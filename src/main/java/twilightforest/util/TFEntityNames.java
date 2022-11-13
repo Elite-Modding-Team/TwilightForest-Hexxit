@@ -21,6 +21,7 @@ public class TFEntityNames {
 	public static final ResourceLocation SKELETON_DRUID = prefix("skeleton_druid");
 	public static final ResourceLocation WRAITH = prefix("wraith");
 	public static final ResourceLocation KOBOLD = prefix("kobold");
+	public static final ResourceLocation FINAL_KOBOLD = prefix("final_kobold");
 	public static final ResourceLocation HOSTILE_WOLF = prefix("hostile_wolf");
 
 	public static final ResourceLocation REDCAP = prefix("redcap");

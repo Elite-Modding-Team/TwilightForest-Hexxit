@@ -17,18 +17,11 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.lwjgl.opengl.GL11;
 import twilightforest.TFConfig;
 import twilightforest.TwilightForestMod;
+import twilightforest.client.model.entity.*;
 import twilightforest.client.model.item.BuiltInItemModel;
 import twilightforest.enums.BossVariant;
 import twilightforest.client.TFClientEvents;
-import twilightforest.client.model.entity.ModelTFHydraHead;
-import twilightforest.client.model.entity.ModelTFKnightPhantom2;
-import twilightforest.client.model.entity.ModelTFLich;
-import twilightforest.client.model.entity.ModelTFMinoshroom;
-import twilightforest.client.model.entity.ModelTFNaga;
 import twilightforest.client.model.armor.ModelTFPhantomArmor;
-import twilightforest.client.model.entity.ModelTFQuestRam;
-import twilightforest.client.model.entity.ModelTFSnowQueen;
-import twilightforest.client.model.entity.ModelTFTowerBoss;
 import twilightforest.tileentity.TileEntityTFTrophy;
 
 import javax.annotation.Nullable;
@@ -63,6 +56,9 @@ public class TileEntityTFTrophyRenderer extends TileEntitySpecialRenderer<TileEn
 	private final ModelTFQuestRam questRamModel = new ModelTFQuestRam();
 	private static final ResourceLocation textureLocQuestRam = TwilightForestMod.getModelTexture("questram.png");
 	private static final ResourceLocation textureLocQuestRamLines = TwilightForestMod.getModelTexture("questram_lines.png");
+
+	private final ModelTFKobold finalKoboldModel = new ModelTFKobold();
+	private static final ResourceLocation textureLocFinalKobold = TwilightForestMod.getModelTexture("kobold.png");
 
 	private final ModelResourceLocation itemModelLocation;
 
@@ -203,6 +199,9 @@ public class TileEntityTFTrophyRenderer extends TileEntitySpecialRenderer<TileEn
 			case QUEST_RAM:
 				renderQuestRamHead(rotation, onGround);
 				break;
+			case FINAL_KOBOLD:
+				renderFinalKoboldHead(rotation, onGround);
+				break;
 			default:
 				break;
 		}
@@ -288,7 +287,7 @@ public class TileEntityTFTrophyRenderer extends TileEntitySpecialRenderer<TileEn
 		GlStateManager.rotate(rotation, 0F, 1F, 0F);
 		GlStateManager.rotate(180F, 0F, 1F, 0F);
 
-		GlStateManager.translate(0, onGround ? 1F : 1F, onGround ? 0F : 0F);
+		GlStateManager.translate(0, 1F, 0F);
 
 		// render the head
 		urGhastModel.render(null, 0.0F, 0, trophy != null ? trophy.ticksExisted + partialTime : TFClientEvents.sineTicker + partialTime, 0, 0.0F, 0.0625F);
@@ -391,7 +390,7 @@ public class TileEntityTFTrophyRenderer extends TileEntitySpecialRenderer<TileEn
 		char var5 = 61680;
 		int var6 = var5 % 65536;
 		int var7 = var5 / 65536;
-		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) var6 / 1.0F, (float) var7 / 1.0F);
+		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) var6, (float) var7);
 		GlStateManager.color(1.0F, 1.0F, 1.0F, var4);
 		questRamModel.head.render(0.0625F);
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -399,5 +398,22 @@ public class TileEntityTFTrophyRenderer extends TileEntitySpecialRenderer<TileEn
 		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GlStateManager.enableAlpha();
 		GlStateManager.enableLighting();
+	}
+
+	private void renderFinalKoboldHead(float rotation, boolean onGround) {
+		GlStateManager.translate(0, 1, 0);
+
+		this.bindTexture(textureLocFinalKobold);
+
+		GlStateManager.scale(1f, -1f, -1f);
+
+		// we seem to be getting a 180 degree rotation here
+		GlStateManager.rotate(rotation, 0F, 1F, 0F);
+		GlStateManager.rotate(180F, 0F, 1F, 0F);
+
+		GlStateManager.translate(0, onGround ? 0.75F : 0.5F, onGround ? 0F : 0.3F);
+
+		// render the head
+		finalKoboldModel.bipedHead.render(0.0625F);
 	}
 }

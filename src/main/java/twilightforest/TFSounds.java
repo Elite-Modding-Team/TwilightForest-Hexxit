@@ -17,6 +17,9 @@ public final class TFSounds {
 	public static final SoundEvent KOBOLD_AMBIENT = createEvent("mob.kobold.kobold");
 	public static final SoundEvent KOBOLD_HURT = createEvent("mob.kobold.hurt");
 	public static final SoundEvent KOBOLD_PARROT = createEvent("mob.kobold.parrot");
+	public static final SoundEvent FINAL_KOBOLD_DEATH = createEvent("mob.final_kobold.die");
+	public static final SoundEvent FINAL_KOBOLD_AMBIENT = createEvent("mob.final_kobold.kobold");
+	public static final SoundEvent FINAL_KOBOLD_HURT = createEvent("mob.final_kobold.hurt");
 	public static final SoundEvent CICADA = createEvent("mob.cicada");
 	public static final SoundEvent NAGA_HISS = createEvent("mob.naga.hiss");
 	public static final SoundEvent NAGA_HURT = createEvent("mob.naga.hurt");

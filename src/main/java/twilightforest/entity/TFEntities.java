@@ -106,6 +106,7 @@ public class TFEntities {
 		helper.registerEntity(TFEntityNames.RAVEN, EntityTFRaven.class, EntityTFRaven::new, 0x000011, 0x222233);
 		helper.registerEntity(TFEntityNames.QUEST_RAM, EntityTFQuestRam.class, EntityTFQuestRam::new, 0xfefeee, 0x33aadd);
 		helper.registerEntity(TFEntityNames.KOBOLD, EntityTFKobold.class, EntityTFKobold::new, 0x372096, 0x895d1b);
+		helper.registerEntity(TFEntityNames.FINAL_KOBOLD, EntityTFFinalKobold.class, EntityTFFinalKobold::new, 0x372096, 0x895d1b);
 		helper.registerEntity(TFEntityNames.MOSQUITO_SWARM, EntityTFMosquitoSwarm.class, EntityTFMosquitoSwarm::new, 0x080904, 0x2d2f21);
 		helper.registerEntity(TFEntityNames.DEATH_TOME, EntityTFDeathTome.class, EntityTFDeathTome::new, 0x774e22, 0xdbcdbe);
 		helper.registerEntity(TFEntityNames.MINOTAUR, EntityTFMinotaur.class, EntityTFMinotaur::new, 0x3f3024, 0xaa7d66);
