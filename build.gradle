@@ -10,20 +10,25 @@ configFile.withReader {
 // For those who want the bleeding edge
 buildscript {
     repositories {
-        jcenter()
         maven {
             name = "forge"
-            url = "http://files.minecraftforge.net/maven"
+            url = "https://maven.minecraftforge.net"
+        }
+        maven {
+            name = "Sponge"
+            url = "https://repo.spongepowered.org/maven"
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath 'com.anatawa12.forge:ForgeGradle:2.3-1.0.8'
+        classpath 'org.spongepowered:mixingradle:0.6-SNAPSHOT'
     }
 }
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'maven'
+apply plugin: 'org.spongepowered.mixin'
 
 ///////////////////////////////////////////////////
 // IDE Settings
@@ -73,15 +78,13 @@ processResources {
         include 'assets/twilightforest/patchouli_books/guide/book.json'
 
         // replace version and mcversion
-        expand ([
-                'version':project.version,
-                'mcversion':project.minecraft.version,
-                'forge_version': config.forge_version,
-                'mod_version': config.mod_version,
+        expand(['version'          : project.version,
+                'mcversion'        : project.minecraft.version,
+                'forge_version'    : config.forge_version,
+                'mod_version'      : config.mod_version,
                 'minecraft_version': config.minecraft_version,
-                'edition': (project.version - (config.mod_version + '.')),
-                's': '$'
-        ])
+                'edition'          : (project.version - (config.mod_version + '.')),
+                's'                : '$'])
     }
 
     // copy everything else, thats not the mcmod.info
@@ -109,7 +112,7 @@ repositories {
     }
     maven {
         name 'tterrag\'s Maven' // CTM
-        url 'https://maven.tterrag.com/'
+        url 'https://maven.tterrag.com'
     }
     maven {
         name 'Jared\'s Maven' // Immersive Engineering + Patchouli
@@ -117,11 +120,19 @@ repositories {
     }
     maven {
         name 'player\'s Maven' // Forestry
-        url 'http://maven.ic2.player.to/'
+        url 'https://maven.ic2.player.to'
     }
     maven {
         name 'Curseforge Maven' // Baubles + Thaumcraft
-        url 'https://minecraft.curseforge.com/api/maven/'
+        url 'https://minecraft.curseforge.com/api/maven'
+    }
+    maven {
+        name 'Curse Maven' // Mowzie's Mobs
+        url 'https://www.cursemaven.com'
+    }
+    maven {
+        name 'CleanroomMC'
+        url 'https://maven.cleanroommc.com'
     }
 }
 
@@ -146,6 +157,17 @@ dependencies {
     // curseforge
     deobfCompile "baubles:Baubles:${minecraft_sub_version}:${baubles_version}"
     deobfCompile "thaumcraft:Thaumcraft:${minecraft_version}:${thaumcraft_version}"
+
+    // curse
+    deobfCompile "curse.maven:llibrary-243298:3116493"
+    deobfCompile "curse.maven:mowzies-mobs-250498:3048685"
+
+    // cleanroom
+    deobfCompile "zone.rong:mixinbooter:7.0"
+}
+
+mixin {
+    add sourceSets.main, "twilightforest.refmap.json"
 }
 
 task createPom {

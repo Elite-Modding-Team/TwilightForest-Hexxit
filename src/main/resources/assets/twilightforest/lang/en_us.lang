@@ -505,6 +505,7 @@ item.twilightforest.trophy.naga.name=Naga Trophy
 item.twilightforest.trophy.lich.name=Lich Trophy
 item.twilightforest.trophy.ur_ghast.name=Ur-Ghast Trophy
 item.twilightforest.trophy.snow_queen.name=Snow Queen Trophy
+item.twilightforest.trophy.final_boss.name=Final Boss Trophy
 item.twilightforest.experiment115.name=Experiment 115
 item.twilightforest.armorShards.name=Armor Shard
 item.twilightforest.knightMetal.name=Knightmetal Ingot
@@ -636,6 +637,7 @@ entity.twilightforest.adherent.name=Adherent [NYI]
 entity.twilightforest.castle_guardian.name=Castle Guardian [NYI]
 entity.twilightforest.harbinger_cube.name=Harbinger Cube
 entity.twilightforest.roving_cube.name=Roving Cube
+entity.twilightforest.final_boss.name=Final Boss
 
 twilightforest.effect.frosted=Frosted
 

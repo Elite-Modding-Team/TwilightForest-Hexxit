@@ -113,7 +113,7 @@ public class BlockTFTrophy extends BlockSkull implements ModelRegisterCallback, 
 				case QUEST_RAM:
 					sound = SoundEvents.ENTITY_SHEEP_AMBIENT;
 					break;
-				case FINAL_KOBOLD:
+				case FINAL_BOSS:
 					sound = TFSounds.FINAL_KOBOLD_AMBIENT;
 					break;
 			}

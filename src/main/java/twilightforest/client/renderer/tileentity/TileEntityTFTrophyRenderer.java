@@ -1,5 +1,6 @@
 package twilightforest.client.renderer.tileentity;
 
+import com.bobmowzie.mowziesmobs.client.model.entity.ModelWroughtnaut;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -199,8 +200,8 @@ public class TileEntityTFTrophyRenderer extends TileEntitySpecialRenderer<TileEn
 			case QUEST_RAM:
 				renderQuestRamHead(rotation, onGround);
 				break;
-			case FINAL_KOBOLD:
-				renderFinalKoboldHead(rotation, onGround);
+			case FINAL_BOSS:
+				renderWroughtnautHead(rotation, onGround);
 				break;
 			default:
 				break;
@@ -415,5 +416,22 @@ public class TileEntityTFTrophyRenderer extends TileEntitySpecialRenderer<TileEn
 
 		// render the head
 		finalKoboldModel.bipedHead.render(0.0625F);
+	}
+
+	private void renderWroughtnautHead(float rotation, boolean onGround) {
+		GlStateManager.translate(0, 1, 0);
+
+		this.bindTexture(new ResourceLocation("mowziesmobs", "textures/entity/wroughtnaut.png"));
+
+		GlStateManager.scale(1f, -1f, -1f);
+
+		// we seem to be getting a 180 degree rotation here
+		GlStateManager.rotate(rotation, 0F, 1F, 0F);
+		GlStateManager.rotate(180F, 0F, 1F, 0F);
+
+		GlStateManager.translate(0, onGround ? 1.35F : 1.25F, onGround ? 0F : 0.3F);
+
+		// render the head
+		new ModelWroughtnaut().head.render(0.0625F);
 	}
 }
