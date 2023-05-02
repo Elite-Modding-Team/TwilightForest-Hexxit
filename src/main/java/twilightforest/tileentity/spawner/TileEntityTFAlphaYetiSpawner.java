@@ -2,12 +2,13 @@ package twilightforest.tileentity.spawner;
 
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayer;
-import twilightforest.entity.boss.EntityTFYetiAlpha;
+
+import com.bobmowzie.mowziesmobs.server.entity.frostmaw.EntityFrostmaw;
 
 public class TileEntityTFAlphaYetiSpawner extends TileEntityTFBossSpawner {
 
 	public TileEntityTFAlphaYetiSpawner() {
-		super(EntityList.getKey(EntityTFYetiAlpha.class));
+		super(EntityList.getKey(EntityFrostmaw.class));
 	}
 
 	@Override
