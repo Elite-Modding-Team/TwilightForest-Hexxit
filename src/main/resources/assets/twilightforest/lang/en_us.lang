@@ -153,7 +153,7 @@ tile.twilightforest.BossSpawner.4.name=Knight Phantoms Spawner
 tile.twilightforest.BossSpawner.5.name=Snow Queen Spawner
 tile.twilightforest.BossSpawner.6.name=Minoshroom Spawner
 tile.twilightforest.BossSpawner.7.name=Alpha Yeti Spawner
-tile.twilightforest.BossSpawner.9.name=Final Boss Spawner
+tile.twilightforest.BossSpawner.9.name=The Twilight Wroughtnaut Spawner
 tile.twilightforest.FireflyJar.name=Firefly Jar
 tile.twilightforest.Plant.0.name=Moss Patch
 tile.twilightforest.Plant.1.name=Mayapple
@@ -505,7 +505,7 @@ item.twilightforest.trophy.naga.name=Naga Trophy
 item.twilightforest.trophy.lich.name=Lich Trophy
 item.twilightforest.trophy.ur_ghast.name=Ur-Ghast Trophy
 item.twilightforest.trophy.snow_queen.name=Snow Queen Trophy
-item.twilightforest.trophy.final_boss.name=Final Boss Trophy
+item.twilightforest.trophy.final_boss.name=The Twilight Wroughtnaut Trophy
 item.twilightforest.experiment115.name=Experiment 115
 item.twilightforest.armorShards.name=Armor Shard
 item.twilightforest.knightMetal.name=Knightmetal Ingot
@@ -637,7 +637,7 @@ entity.twilightforest.adherent.name=Adherent [NYI]
 entity.twilightforest.castle_guardian.name=Castle Guardian [NYI]
 entity.twilightforest.harbinger_cube.name=Harbinger Cube
 entity.twilightforest.roving_cube.name=Roving Cube
-entity.twilightforest.final_boss.name=Final Boss
+entity.twilightforest.final_boss.name=The Twilight Wroughtnaut
 
 twilightforest.effect.frosted=Frosted
 
