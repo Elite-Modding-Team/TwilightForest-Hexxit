@@ -14,21 +14,15 @@ buildscript {
             name = "forge"
             url = "https://maven.minecraftforge.net"
         }
-        maven {
-            name = "Sponge"
-            url = "https://repo.spongepowered.org/maven"
-        }
     }
     dependencies {
         classpath 'com.anatawa12.forge:ForgeGradle:2.3-1.0.8'
-        classpath 'org.spongepowered:mixingradle:0.6-SNAPSHOT'
     }
 }
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'maven'
-apply plugin: 'org.spongepowered.mixin'
 
 ///////////////////////////////////////////////////
 // IDE Settings
@@ -130,10 +124,6 @@ repositories {
         name 'Curse Maven' // Mowzie's Mobs
         url 'https://www.cursemaven.com'
     }
-    maven {
-        name 'CleanroomMC'
-        url 'https://maven.cleanroommc.com'
-    }
 }
 
 dependencies {
@@ -161,13 +151,6 @@ dependencies {
     // curse
     deobfCompile "curse.maven:llibrary-243298:3116493"
     deobfCompile "curse.maven:mowzies-mobs-250498:3048685"
-
-    // cleanroom
-    deobfCompile "zone.rong:mixinbooter:7.0"
-}
-
-mixin {
-    add sourceSets.main, "twilightforest.refmap.json"
 }
 
 task createPom {
