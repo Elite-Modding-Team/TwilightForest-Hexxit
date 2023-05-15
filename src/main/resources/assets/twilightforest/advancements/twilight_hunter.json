@@ -343,7 +343,17 @@
         }
       }
     },
-
+    "frostmaw": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "mowziesmobs:frostmaw",
+          "location": {
+            "dimension": "twilight_forest"
+          }
+        }
+      }
+    },
     "bighorn_sheep": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
@@ -466,6 +476,7 @@
       "snow_queen",
       "ur_ghast",
       "yeti_alpha",
+      "frostmaw",
 
       "bighorn_sheep",
       "wild_boar",

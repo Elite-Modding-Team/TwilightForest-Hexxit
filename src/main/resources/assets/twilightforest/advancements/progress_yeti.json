@@ -20,6 +20,10 @@
       "trigger": "minecraft:player_killed_entity",
       "conditions": { "entity": { "type": "twilightforest:yeti_alpha" } }
     },
+    "frostmaw": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": { "entity": { "type": "mowziesmobs:frostmaw" } }
+    },
     "fur": {
       "trigger": "minecraft:inventory_changed",
       "conditions": { "items": [  { "item": "twilightforest:alpha_fur" } ] }
@@ -30,7 +34,7 @@
     }
   },
   "requirements": [
-    [ "yeti", "fur" ],
+    [ "yeti", "frostmaw", "fur" ],
     [ "previous_progression" ]
   ],
   "rewards": {
