@@ -14,11 +14,8 @@ public class TileEntityTFFinalBossSpawner extends TileEntityTFBossSpawner {
     @Override
     protected void initializeCreature(EntityLiving myCreature) {
         super.initializeCreature(myCreature);
-        double health = myCreature.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).getBaseValue();
-        myCreature.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(health * 4);
-        myCreature.setHealth((float) (health * 4));
-        double speed = myCreature.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getBaseValue();
-        myCreature.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(speed * 1.5);
+        double movementSpeed = myCreature.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getBaseValue();
+        myCreature.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(movementSpeed * 1.5);
         myCreature.setGlowing(true);
     }
 }

@@ -36,18 +36,18 @@ public class ComponentTFFinalCastleDungeonExit extends ComponentTFFinalCastleDun
 		// no need for additional rooms, we're along the outside anyways
 
 		// add stairway down
-		Rotation bestDir = this.findStairDirectionTowards(parent.getBoundingBox().minX, parent.getBoundingBox().minZ);
+		//Rotation bestDir = this.findStairDirectionTowards(parent.getBoundingBox().minX, parent.getBoundingBox().minZ);
 
-		ComponentTFFinalCastleDungeonSteps steps0 = new ComponentTFFinalCastleDungeonSteps(rand, 5, boundingBox.minX + 15, boundingBox.minY, boundingBox.minZ + 15, bestDir.rotate(EnumFacing.SOUTH));
-		list.add(steps0);
-		steps0.buildComponent(this, list, rand);
+		//ComponentTFFinalCastleDungeonSteps steps0 = new ComponentTFFinalCastleDungeonSteps(rand, 5, boundingBox.minX + 15, boundingBox.minY, boundingBox.minZ + 15, bestDir.rotate(EnumFacing.SOUTH));
+		//list.add(steps0);
+		//steps0.buildComponent(this, list, rand);
 
-		// another level!?
-		if (this.level == 1) {
-			steps0.buildLevelUnder(parent, list, rand, this.level + 1);
-		} else {
-			steps0.buildBossRoomUnder(parent, list, rand);
-		}
+		//// another level!?
+		//if (this.level == 1) {
+		//	steps0.buildLevelUnder(parent, list, rand, this.level + 1);
+		//} else {
+		//	steps0.buildBossRoomUnder(parent, list, rand);
+		//}
 	}
 
 	@Override

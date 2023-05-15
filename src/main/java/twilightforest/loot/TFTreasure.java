@@ -1,14 +1,20 @@
 package twilightforest.loot;
 
+import com.bobmowzie.mowziesmobs.MowziesMobs;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.storage.loot.LootTable;
 import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraft.world.storage.loot.conditions.LootConditionManager;
 import net.minecraft.world.storage.loot.functions.LootFunctionManager;
+import net.minecraftforge.event.LootTableLoadEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import twilightforest.TwilightForestMod;
 import twilightforest.entity.*;
 import twilightforest.entity.boss.EntityTFHydra;
@@ -20,6 +26,7 @@ import twilightforest.entity.boss.EntityTFSnowQueen;
 import twilightforest.entity.boss.EntityTFYetiAlpha;
 import twilightforest.entity.passive.*;
 
+@Mod.EventBusSubscriber(modid = TwilightForestMod.ID)
 public class TFTreasure {
 	// For easy testing:
 	// /give @p chest 1 0 {"display":{"Name":"Master Loot Crate"},"BlockEntityTag":{"LootTable":"twilightforest:entities/all_bosses"}}
@@ -122,5 +129,15 @@ public class TFTreasure {
 		TileEntity te = world.getTileEntity(pos);
 		if (te instanceof TileEntityChest)
 			((TileEntityChest) te).setLootTable(lootTable, world.getSeed() * pos.getX() + pos.getY() ^ pos.getZ());
+	}
+
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public static void onLootTableLoad(LootTableLoadEvent event) {
+		if (event.getName().equals(new ResourceLocation(MowziesMobs.MODID, "entities/frostmaw"))) {
+			LootTable lootAlphaYeti = event.getLootTableManager().getLootTableFromLocation(EntityTFYetiAlpha.LOOT_TABLE);
+			event.getTable().addPool(lootAlphaYeti.getPool("fur"));
+			event.getTable().addPool(lootAlphaYeti.getPool("icebombs"));
+			event.getTable().addPool(lootAlphaYeti.getPool("shader"));
+		}
 	}
 }
