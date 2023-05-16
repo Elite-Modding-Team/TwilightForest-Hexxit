@@ -15,6 +15,7 @@ import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import twilightforest.TFConfig;
+import twilightforest.TFEventListenerClient;
 import twilightforest.TwilightForestMod;
 import twilightforest.biomes.TFBiomes;
 import twilightforest.client.TFClientProxy;
@@ -125,6 +126,7 @@ public class WorldProviderTwilightForest extends WorldProviderSurface {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public boolean isSkyColored() {
+		if (TFEventListenerClient.hasAdvancement(TFEventListenerClient.BEATEN_TF)) return super.isSkyColored();
 		return false;
 	}
 
@@ -164,6 +166,7 @@ public class WorldProviderTwilightForest extends WorldProviderSurface {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Vec3d getSkyColor(Entity cameraEntity, float partialTicks) {
+        if (TFEventListenerClient.hasAdvancement(TFEventListenerClient.BEATEN_TF)) return super.getSkyColor(cameraEntity, partialTicks);
 		// TODO Maybe in the future we can get the return of sky color by biome?
 		return new Vec3d(32 / 256.0, 34 / 256.0, 74 / 256.0);
 	}
@@ -181,6 +184,7 @@ public class WorldProviderTwilightForest extends WorldProviderSurface {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public float getStarBrightness(float partialTicks) {
+        if (TFEventListenerClient.hasAdvancement(TFEventListenerClient.BEATEN_TF)) return super.getStarBrightness(partialTicks);
 		return 1.0F;
 	}
 

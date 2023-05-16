@@ -73,6 +73,8 @@ public final class TFSounds {
 	public static final SoundEvent TOME_HURT = createEvent("mob.tome.hurt");
 	public static final SoundEvent TOME_IDLE = createEvent("mob.tome.idle");
 	public static final SoundEvent TOME_PARROT = createEvent("mob.tome.parrot");
+	public static final SoundEvent FINALBOSS_SPAWN = createEvent("mob.finalboss.spawn");
+	public static final SoundEvent FINALBOSS_DEATH = createEvent("mob.finalboss.death");
 
 	public static final SoundEvent SLIDER = createEvent("random.slider");
 
@@ -143,6 +145,8 @@ public final class TFSounds {
 				TOME_HURT,
 				TOME_IDLE,
 				TOME_PARROT,
+				FINALBOSS_SPAWN,
+				FINALBOSS_DEATH,
 				SLIDER,
 				MUSIC
 		);

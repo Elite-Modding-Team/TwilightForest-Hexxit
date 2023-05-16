@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "twilightforest:castle_rune_brick",
+      "data": 3
+    },
+    "title": {
+      "translate": "advancement.twilightforest.progress_finalboss"
+    },
+    "description": {
+      "translate": "advancement.twilightforest.progress_finalboss.desc"
+    },
+    "frame": "goal"
+  },
+  "parent": "twilightforest:progress_castle",
+  "criteria": {
+    "wroughtnaut": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "mowziesmobs:ferrous_wroughtnaut"
+        }
+      }
+    },
+    "previous_progression": {
+      "trigger": "twilightforest:has_advancement",
+      "conditions": {
+        "advancement": "twilightforest:progress_castle"
+      }
+    }
+  }
+}
