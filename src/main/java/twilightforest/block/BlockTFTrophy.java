@@ -1,5 +1,6 @@
 package twilightforest.block;
 
+import com.bobmowzie.mowziesmobs.server.sound.MMSounds;
 import net.minecraft.block.BlockSkull;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.statemap.StateMap;
@@ -114,7 +115,7 @@ public class BlockTFTrophy extends BlockSkull implements ModelRegisterCallback, 
 					sound = SoundEvents.ENTITY_SHEEP_AMBIENT;
 					break;
 				case FINAL_BOSS:
-					sound = TFSounds.FINAL_KOBOLD_AMBIENT;
+					sound = MMSounds.ENTITY_WROUGHT_AMBIENT;
 					break;
 			}
 			if (sound != null)
