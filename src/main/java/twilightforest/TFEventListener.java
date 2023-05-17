@@ -1,5 +1,6 @@
 package twilightforest;
 
+import com.bobmowzie.mowziesmobs.server.entity.wroughtnaut.EntityWroughtnaut;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -23,9 +24,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.network.play.INetHandlerPlayServer;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameRules;
@@ -614,6 +617,16 @@ public class TFEventListener {
 			if (cap != null && cap.shieldsLeft() > 0) {
 				cap.breakShield();
 				event.setCanceled(true);
+			}
+		}
+		// final boss
+		if (!living.world.isRemote && living instanceof EntityPlayer && event.getSource().getTrueSource() instanceof EntityWroughtnaut) {
+			living.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 120, 0));
+			if (Loader.isModLoaded("mod_lavacow")) {
+				Potion corroded = Potion.getPotionFromResourceLocation("mod_lavacow:corroded");
+				if (corroded != null) {
+					living.addPotionEffect(new PotionEffect(corroded, 120, 0));
+				}
 			}
 		}
 	}

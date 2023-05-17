@@ -75,6 +75,10 @@ public class TFCommonProxy implements IGuiHandler {
 		return false;
 	}
 
+	public boolean doesClientPlayerHaveAdvancement(ResourceLocation advId) {
+		return false;
+	}
+
 	public TileEntityTFCicada getNewCicadaTE() {
 		return new TileEntityTFCicada();
 	}

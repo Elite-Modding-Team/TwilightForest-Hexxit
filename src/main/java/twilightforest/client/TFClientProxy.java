@@ -30,6 +30,7 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import twilightforest.TFCommonProxy;
 import twilightforest.TFSounds;
+import twilightforest.TwilightForestMod;
 import twilightforest.client.model.armor.*;
 import twilightforest.client.model.entity.*;
 import twilightforest.client.model.entity.finalcastle.ModelTFCastleGuardian;
@@ -60,6 +61,8 @@ public class TFClientProxy extends TFCommonProxy {
 	private boolean isDangerOverlayShown;
 
 	public static MusicTicker.MusicType TFMUSICTYPE;
+
+	public static final ResourceLocation BEATEN_TF = new ResourceLocation(TwilightForestMod.ID, "progress_finalboss");
 
 	@Override
 	public void preInit() {
@@ -295,6 +298,15 @@ public class TFClientProxy extends TFCommonProxy {
 		}
 
 		return super.doesPlayerHaveAdvancement(player, advId);
+	}
+
+	@Override
+	public boolean doesClientPlayerHaveAdvancement(ResourceLocation advId) {
+		ClientAdvancementManager manager = Minecraft.getMinecraft().player.connection.getAdvancementManager();
+		Advancement adv = manager.getAdvancementList().getAdvancement(advId);
+		if (adv == null) return false;
+		AdvancementProgress progress = manager.advancementToProgress.get(adv);
+		return progress != null && progress.isDone();
 	}
 
 	@Override

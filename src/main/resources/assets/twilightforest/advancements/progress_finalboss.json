@@ -1,8 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "twilightforest:castle_rune_brick",
-      "data": 3
+      "item": "mowziesmobs:wrought_helmet"
     },
     "title": {
       "translate": "advancement.twilightforest.progress_finalboss"

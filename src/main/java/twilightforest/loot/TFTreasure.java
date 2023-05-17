@@ -55,6 +55,8 @@ public class TFTreasure {
 	public static final TFTreasure troll_vault = new TFTreasure("troll_vault");
 	public static final TFTreasure graveyard = new TFTreasure("graveyard");
 
+	public static final ResourceLocation FINAL_BOSS_LOOT_TABLE = TwilightForestMod.prefix("entities/final_boss");
+
 	public static void init() {
 		// Preload all entity tables
 		LootTableList.register(EntityTFArmoredGiant.LOOT_TABLE);
@@ -100,6 +102,7 @@ public class TFTreasure {
 		LootTableList.register(EntityTFWraith.LOOT_TABLE);
 		LootTableList.register(EntityTFYeti.LOOT_TABLE);
 		LootTableList.register(EntityTFYetiAlpha.LOOT_TABLE);
+		LootTableList.register(FINAL_BOSS_LOOT_TABLE);
 
 		LootFunctionManager.registerFunction(new LootFunctionEnchant.Serializer());
 		LootFunctionManager.registerFunction(new LootFunctionModItemSwap.Serializer());
@@ -138,6 +141,11 @@ public class TFTreasure {
 			event.getTable().addPool(lootAlphaYeti.getPool("fur"));
 			event.getTable().addPool(lootAlphaYeti.getPool("icebombs"));
 			event.getTable().addPool(lootAlphaYeti.getPool("shader"));
+		}
+
+		if (event.getName().equals(new ResourceLocation(MowziesMobs.MODID, "entities/ferrous_wroughtnaut"))) {
+			LootTable lootFinalBoss = event.getLootTableManager().getLootTableFromLocation(FINAL_BOSS_LOOT_TABLE);
+			event.getTable().addPool(lootFinalBoss.getPool("trophy"));
 		}
 	}
 }
