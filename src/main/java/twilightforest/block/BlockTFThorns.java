@@ -1,5 +1,6 @@
 package twilightforest.block;
 
+import com.bobmowzie.mowziesmobs.server.entity.naga.EntityNaga;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.MapColor;
@@ -95,6 +96,7 @@ public class BlockTFThorns extends BlockTFConnectableRotatedPillar implements Mo
 
 	@Override
 	public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity) {
+		if (entity instanceof EntityNaga) return;
 		entity.attackEntityFrom(DamageSource.CACTUS, THORN_DAMAGE);
 	}
 
