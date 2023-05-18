@@ -5,7 +5,6 @@ import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.play.server.SPacketTitle;
 import net.minecraft.util.EnumParticleTypes;
@@ -27,7 +26,7 @@ public class TileEntityTFFinalBossSpawner extends TileEntityTFBossSpawner {
 
     @Override
     public void update() {
-        if (spawnedBoss || !anyPlayerInRange()) {
+        if (spawnedBoss || world.getDifficulty() == EnumDifficulty.PEACEFUL || !anyPlayerInRange()) {
             return;
         }
 
@@ -41,31 +40,27 @@ public class TileEntityTFFinalBossSpawner extends TileEntityTFBossSpawner {
             double rz = pos.getZ() + world.rand.nextFloat();
             world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, rx, ry, rz, 0.0D, 0.0D, 0.0D);
             world.spawnParticle(EnumParticleTypes.FLAME, rx, ry, rz, 0.0D, 0.0D, 0.0D);
-
-            // play sound
-            world.getEntitiesWithinAABB(EntityPlayer.class, boundingBox).forEach(player -> {
-                player.playSound(TFSounds.FINALBOSS_SPAWN, 1.0F, 1.0F);
-            });
         } else {
-            if (world.getDifficulty() != EnumDifficulty.PEACEFUL) {
-                if (spawnMyBoss()) {
-                    world.destroyBlock(pos, false);
-                    spawnedBoss = true;
+            if (spawnMyBoss()) {
+                world.destroyBlock(pos, false);
+                spawnedBoss = true;
 
-                    // create lightning
-                    world.addWeatherEffect(new EntityLightningBolt(world, getPos().getX() + world.rand.nextGaussian(), getPos().getY(), getPos().getZ() + world.rand.nextGaussian(), true));
-                    world.addWeatherEffect(new EntityLightningBolt(world, getPos().getX() + world.rand.nextGaussian(), getPos().getY(), getPos().getZ() + world.rand.nextGaussian(), true));
+                // create lightning
+                world.addWeatherEffect(new EntityLightningBolt(world, getPos().getX() + world.rand.nextGaussian(), getPos().getY(), getPos().getZ() + world.rand.nextGaussian(), true));
+                world.addWeatherEffect(new EntityLightningBolt(world, getPos().getX() + world.rand.nextGaussian(), getPos().getY(), getPos().getZ() + world.rand.nextGaussian(), true));
 
-                    // display title
-                    world.getEntitiesWithinAABB(EntityPlayerMP.class, boundingBox).forEach(player -> {
-                        SPacketTitle title = new SPacketTitle(SPacketTitle.Type.TITLE, new TextComponentTranslation("twilightforest.title.finalboss.spawn").setStyle(new Style().setColor(TextFormatting.LIGHT_PURPLE)));
-                        SPacketTitle subtitle = new SPacketTitle(SPacketTitle.Type.SUBTITLE, new TextComponentTranslation("twilightforest.subtitle.finalboss.spawn").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)));
-                        player.connection.sendPacket(title);
-                        player.connection.sendPacket(subtitle);
-                    });
-                }
+                // display title
+                world.getEntitiesWithinAABB(EntityPlayerMP.class, boundingBox).forEach(player -> {
+                    SPacketTitle title = new SPacketTitle(SPacketTitle.Type.TITLE, new TextComponentTranslation("twilightforest.title.finalboss.spawn").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)), 20, 40, 20);
+                    SPacketTitle subtitle = new SPacketTitle(SPacketTitle.Type.SUBTITLE, new TextComponentTranslation("twilightforest.subtitle.finalboss.spawn"), 20, 40, 20);
+                    player.connection.sendPacket(title);
+                    player.connection.sendPacket(subtitle);
+                });
             }
         }
+
+        // play sound
+        TwilightForestMod.proxy.playSoundAtClientPlayer(TFSounds.FINALBOSS_SPAWN);
     }
 
     @Override
@@ -96,6 +91,6 @@ public class TileEntityTFFinalBossSpawner extends TileEntityTFBossSpawner {
 
     @Override
     protected int getRange() {
-        return 28;
+        return 32;
     }
 }

@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.ContainerFurnace;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
@@ -99,5 +100,8 @@ public class TFCommonProxy implements IGuiHandler {
 
 	protected static ResourceLocation prefix(String name) {
 		return new ResourceLocation(TwilightForestMod.ID, name);
+	}
+
+	public void playSoundAtClientPlayer(SoundEvent soundEvent) {
 	}
 }

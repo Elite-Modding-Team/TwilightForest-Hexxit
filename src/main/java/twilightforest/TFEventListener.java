@@ -30,6 +30,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
@@ -53,11 +54,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.*;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -68,6 +65,7 @@ import twilightforest.block.BlockTFPortal;
 import twilightforest.block.TFBlocks;
 import twilightforest.capabilities.CapabilityList;
 import twilightforest.capabilities.shield.IShieldCapability;
+import twilightforest.client.particle.TFParticleType;
 import twilightforest.compat.Baubles;
 import twilightforest.compat.TFCompat;
 import twilightforest.enchantment.TFEnchantment;
@@ -76,11 +74,7 @@ import twilightforest.entity.IHostileMount;
 import twilightforest.entity.ITFProjectile;
 import twilightforest.item.ItemTFPhantomArmor;
 import twilightforest.item.TFItems;
-import twilightforest.network.PacketAreaProtection;
-import twilightforest.network.PacketEnforceProgressionStatus;
-import twilightforest.network.PacketSetSkylightEnabled;
-import twilightforest.network.PacketUpdateShield;
-import twilightforest.network.TFPacketHandler;
+import twilightforest.network.*;
 import twilightforest.potions.TFPotions;
 import twilightforest.util.TFItemStackUtils;
 import twilightforest.world.ChunkGeneratorTFBase;
@@ -467,6 +461,37 @@ public class TFEventListener {
 		if (living instanceof EntityPlayer && living.isSneaking() && isRidingUnfriendly(living)) {
 			living.setSneaking(false);
 		}
+
+		// Final Boss gravity ability
+		if (living instanceof EntityWroughtnaut) {
+			EntityWroughtnaut boss = (EntityWroughtnaut) living;
+			EntityLivingBase target = boss.getAttackTarget();
+			if (boss.ticksExisted % 100 == 0 && target instanceof EntityPlayer && boss.canEntityBeSeen(target)) {
+				double diffX = target.posX - boss.posX;
+				double diffZ;
+				for (diffZ = target.posZ - boss.posZ; diffX * diffX + diffZ * diffZ < 1.0E-4D; diffZ = (Math.random() - Math.random()) * 0.01D) {
+					diffX = (Math.random() - Math.random()) * 0.01D;
+				}
+
+				// pull target
+				target.isAirBorne = true;
+				float normalizedPower = MathHelper.sqrt(diffX * diffX + diffZ * diffZ);
+				float knockPower = 0.8F;
+				target.motionX /= 2.0D;
+				target.motionY /= 2.0D;
+				target.motionZ /= 2.0D;
+				target.motionX -= diffX / (double) normalizedPower * (double) knockPower;
+				target.motionY += knockPower;
+				target.motionZ -= diffZ / (double) normalizedPower * (double) knockPower;
+				if (target.motionY > 0.4D) {
+					target.motionY = 0.4D;
+				}
+
+				// play sounds
+				TwilightForestMod.proxy.playSoundAtClientPlayer(SoundEvents.ENTITY_IRONGOLEM_ATTACK);
+				TwilightForestMod.proxy.playSoundAtClientPlayer(SoundEvents.ENTITY_GUARDIAN_ATTACK);
+			}
+		}
 	}
 
 	public static boolean isRidingUnfriendly(EntityLivingBase entity) {
@@ -840,6 +865,13 @@ public class TFEventListener {
 					event.setCanceled(true);
 				}
 			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void onFinalBossDeath(LivingDeathEvent event) {
+		if (event.getEntityLiving() instanceof EntityWroughtnaut) {
+			TwilightForestMod.proxy.playSoundAtClientPlayer(TFSounds.FINALBOSS_DEATH);
 		}
 	}
 }
