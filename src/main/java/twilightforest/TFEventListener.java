@@ -485,10 +485,12 @@ public class TFEventListener {
 				if (target.motionY > 0.4D) {
 					target.motionY = 0.4D;
 				}
-
 				if (target instanceof EntityPlayerMP) {
 					((EntityPlayerMP) target).connection.sendPacket(new SPacketEntityVelocity(target));
 				}
+
+				// inflict slowness
+				target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 40, 2));
 
 				// play sounds
 				TwilightForestMod.proxy.playSoundAtClientPlayer(SoundEvents.ENTITY_IRONGOLEM_ATTACK);
