@@ -4,9 +4,10 @@ import com.bobmowzie.mowziesmobs.server.entity.wroughtnaut.EntityWroughtnaut;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.play.server.SPacketTitle;
+import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.Style;
@@ -22,6 +23,18 @@ public class TileEntityTFFinalBossSpawner extends TileEntityTFBossSpawner {
 
     public TileEntityTFFinalBossSpawner() {
         super(EntityList.getKey(EntityWroughtnaut.class));
+    }
+
+    @Override
+    public boolean anyPlayerInRange() {
+        for (int i = 0; i < world.playerEntities.size(); i++) {
+            EntityPlayer player = world.playerEntities.get(i);
+            if (player.posY > pos.getY() - 2 && EntitySelectors.NOT_SPECTATING.apply(player)) {
+                double distance = player.getDistanceSq(pos.getX(), pos.getY(), pos.getZ());
+                if (getRange() < 0.0D || distance < getRange() * getRange()) return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -45,14 +58,10 @@ public class TileEntityTFFinalBossSpawner extends TileEntityTFBossSpawner {
                 world.destroyBlock(pos, false);
                 spawnedBoss = true;
 
-                // create lightning
-                world.addWeatherEffect(new EntityLightningBolt(world, getPos().getX() + world.rand.nextGaussian(), getPos().getY(), getPos().getZ() + world.rand.nextGaussian(), true));
-                world.addWeatherEffect(new EntityLightningBolt(world, getPos().getX() + world.rand.nextGaussian(), getPos().getY(), getPos().getZ() + world.rand.nextGaussian(), true));
-
                 // display title
                 world.getEntitiesWithinAABB(EntityPlayerMP.class, boundingBox).forEach(player -> {
                     SPacketTitle title = new SPacketTitle(SPacketTitle.Type.TITLE, new TextComponentTranslation("twilightforest.title.finalboss.spawn").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)), 20, 40, 20);
-                    SPacketTitle subtitle = new SPacketTitle(SPacketTitle.Type.SUBTITLE, new TextComponentTranslation("twilightforest.subtitle.finalboss.spawn"), 20, 40, 20);
+                    SPacketTitle subtitle = new SPacketTitle(SPacketTitle.Type.SUBTITLE, new TextComponentTranslation("twilightforest.subtitle.finalboss.spawn"), 20, 60, 20);
                     player.connection.sendPacket(title);
                     player.connection.sendPacket(subtitle);
                 });
@@ -91,6 +100,6 @@ public class TileEntityTFFinalBossSpawner extends TileEntityTFBossSpawner {
 
     @Override
     protected int getRange() {
-        return 32;
+        return 30;
     }
 }

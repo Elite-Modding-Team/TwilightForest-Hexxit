@@ -24,11 +24,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.network.play.INetHandlerPlayServer;
+import net.minecraft.network.play.server.SPacketEntityVelocity;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -65,7 +65,6 @@ import twilightforest.block.BlockTFPortal;
 import twilightforest.block.TFBlocks;
 import twilightforest.capabilities.CapabilityList;
 import twilightforest.capabilities.shield.IShieldCapability;
-import twilightforest.client.particle.TFParticleType;
 import twilightforest.compat.Baubles;
 import twilightforest.compat.TFCompat;
 import twilightforest.enchantment.TFEnchantment;
@@ -463,10 +462,10 @@ public class TFEventListener {
 		}
 
 		// Final Boss gravity ability
-		if (living instanceof EntityWroughtnaut) {
+		if (!living.world.isRemote && living instanceof EntityWroughtnaut && (living.motionX > 0 || living.motionZ > 0)) {
 			EntityWroughtnaut boss = (EntityWroughtnaut) living;
 			EntityLivingBase target = boss.getAttackTarget();
-			if (boss.ticksExisted % 100 == 0 && target instanceof EntityPlayer && boss.canEntityBeSeen(target)) {
+			if (boss.ticksExisted % 40 == 0 && target != null && boss.canEntityBeSeen(target)) {
 				double diffX = target.posX - boss.posX;
 				double diffZ;
 				for (diffZ = target.posZ - boss.posZ; diffX * diffX + diffZ * diffZ < 1.0E-4D; diffZ = (Math.random() - Math.random()) * 0.01D) {
@@ -485,6 +484,10 @@ public class TFEventListener {
 				target.motionZ -= diffZ / (double) normalizedPower * (double) knockPower;
 				if (target.motionY > 0.4D) {
 					target.motionY = 0.4D;
+				}
+
+				if (target instanceof EntityPlayerMP) {
+					((EntityPlayerMP) target).connection.sendPacket(new SPacketEntityVelocity(target));
 				}
 
 				// play sounds

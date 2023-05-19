@@ -9,7 +9,8 @@
     "description": {
       "translate": "advancement.twilightforest.progress_finalboss.desc"
     },
-    "frame": "challenge"
+    "frame": "challenge",
+    "hidden": true
   },
   "parent": "twilightforest:progress_castle",
   "criteria": {
