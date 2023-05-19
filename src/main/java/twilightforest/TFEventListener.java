@@ -490,7 +490,7 @@ public class TFEventListener {
 				}
 
 				// inflict slowness
-				target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 40, 2));
+				target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 20, 1));
 
 				// play sounds
 				TwilightForestMod.proxy.playSoundAtClientPlayer(SoundEvents.ENTITY_IRONGOLEM_ATTACK);
