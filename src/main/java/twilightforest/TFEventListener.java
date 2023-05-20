@@ -490,7 +490,7 @@ public class TFEventListener {
 				}
 
 				// inflict slowness
-				target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 20, 1));
+				target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 40, 1));
 
 				// play sounds
 				TwilightForestMod.proxy.playSoundAtClientPlayer(SoundEvents.ENTITY_IRONGOLEM_ATTACK);
@@ -656,6 +656,12 @@ public class TFEventListener {
 				Potion corroded = Potion.getPotionFromResourceLocation("mod_lavacow:corroded");
 				if (corroded != null) {
 					living.addPotionEffect(new PotionEffect(corroded, 120, 0));
+				}
+			}
+			if (Loader.isModLoaded("elenaidodge")) {
+				Potion cannotDodge = Potion.getPotionFromResourceLocation("elenaidodge:cannot_dodge");
+				if (cannotDodge != null) {
+					living.addPotionEffect(new PotionEffect(cannotDodge, 120, 0));
 				}
 			}
 		}
