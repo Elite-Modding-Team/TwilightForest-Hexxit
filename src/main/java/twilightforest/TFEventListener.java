@@ -489,8 +489,14 @@ public class TFEventListener {
 					((EntityPlayerMP) target).connection.sendPacket(new SPacketEntityVelocity(target));
 				}
 
+				// compute amplifier
+				int amplifier = 1;
+				PotionEffect speed = target.getActivePotionEffect(MobEffects.SPEED);
+				if (speed != null) {
+					amplifier++;
+				}
 				// inflict slowness
-				target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 40, 1));
+				target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 40, amplifier));
 
 				// play sounds
 				TwilightForestMod.proxy.playSoundAtClientPlayer(SoundEvents.ENTITY_IRONGOLEM_ATTACK);
