@@ -25,7 +25,7 @@ public class ComponentTFFinalCastleDungeonForgeRoom extends StructureTFComponent
 		this.fillWithAir(world, sbb, 0, 0, 0, 50, 30, 50);
 
 		// sign
-		this.placeSignAtCurrentPosition(world, 25, 0, 25, "Mini-boss 2", "Gives talisman", sbb);
+		//this.placeSignAtCurrentPosition(world, 25, 0, 25, "Mini-boss 2", "Gives talisman", sbb);
 
 		return true;
 	}

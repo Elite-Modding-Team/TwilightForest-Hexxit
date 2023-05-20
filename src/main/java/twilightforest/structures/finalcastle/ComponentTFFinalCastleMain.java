@@ -73,7 +73,7 @@ public class ComponentTFFinalCastleMain extends StructureTFComponentOld {
 		list.add(tower0);
 		tower0.buildComponent(this, list, rand);
 
-		ComponentTFFinalCastleLargeTower tower1 = new ComponentTFFinalCastleLargeTower(getFeatureType(), rand, 3, boundingBox.maxX, boundingBox.minY + 3, boundingBox.minZ, EnumFacing.EAST);
+		ComponentTFFinalCastleStairTower tower1 = new ComponentTFFinalCastleStairTower(getFeatureType(), rand, 3, boundingBox.maxX, boundingBox.minY + 3, boundingBox.minZ, EnumFacing.EAST);
 		list.add(tower1);
 		tower1.buildComponent(this, list, rand);
 
