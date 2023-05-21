@@ -80,6 +80,24 @@ public final class TFSounds {
 
 	public static final SoundEvent MUSIC = createEvent("music.bg");
 
+	public static final SoundEvent BOSS_MUSIC_START = createEvent("music.boss.start");
+	public static final SoundEvent BOSS_MUSIC_END = createEvent("music.boss.end");
+	public static final SoundEvent BOSS_MUSIC_MAIN_1 = createEvent("music.boss.main1");
+	public static final SoundEvent BOSS_MUSIC_MAIN_2 = createEvent("music.boss.main2");
+	public static final SoundEvent BOSS_MUSIC_MAIN_3 = createEvent("music.boss.main3");
+	public static final SoundEvent BOSS_MUSIC_MAIN_4 = createEvent("music.boss.main4");
+	public static final SoundEvent BOSS_MUSIC_MAIN_5 = createEvent("music.boss.main5");
+	public static final SoundEvent BOSS_MUSIC_MAIN_6 = createEvent("music.boss.main6");
+	public static final SoundEvent BOSS_MUSIC_MAIN_7 = createEvent("music.boss.main7");
+	public static final SoundEvent BOSS_MUSIC_MAIN_8 = createEvent("music.boss.main8");
+	public static final SoundEvent BOSS_MUSIC_MAIN_9 = createEvent("music.boss.main9");
+	public static final SoundEvent BOSS_MUSIC_MAIN_10 = createEvent("music.boss.main10");
+	public static final SoundEvent BOSS_MUSIC_MAIN_11 = createEvent("music.boss.main11");
+	public static final SoundEvent BOSS_MUSIC_MAIN_12 = createEvent("music.boss.main12");
+	public static final SoundEvent BOSS_MUSIC_MAIN_13 = createEvent("music.boss.main13");
+	public static final SoundEvent BOSS_MUSIC_MAIN_14 = createEvent("music.boss.main14");
+	public static final SoundEvent BOSS_MUSIC_MAIN_15 = createEvent("music.boss.main15");
+
 	private static SoundEvent createEvent(String sound) {
 		ResourceLocation name = TwilightForestMod.prefix(sound);
 		return new SoundEvent(name).setRegistryName(name);
@@ -148,7 +166,24 @@ public final class TFSounds {
 				FINALBOSS_SPAWN,
 				FINALBOSS_DEATH,
 				SLIDER,
-				MUSIC
+				MUSIC,
+				BOSS_MUSIC_START,
+				BOSS_MUSIC_END,
+				BOSS_MUSIC_MAIN_1,
+				BOSS_MUSIC_MAIN_2,
+				BOSS_MUSIC_MAIN_3,
+				BOSS_MUSIC_MAIN_4,
+				BOSS_MUSIC_MAIN_5,
+				BOSS_MUSIC_MAIN_6,
+				BOSS_MUSIC_MAIN_7,
+				BOSS_MUSIC_MAIN_8,
+				BOSS_MUSIC_MAIN_9,
+				BOSS_MUSIC_MAIN_10,
+				BOSS_MUSIC_MAIN_11,
+				BOSS_MUSIC_MAIN_12,
+				BOSS_MUSIC_MAIN_13,
+				BOSS_MUSIC_MAIN_14,
+				BOSS_MUSIC_MAIN_15
 		);
 
 		registerParrotSounds();

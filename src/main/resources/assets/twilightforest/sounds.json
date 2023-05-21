@@ -488,5 +488,141 @@
         "stream": true
       }
     ]
+  },
+  "music.boss.start": {
+    "sounds": [
+      {
+        "name": "twilightforest:music/boss/start",
+        "stream": true
+      }
+    ]
+  },
+  "music.boss.end": {
+    "sounds": [
+      {
+        "name": "twilightforest:music/boss/end",
+        "stream": true
+      }
+    ]
+  },
+  "music.boss.main1": {
+    "sounds": [
+      {
+        "name": "twilightforest:music/boss/main1",
+        "stream": true
+      }
+    ]
+  },
+  "music.boss.main2": {
+    "sounds": [
+      {
+        "name": "twilightforest:music/boss/main2",
+        "stream": true
+      }
+    ]
+  },
+  "music.boss.main3": {
+    "sounds": [
+      {
+        "name": "twilightforest:music/boss/main3",
+        "stream": true
+      }
+    ]
+  },
+  "music.boss.main4": {
+    "sounds": [
+      {
+        "name": "twilightforest:music/boss/main4",
+        "stream": true
+      }
+    ]
+  },
+  "music.boss.main5": {
+    "sounds": [
+      {
+        "name": "twilightforest:music/boss/main5",
+        "stream": true
+      }
+    ]
+  },
+  "music.boss.main6": {
+    "sounds": [
+      {
+        "name": "twilightforest:music/boss/main6",
+        "stream": true
+      }
+    ]
+  },
+  "music.boss.main7": {
+    "sounds": [
+      {
+        "name": "twilightforest:music/boss/main7",
+        "stream": true
+      }
+    ]
+  },
+  "music.boss.main8": {
+    "sounds": [
+      {
+        "name": "twilightforest:music/boss/main8",
+        "stream": true
+      }
+    ]
+  },
+  "music.boss.main9": {
+    "sounds": [
+      {
+        "name": "twilightforest:music/boss/main9",
+        "stream": true
+      }
+    ]
+  },
+  "music.boss.main10": {
+    "sounds": [
+      {
+        "name": "twilightforest:music/boss/main10",
+        "stream": true
+      }
+    ]
+  },
+  "music.boss.main11": {
+    "sounds": [
+      {
+        "name": "twilightforest:music/boss/main11",
+        "stream": true
+      }
+    ]
+  },
+  "music.boss.main12": {
+    "sounds": [
+      {
+        "name": "twilightforest:music/boss/main12",
+        "stream": true
+      }
+    ]
+  },
+  "music.boss.main13": {
+    "sounds": [
+      {
+        "name": "twilightforest:music/boss/main13",
+        "stream": true
+      }
+    ]
+  },
+  "music.boss.main14": {
+    "sounds": [
+      {
+        "name": "twilightforest:music/boss/main14",
+        "stream": true
+      }
+    ]
+  },
+  "music.boss.main15": {
+    "sounds": [
+      {
+        "name": "twilightforest:music/boss/main15",
+        "stream": true
+      }
+    ]
   }
 }

@@ -25,6 +25,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.network.play.INetHandlerPlayServer;
 import net.minecraft.network.play.server.SPacketEntityVelocity;
+import net.minecraft.network.play.server.SPacketTitle;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -32,6 +33,9 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
@@ -461,11 +465,31 @@ public class TFEventListener {
 			living.setSneaking(false);
 		}
 
-		// Final Boss gravity ability
-		if (!living.world.isRemote && living instanceof EntityWroughtnaut && (living.motionX > 0 || living.motionZ > 0)) {
+		/*
+		 * Final Boss
+		 */
+		if (!living.world.isRemote && living instanceof EntityWroughtnaut) {
 			EntityWroughtnaut boss = (EntityWroughtnaut) living;
 			EntityLivingBase target = boss.getAttackTarget();
-			if (boss.ticksExisted % 40 == 0 && target != null && boss.canEntityBeSeen(target)) {
+
+			if (target != null && !boss.getTags().contains("encountered")) {
+				// display title
+				if (target instanceof EntityPlayerMP) {
+					SPacketTitle title = new SPacketTitle(SPacketTitle.Type.TITLE, new TextComponentTranslation("twilightforest.title.finalboss.spawn").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)), 20, 40, 20);
+					SPacketTitle subtitle = new SPacketTitle(SPacketTitle.Type.SUBTITLE, new TextComponentTranslation("twilightforest.subtitle.finalboss.spawn"), 20, 60, 20);
+					((EntityPlayerMP) target).connection.sendPacket(title);
+					((EntityPlayerMP) target).connection.sendPacket(subtitle);
+				}
+
+				// play sound
+				TwilightForestMod.proxy.playSoundAtClientPlayer(TFSounds.FINALBOSS_SPAWN);
+
+				// set as encountered
+				boss.addTag("encountered");
+			}
+
+			// gravity ability
+			if (boss.ticksExisted % 40 == 0 && target != null && boss.isActive() && (boss.motionX > 0 || boss.motionZ > 0) && boss.canEntityBeSeen(target)) {
 				double diffX = target.posX - boss.posX;
 				double diffZ;
 				for (diffZ = target.posZ - boss.posZ; diffX * diffX + diffZ * diffZ < 1.0E-4D; diffZ = (Math.random() - Math.random()) * 0.01D) {
@@ -882,13 +906,6 @@ public class TFEventListener {
 					event.setCanceled(true);
 				}
 			}
-		}
-	}
-
-	@SubscribeEvent
-	public static void onFinalBossDeath(LivingDeathEvent event) {
-		if (event.getEntityLiving() instanceof EntityWroughtnaut) {
-			TwilightForestMod.proxy.playSoundAtClientPlayer(TFSounds.FINALBOSS_DEATH);
 		}
 	}
 }

@@ -4,18 +4,12 @@ import com.bobmowzie.mowziesmobs.server.entity.wroughtnaut.EntityWroughtnaut;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.network.play.server.SPacketTitle;
 import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraftforge.fml.common.Mod;
-import twilightforest.TFSounds;
 import twilightforest.TwilightForestMod;
 
 @Mod.EventBusSubscriber(modid = TwilightForestMod.ID)
@@ -43,9 +37,6 @@ public class TileEntityTFFinalBossSpawner extends TileEntityTFBossSpawner {
             return;
         }
 
-        // compute affected area
-        AxisAlignedBB boundingBox = new AxisAlignedBB(pos).grow(getRange());
-
         if (world.isRemote) {
             // spawn particles
             double rx = pos.getX() + world.rand.nextFloat();
@@ -58,18 +49,11 @@ public class TileEntityTFFinalBossSpawner extends TileEntityTFBossSpawner {
                 world.destroyBlock(pos, false);
                 spawnedBoss = true;
 
-                // display title
-                world.getEntitiesWithinAABB(EntityPlayerMP.class, boundingBox).forEach(player -> {
-                    SPacketTitle title = new SPacketTitle(SPacketTitle.Type.TITLE, new TextComponentTranslation("twilightforest.title.finalboss.spawn").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)), 20, 40, 20);
-                    SPacketTitle subtitle = new SPacketTitle(SPacketTitle.Type.SUBTITLE, new TextComponentTranslation("twilightforest.subtitle.finalboss.spawn"), 20, 60, 20);
-                    player.connection.sendPacket(title);
-                    player.connection.sendPacket(subtitle);
-                });
+                // create lightning
+                world.addWeatherEffect(new EntityLightningBolt(world, getPos().getX() + world.rand.nextGaussian(), getPos().getY(), getPos().getZ() + world.rand.nextGaussian(), true));
+                world.addWeatherEffect(new EntityLightningBolt(world, getPos().getX() + world.rand.nextGaussian(), getPos().getY(), getPos().getZ() + world.rand.nextGaussian(), true));
             }
         }
-
-        // play sound
-        TwilightForestMod.proxy.playSoundAtClientPlayer(TFSounds.FINALBOSS_SPAWN);
     }
 
     @Override
