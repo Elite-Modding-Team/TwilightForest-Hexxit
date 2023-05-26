@@ -490,138 +490,172 @@
     ]
   },
   "music.boss.start": {
+    "category": "music",
     "sounds": [
       {
         "name": "twilightforest:music/boss/start",
-        "stream": true
+        "stream": true,
+        "volume": 0.6
       }
     ]
   },
   "music.boss.end": {
+    "category": "music",
     "sounds": [
       {
         "name": "twilightforest:music/boss/end",
-        "stream": true
+        "stream": true,
+        "volume": 0.6
       }
     ]
   },
   "music.boss.main1": {
+    "category": "music",
     "sounds": [
       {
         "name": "twilightforest:music/boss/main1",
-        "stream": true
+        "stream": true,
+        "volume": 0.6
       }
     ]
   },
   "music.boss.main2": {
+    "category": "music",
     "sounds": [
       {
         "name": "twilightforest:music/boss/main2",
-        "stream": true
+        "stream": true,
+        "volume": 0.6
       }
     ]
   },
   "music.boss.main3": {
+    "category": "music",
     "sounds": [
       {
         "name": "twilightforest:music/boss/main3",
-        "stream": true
+        "stream": true,
+        "volume": 0.6
       }
     ]
   },
   "music.boss.main4": {
+    "category": "music",
     "sounds": [
       {
         "name": "twilightforest:music/boss/main4",
-        "stream": true
+        "stream": true,
+        "volume": 0.6
       }
     ]
   },
   "music.boss.main5": {
+    "category": "music",
     "sounds": [
       {
         "name": "twilightforest:music/boss/main5",
-        "stream": true
+        "stream": true,
+        "volume": 0.6
       }
     ]
   },
   "music.boss.main6": {
+    "category": "music",
     "sounds": [
       {
         "name": "twilightforest:music/boss/main6",
-        "stream": true
+        "stream": true,
+        "volume": 0.6
       }
     ]
   },
   "music.boss.main7": {
+    "category": "music",
     "sounds": [
       {
         "name": "twilightforest:music/boss/main7",
-        "stream": true
+        "stream": true,
+        "volume": 0.6
       }
     ]
   },
   "music.boss.main8": {
+    "category": "music",
     "sounds": [
       {
         "name": "twilightforest:music/boss/main8",
-        "stream": true
+        "stream": true,
+        "volume": 0.6
       }
     ]
   },
   "music.boss.main9": {
+    "category": "music",
     "sounds": [
       {
         "name": "twilightforest:music/boss/main9",
-        "stream": true
+        "stream": true,
+        "volume": 0.6
       }
     ]
   },
   "music.boss.main10": {
+    "category": "music",
     "sounds": [
       {
         "name": "twilightforest:music/boss/main10",
-        "stream": true
+        "stream": true,
+        "volume": 0.6
       }
     ]
   },
   "music.boss.main11": {
+    "category": "music",
     "sounds": [
       {
         "name": "twilightforest:music/boss/main11",
-        "stream": true
+        "stream": true,
+        "volume": 0.6
       }
     ]
   },
   "music.boss.main12": {
+    "category": "music",
     "sounds": [
       {
         "name": "twilightforest:music/boss/main12",
-        "stream": true
+        "stream": true,
+        "volume": 0.6
       }
     ]
   },
   "music.boss.main13": {
+    "category": "music",
     "sounds": [
       {
         "name": "twilightforest:music/boss/main13",
-        "stream": true
+        "stream": true,
+        "volume": 0.6
       }
     ]
   },
   "music.boss.main14": {
+    "category": "music",
     "sounds": [
       {
         "name": "twilightforest:music/boss/main14",
-        "stream": true
+        "stream": true,
+        "volume": 0.6
       }
     ]
   },
   "music.boss.main15": {
+    "category": "music",
     "sounds": [
       {
         "name": "twilightforest:music/boss/main15",
-        "stream": true
+        "stream": true,
+        "volume": 0.6
       }
     ]
   }
