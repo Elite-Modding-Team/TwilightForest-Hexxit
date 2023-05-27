@@ -451,17 +451,17 @@
       {
         "name": "twilightforest:music/superstitious",
         "stream": true,
-        "volume": 0.25
+        "volume": 0.4
       },
       {
         "name": "twilightforest:music/steps",
         "stream": true,
-        "volume": 0.25
+        "volume": 0.4
       },
       {
         "name": "twilightforest:music/radiance",
         "stream": true,
-        "volume": 0.25
+        "volume": 0.4
       },
       {
         "name": "twilightforest:music/ambient1",
