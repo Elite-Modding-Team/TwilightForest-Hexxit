@@ -3,6 +3,7 @@ package twilightforest.structures;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.gen.structure.StructureComponent;
+import twilightforest.block.TFBlocks;
 import twilightforest.structures.darktower.StructureDecoratorDarkTower;
 import twilightforest.structures.finalcastle.StructureTFDecoratorCastle;
 import twilightforest.structures.icetower.StructureDecoratorIceTower;
@@ -19,6 +20,7 @@ public class StructureTFDecorator {
 	public IBlockState accentState = Blocks.COBBLESTONE.getDefaultState();
 	public IBlockState stairState = Blocks.STONE_STAIRS.getDefaultState();
 	public IBlockState fenceState = Blocks.OAK_FENCE.getDefaultState();
+	public IBlockState forcefieldState = TFBlocks.force_field.getDefaultState();
 	public IBlockState pillarState = Blocks.STONEBRICK.getDefaultState();
 	public IBlockState platformState = Blocks.STONE_SLAB.getDefaultState();
 	public IBlockState floorState = Blocks.STONEBRICK.getDefaultState();
