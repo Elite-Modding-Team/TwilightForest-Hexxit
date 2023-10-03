@@ -113,10 +113,6 @@ repositories {
         url 'https://blamejared.com/maven'
     }
     maven {
-        name 'player\'s Maven' // Forestry
-        url 'https://maven.ic2.player.to'
-    }
-    maven {
         name 'Curseforge Maven' // Baubles + Thaumcraft
         url 'https://minecraft.curseforge.com/api/maven'
     }
