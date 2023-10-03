@@ -101,8 +101,8 @@ jar {
 
 repositories {
     maven {
-        name 'progwm\'s Maven' // JEI + Mantle + TCon
-        url 'https://dvs1.progwml6.com/files/maven'
+        name 'K4Unl\'s Maven' // JEI + Mantle + TCon
+        url 'https://modmaven.dev'
     }
     maven {
         name 'tterrag\'s Maven' // CTM
