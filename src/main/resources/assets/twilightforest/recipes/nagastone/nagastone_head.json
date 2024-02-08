@@ -1,0 +1,23 @@
+{
+  "result": {
+    "item": "twilightforest:naga_stone",
+    "data": 0,
+    "count": 8
+  },
+  "pattern": [
+    "SSS",
+    "SBS",
+    "SSS"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "S": {
+	  "item": "twilightforest:naga_stone",
+      "data": 1
+    },
+    "B": {
+      "type": "forge:ore_dict",
+      "ore": "bone"
+    }
+  }
+}

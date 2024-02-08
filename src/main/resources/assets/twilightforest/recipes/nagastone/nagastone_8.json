@@ -1,0 +1,22 @@
+{
+  "result": {
+    "item": "twilightforest:naga_stone",
+    "data": 1,
+    "count": 8
+  },
+  "pattern": [
+    "SSS",
+    "SNS",
+    "SSS"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "S": {
+	  "type": "forge:ore_dict",
+      "ore": "stone"
+    },
+    "N": {
+      "item": "twilightforest:naga_scale"
+    }
+  }
+}

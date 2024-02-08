@@ -55,7 +55,7 @@ public class TileEntityTFCicadaTicking extends TileEntityTFCicada implements ITi
 				}
 				if (!singing && singDuration <= 0) {
 					singing = true;
-					singDelay = 100 + world.rand.nextInt(100);
+					singDelay = 500 + world.rand.nextInt(100);
 				}
 			}
 		}

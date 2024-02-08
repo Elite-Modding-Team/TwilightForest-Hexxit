@@ -1,0 +1,16 @@
+{
+  "result": {
+    "item": "twilightforest:naga_stone",
+    "data": 1
+  },
+  "ingredients": [
+    {
+	  "type": "forge:ore_dict",
+      "ore": "stone"
+    },
+    {
+      "item": "twilightforest:naga_scale"
+    }
+  ],
+  "type": "forge:ore_shapeless"
+}

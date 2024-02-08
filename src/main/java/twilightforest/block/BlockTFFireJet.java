@@ -15,6 +15,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
@@ -31,6 +32,7 @@ import twilightforest.tileentity.TileEntityTFFlameJet;
 import twilightforest.tileentity.TileEntityTFPoppingJet;
 import twilightforest.tileentity.TileEntityTFSmoker;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.EnumSet;
 import java.util.Random;
@@ -236,6 +238,11 @@ public class BlockTFFireJet extends Block implements ModelRegisterCallback {
 		list.add(new ItemStack(this, 1, FireJetVariant.JET_IDLE.ordinal()));
 		list.add(new ItemStack(this, 1, FireJetVariant.ENCASED_SMOKER_OFF.ordinal()));
 		list.add(new ItemStack(this, 1, FireJetVariant.ENCASED_JET_IDLE.ordinal()));
+	}
+	
+	@Override
+	public boolean isFireSource(@Nonnull World world, BlockPos pos, EnumFacing side) {
+		return true;
 	}
 
 	@SideOnly(Side.CLIENT)

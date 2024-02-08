@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "twilightforest:etched_nagastone",
+    "count": 4
+  },
+  "pattern": [
+    "SS",
+    "SS"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "S": {
+	  "item": "twilightforest:naga_stone",
+      "data": 1
+    }
+  }
+}

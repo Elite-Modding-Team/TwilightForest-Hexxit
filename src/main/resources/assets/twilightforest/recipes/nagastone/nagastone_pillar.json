@@ -1,0 +1,16 @@
+{
+  "result": {
+    "item": "twilightforest:nagastone_pillar",
+    "count": 2
+  },
+  "pattern": [
+    "S",
+    "S"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "S": {
+	  "item": "twilightforest:etched_nagastone"
+    }
+  }
+}
