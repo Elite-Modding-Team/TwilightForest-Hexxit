@@ -118,6 +118,8 @@ public class TFRecipes {
 		GameRegistry.addSmelting(TFItems.raw_venison, new ItemStack(TFItems.cooked_venison), 0.3F);
 		GameRegistry.addSmelting(TFItems.raw_meef, new ItemStack(TFItems.cooked_meef), 0.3F);
 		GameRegistry.addSmelting(TFItems.armor_shard_cluster, new ItemStack(TFItems.knightmetal_ingot), 1.0F);
+		GameRegistry.addSmelting(TFBlocks.etched_nagastone, new ItemStack(TFBlocks.etched_nagastone_weathered), 0.1F);
+		GameRegistry.addSmelting(TFBlocks.nagastone_pillar, new ItemStack(TFBlocks.nagastone_pillar_weathered), 0.1F);
 
 		event.getRegistry().register(new TFArmorDyeingRecipe().setRegistryName(TwilightForestMod.ID, "arctic_armor_dyeing"));
 
