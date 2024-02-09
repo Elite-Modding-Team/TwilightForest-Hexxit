@@ -62,7 +62,7 @@ public class EntityTFQuestRam extends EntityAnimal {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(70.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23000000417232513D);
 	}
 
@@ -105,6 +105,7 @@ public class EntityTFQuestRam extends EntityAnimal {
 			if (countColorsSet() > 15 && !getRewarded()) {
 				rewardQuest();
 				setRewarded(true);
+				playSound(SoundEvents.ENTITY_PLAYER_LEVELUP, 1.0F, 1.0F);
 			}
 
 		}
@@ -201,8 +202,7 @@ public class EntityTFQuestRam extends EntityAnimal {
 			this.world.spawnParticle(EnumParticleTypes.SPELL_MOB, this.posX + (this.rand.nextDouble() - 0.5D) * this.width * 1.5, this.posY + this.rand.nextDouble() * this.height * 1.5, this.posZ + (this.rand.nextDouble() - 0.5D) * this.width * 1.5, red, green, blue);
 		}
 
-		//TODO: it would be nice to play a custom sound
-		playLivingSound();
+		playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F);
 	}
 
 	public int countColorsSet() {
@@ -211,7 +211,7 @@ public class EntityTFQuestRam extends EntityAnimal {
 
 	@Override
 	protected float getSoundVolume() {
-		return 5.0F;
+		return 2.5F;
 	}
 
 	@Override
