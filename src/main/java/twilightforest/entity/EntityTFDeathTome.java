@@ -75,11 +75,11 @@ public class EntityTFDeathTome extends EntityMob implements IRangedAttackMob {
 
 	@Override
 	public void onLivingUpdate() {
+		super.onLivingUpdate();
+		
 		if (!this.onGround && this.motionY < 0.0D) {
 			this.motionY *= 0.6D;
 		}
-
-		super.onLivingUpdate();
 
 		for (int i = 0; i < 1; ++i) {
 			this.world.spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, this.posX + (this.rand.nextDouble() - 0.5D) * this.width, this.posY + this.rand.nextDouble() * (this.height - 0.75D) + 0.5D, this.posZ + (this.rand.nextDouble() - 0.5D) * this.width,

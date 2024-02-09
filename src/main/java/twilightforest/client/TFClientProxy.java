@@ -48,6 +48,7 @@ import twilightforest.entity.*;
 import twilightforest.entity.boss.*;
 import twilightforest.entity.finalcastle.EntityTFCastleGuardian;
 import twilightforest.entity.passive.*;
+import twilightforest.item.TFItems;
 import twilightforest.tileentity.TileEntityTFTrophy;
 import twilightforest.tileentity.critters.*;
 
@@ -141,6 +142,7 @@ public class TFClientProxy extends TFCommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityTFCastleGuardian.class, m -> new RenderTFCastleGuardian(m, new ModelTFCastleGuardian(), 2.0F, "finalcastle/castle_guardian.png"));
 
 		// projectiles
+		RenderingRegistry.registerEntityRenderingHandler(EntityTFAdherentBolt.class, m -> new RenderSnowball<>(m, TFItems.cube_talisman, Minecraft.getMinecraft().getRenderItem()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTFNatureBolt.class, m -> new RenderSnowball<>(m, Items.WHEAT_SEEDS, Minecraft.getMinecraft().getRenderItem()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTFLichBolt.class, m -> new RenderSnowball<>(m, Items.ENDER_PEARL, Minecraft.getMinecraft().getRenderItem()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTFTwilightWandBolt.class, m -> new RenderSnowball<>(m, Items.ENDER_PEARL, Minecraft.getMinecraft().getRenderItem()));

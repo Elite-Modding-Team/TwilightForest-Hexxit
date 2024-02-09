@@ -148,6 +148,7 @@ public class TFEntities {
 
 		helper.registerEntity(TFEntityNames.HYDRA_HEAD, EntityTFHydraHead.class, EntityTFHydraHead::new, 150, 3, false);
 
+		helper.registerEntity(TFEntityNames.ADHERENT_BOLT, EntityTFAdherentBolt.class, EntityTFAdherentBolt::new, 150, 5, true);
 		helper.registerEntity(TFEntityNames.NATURE_BOLT, EntityTFNatureBolt.class, EntityTFNatureBolt::new, 150, 5, true);
 		helper.registerEntity(TFEntityNames.LICH_BOLT, EntityTFLichBolt.class, EntityTFLichBolt::new, 150, 2, true);
 		helper.registerEntity(TFEntityNames.WAND_BOLT, EntityTFTwilightWandBolt.class, EntityTFTwilightWandBolt::new, 150, 5, true);

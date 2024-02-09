@@ -100,11 +100,11 @@ public class EntityTFMosquitoSwarm extends EntityMob {
 
 	@Override
 	public void onLivingUpdate() {
+		super.onLivingUpdate();
+		
 		if (!this.onGround && this.motionY < 0.0D) {
 			this.motionY *= 0.6D;
 		}
-
-		super.onLivingUpdate();
 	}
 
 	@Override

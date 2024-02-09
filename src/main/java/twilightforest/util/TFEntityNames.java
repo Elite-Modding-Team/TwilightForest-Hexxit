@@ -104,6 +104,7 @@ public class TFEntityNames {
 	public static final ResourceLocation CUBE_OF_ANNIHILATION = prefix("cube_of_annihilation");
 
 	// Projectiles
+	public static final ResourceLocation ADHERENT_BOLT = prefix("adherent_bolt");
 	public static final ResourceLocation NATURE_BOLT = prefix("nature_bolt");
 	public static final ResourceLocation LICH_BOLT = prefix("lich_bolt");
 	public static final ResourceLocation WAND_BOLT = prefix("wand_bolt");
