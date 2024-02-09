@@ -7,12 +7,10 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntitySilverfish;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;
@@ -30,7 +28,7 @@ import twilightforest.enums.TowerWoodVariant;
 
 import java.util.Random;
 
-public class EntityTFTowerTermite extends EntityMob {
+public class EntityTFTowerTermite extends EntitySilverfish {
 
 	public static final ResourceLocation LOOT_TABLE = TwilightForestMod.prefix("entities/tower_termite");
 	private AISummonSilverfish summonSilverfish;
@@ -45,7 +43,7 @@ public class EntityTFTowerTermite extends EntityMob {
 		this.tasks.addTask(1, new EntityAISwimming(this));
 		this.tasks.addTask(2, this.summonSilverfish = new AISummonSilverfish(this));
 		this.tasks.addTask(3, new EntityAIAttackMelee(this, 1.0D, false));
-		this.tasks.addTask(4, new AIHideInStone(this));
+		this.tasks.addTask(4, new EntityTFTowerTermite.AIHideInStone(this));
 		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
 		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
 	}
