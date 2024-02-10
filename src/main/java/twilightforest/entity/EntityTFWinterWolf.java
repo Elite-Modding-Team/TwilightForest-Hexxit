@@ -1,5 +1,7 @@
 package twilightforest.entity;
 
+import com.bobmowzie.mowziesmobs.server.potion.PotionHandler;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
@@ -13,6 +15,7 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -22,6 +25,7 @@ import twilightforest.TwilightForestMod;
 import twilightforest.biomes.TFBiomes;
 import twilightforest.client.particle.TFParticleType;
 import twilightforest.entity.ai.EntityAITFBreathAttack;
+import twilightforest.potions.TFPotions;
 
 public class EntityTFWinterWolf extends EntityTFHostileWolf implements IBreathAttacker {
 
@@ -69,6 +73,11 @@ public class EntityTFWinterWolf extends EntityTFHostileWolf implements IBreathAt
 			}
 			playBreathSound();
 		}
+	}
+	
+	// Immune to ice effects
+	public boolean isPotionApplicable(PotionEffect effect) {
+		return effect.getPotion() != TFPotions.frosty && effect.getPotion() != PotionHandler.FROZEN && super.isPotionApplicable(effect);
 	}
 
 	private void spawnBreathParticles() {

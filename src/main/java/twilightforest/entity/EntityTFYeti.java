@@ -16,6 +16,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -26,8 +27,11 @@ import twilightforest.TFSounds;
 import twilightforest.TwilightForestMod;
 import twilightforest.biomes.TFBiomes;
 import twilightforest.entity.ai.EntityAITFThrowRider;
+import twilightforest.potions.TFPotions;
 
 import javax.annotation.Nullable;
+
+import com.bobmowzie.mowziesmobs.server.potion.PotionHandler;
 
 public class EntityTFYeti extends EntityMob implements IHostileMount {
 
@@ -99,6 +103,11 @@ public class EntityTFYeti extends EntityMob implements IHostileMount {
 			Vec3d riderPos = this.getRiderPosition(getPassengers().get(0));
 			this.pushOutOfBlocks(riderPos.x, riderPos.y, riderPos.z);
 		}
+	}
+	
+	// Immune to ice effects
+	public boolean isPotionApplicable(PotionEffect effect) {
+		return effect.getPotion() != TFPotions.frosty && effect.getPotion() != PotionHandler.FROZEN && super.isPotionApplicable(effect);
 	}
 
 	@Override

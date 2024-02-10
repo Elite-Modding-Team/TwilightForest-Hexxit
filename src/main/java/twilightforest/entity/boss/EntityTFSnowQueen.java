@@ -22,6 +22,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
@@ -45,10 +46,13 @@ import twilightforest.entity.ai.EntityAITFHoverBeam;
 import twilightforest.entity.ai.EntityAITFHoverSummon;
 import twilightforest.entity.ai.EntityAITFHoverThenDrop;
 import twilightforest.enums.BossVariant;
+import twilightforest.potions.TFPotions;
 import twilightforest.util.WorldUtil;
 import twilightforest.world.TFWorld;
 
 import java.util.List;
+
+import com.bobmowzie.mowziesmobs.server.potion.PotionHandler;
 
 public class EntityTFSnowQueen extends EntityMob implements IEntityMultiPart, IBreathAttacker {
 
@@ -262,6 +266,12 @@ public class EntityTFSnowQueen extends EntityMob implements IEntityMultiPart, IB
 		if (!world.isRemote) {
 			TFWorld.markStructureConquered(world, new BlockPos(this), TFFeature.ICE_TOWER);
 		}
+	}
+
+	// Immune to ice effects
+	@Override
+	public boolean isPotionApplicable(PotionEffect effect) {
+		return effect.getPotion() != TFPotions.frosty && effect.getPotion() != PotionHandler.FROZEN && super.isPotionApplicable(effect);
 	}
 
 	private void applyShieldCollisions(Entity collider) {

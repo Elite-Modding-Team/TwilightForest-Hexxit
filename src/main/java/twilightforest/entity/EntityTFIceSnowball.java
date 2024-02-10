@@ -1,12 +1,16 @@
 package twilightforest.entity;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import twilightforest.TFSounds;
+import twilightforest.potions.TFPotions;
 
 public class EntityTFIceSnowball extends EntityTFThrowable {
 
@@ -62,8 +66,9 @@ public class EntityTFIceSnowball extends EntityTFThrowable {
 	@Override
 	protected void onImpact(RayTraceResult result) {
 		if (!world.isRemote && result.entityHit instanceof EntityLivingBase) {
+			int freezeTime = world.getDifficulty() == EnumDifficulty.HARD ? 8 : 4;
 			result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), DAMAGE);
-			// TODO: damage armor?
+			((EntityLivingBase) result.entityHit).addPotionEffect(new PotionEffect(TFPotions.frosty, freezeTime * 20, 0));
 		}
 
 		die();
@@ -73,6 +78,7 @@ public class EntityTFIceSnowball extends EntityTFThrowable {
 		if (!this.world.isRemote) {
 			this.world.setEntityState(this, (byte) 3);
 			this.setDead();
+			this.playSound(TFSounds.ICE_HURT, 1.0F, 1.5F / (rand.nextFloat() * 0.2F + 0.4F));
 		}
 	}
 }

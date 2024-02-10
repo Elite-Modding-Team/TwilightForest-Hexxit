@@ -9,10 +9,13 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.EntityFlyHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.pathfinding.PathNavigateFlying;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -30,6 +33,7 @@ public class EntityTFSnowGuardian extends EntityTFIceMob {
 	public EntityTFSnowGuardian(World world) {
 		super(world);
 		this.setSize(0.6F, 1.8F);
+		this.moveHelper = new EntityFlyHelper(this);
 	}
 
 	@Override
@@ -46,11 +50,22 @@ public class EntityTFSnowGuardian extends EntityTFIceMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
+		this.getAttributeMap().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23000000417232513D);
 		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.FLYING_SPEED).setBaseValue(0.45D);
 	}
 
+	@Override
+	protected PathNavigate createNavigator(World worldIn) {
+		PathNavigateFlying pathnavigateflying = new PathNavigateFlying(this, worldIn);
+		pathnavigateflying.setCanOpenDoors(false);
+		pathnavigateflying.setCanFloat(true);
+		pathnavigateflying.setCanEnterDoors(true);
+		return pathnavigateflying;
+	}
+	
 	@Override
 	protected SoundEvent getAmbientSound() {
 		return TFSounds.ICE_AMBIENT;
@@ -161,6 +176,10 @@ public class EntityTFSnowGuardian extends EntityTFIceMob {
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
+
+		if (!this.onGround && this.motionY < 0.0D) {
+			this.motionY *= 0.6D;
+		}
 
 		if (this.world.isRemote) {
 			for (int i = 0; i < 3; i++) {

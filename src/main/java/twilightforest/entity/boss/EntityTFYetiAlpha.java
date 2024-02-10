@@ -22,6 +22,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
@@ -47,11 +48,14 @@ import twilightforest.entity.ai.EntityAITFThrowRider;
 import twilightforest.entity.ai.EntityAITFYetiRampage;
 import twilightforest.entity.ai.EntityAITFYetiTired;
 import twilightforest.enums.BossVariant;
+import twilightforest.potions.TFPotions;
 import twilightforest.util.EntityUtil;
 import twilightforest.util.WorldUtil;
 import twilightforest.world.TFWorld;
 
 import javax.annotation.Nullable;
+
+import com.bobmowzie.mowziesmobs.server.potion.PotionHandler;
 
 public class EntityTFYetiAlpha extends EntityMob implements IRangedAttackMob, IHostileMount {
 
@@ -159,6 +163,11 @@ public class EntityTFYetiAlpha extends EntityMob implements IRangedAttackMob, IH
 				}
 			}
 		}
+	}
+	
+	// Immune to ice effects
+	public boolean isPotionApplicable(PotionEffect effect) {
+		return effect.getPotion() != TFPotions.frosty && effect.getPotion() != PotionHandler.FROZEN && super.isPotionApplicable(effect);
 	}
 
 	private void addSnowEffect(float rotation, float hgt) {

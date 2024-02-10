@@ -1,9 +1,15 @@
 package twilightforest.entity;
 
+import java.util.List;
+
+import com.bobmowzie.mowziesmobs.server.potion.PotionHandler;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockColored;
 import net.minecraft.block.BlockStainedGlass;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -15,6 +21,7 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -85,8 +92,17 @@ public class EntityTFIceExploder extends EntityTFIceMob {
 		if (this.deathTime == 60) // delay until 3 seconds
 		{
 			if (!world.isRemote) {
+				List<Entity> list = EntityTFIceExploder.this.world.getEntitiesWithinAABBExcludingEntity((Entity)EntityTFIceExploder.this, EntityTFIceExploder.this.getEntityBoundingBox().grow(3.0D));
+	            
 				boolean mobGriefing = ForgeEventFactory.getMobGriefingEvent(world, this);
 				this.world.createExplosion(this, this.posX, this.posY, this.posZ, EntityTFIceExploder.EXPLOSION_RADIUS, mobGriefing);
+				this.playSound(TFSounds.ICE_DEATH, 2.5F, 0.5F);
+				
+            	for (Entity entity : list) {
+            		if (entity instanceof EntityLivingBase) {
+            			((EntityLivingBase)entity).addPotionEffect(new PotionEffect(PotionHandler.FROZEN, 20 * 5, 0));
+            		}
+            	}
 
 				if (mobGriefing) {
 					this.transformBlocks();
@@ -132,6 +148,8 @@ public class EntityTFIceExploder extends EntityTFIceMob {
 			// do appropriate transformation
 			if (this.shouldTransformGlass(state, pos)) {
 				this.world.setBlockState(pos, Blocks.STAINED_GLASS.getDefaultState().withProperty(BlockStainedGlass.COLOR, getClosestDyeColor(blockColor)));
+			} else if (this.shouldTransformAurora(state, pos)) {
+				this.world.setBlockState(pos, TFBlocks.auroralized_glass.getDefaultState());
 			} else if (this.shouldTransformClay(state, pos)) {
 				this.world.setBlockState(pos, Blocks.STAINED_HARDENED_CLAY.getDefaultState().withProperty(BlockColored.COLOR, getClosestDyeColor(blockColor)));
 			}
@@ -145,10 +163,13 @@ public class EntityTFIceExploder extends EntityTFIceMob {
 
 
 	private boolean shouldTransformGlass(IBlockState state, BlockPos pos) {
-		return state.getBlock() != Blocks.AIR && this.isBlockNormalBounds(state, pos) && (!state.getMaterial().isOpaque() || state.getBlock().isLeaves(state, this.world, pos) || state.getBlock() == Blocks.ICE || state.getBlock() == TFBlocks.aurora_block);
+	return state.getBlock() != Blocks.AIR && this.isBlockNormalBounds(state, pos) && (!state.getMaterial().isOpaque() || state.getBlock().isLeaves(state, this.world, pos) || state.getBlock() == Blocks.ICE || state.getBlock() == Blocks.PACKED_ICE);
 	}
 
-
+	private boolean shouldTransformAurora(IBlockState state, BlockPos pos) {
+		return state.getBlock() != Blocks.AIR && this.isBlockNormalBounds(state, pos) && (!state.getMaterial().isOpaque() || state.getBlock() == TFBlocks.aurora_block || state.getBlock() == TFBlocks.aurora_pillar);
+	}
+	
 	private boolean isBlockNormalBounds(IBlockState state, BlockPos pos) {
 		return Block.FULL_BLOCK_AABB.equals(state.getBoundingBox(world, pos));
 	}

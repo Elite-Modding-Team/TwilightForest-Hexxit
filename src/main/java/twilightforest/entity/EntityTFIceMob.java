@@ -1,13 +1,19 @@
 package twilightforest.entity;
 
+import com.bobmowzie.mowziesmobs.server.potion.PotionHandler;
+
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import twilightforest.TwilightForestMod;
 import twilightforest.client.particle.TFParticleType;
+import twilightforest.potions.TFPotions;
 
 public abstract class EntityTFIceMob extends EntityMob {
 	public EntityTFIceMob(World worldIn) {
@@ -38,6 +44,22 @@ public abstract class EntityTFIceMob extends EntityMob {
 			//BURN!!!
 			this.attackEntityFrom(DamageSource.ON_FIRE, 1.0F);
 		}
+	}
+	
+	public boolean attackEntityAsMob(Entity entityIn) {
+        boolean flag = super.attackEntityAsMob(entityIn);
+
+        if (flag && entityIn instanceof EntityLivingBase) {
+            float f = this.world.getDifficultyForLocation(new BlockPos(this)).getAdditionalDifficulty();
+            ((EntityLivingBase)entityIn).addPotionEffect(new PotionEffect(TFPotions.frosty, 80 * (int)f, 1)); // 4 seconds
+        }
+
+        return flag;
+    }
+
+	// Immune to ice effects
+	public boolean isPotionApplicable(PotionEffect effect) {
+		return effect.getPotion() != TFPotions.frosty && effect.getPotion() != PotionHandler.FROZEN && super.isPotionApplicable(effect);
 	}
 
 	@Override
