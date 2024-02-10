@@ -120,6 +120,8 @@ public class TFRecipes {
 		GameRegistry.addSmelting(TFItems.armor_shard_cluster, new ItemStack(TFItems.knightmetal_ingot), 1.0F);
 		GameRegistry.addSmelting(TFBlocks.etched_nagastone, new ItemStack(TFBlocks.etched_nagastone_weathered), 0.1F);
 		GameRegistry.addSmelting(TFBlocks.nagastone_pillar, new ItemStack(TFBlocks.nagastone_pillar_weathered), 0.1F);
+		GameRegistry.addSmelting(TFBlocks.aurora_block, new ItemStack(TFBlocks.auroralized_glass), 0.1F);
+		GameRegistry.addSmelting(TFBlocks.aurora_pillar, new ItemStack(TFBlocks.auroralized_glass), 0.1F);
 
 		event.getRegistry().register(new TFArmorDyeingRecipe().setRegistryName(TwilightForestMod.ID, "arctic_armor_dyeing"));
 

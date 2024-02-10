@@ -212,7 +212,7 @@ public class TFConfig {
 
 		@Config.LangKey(config + "glacier_packed_ice")
 		@Config.Comment("Setting this true will make Twilight Glaciers generate with Packed Ice instead of regular translucent Ice, decreasing amount of light checking calculations.")
-		public boolean glacierPackedIce = false;
+		public boolean glacierPackedIce = true;
 
 		@Config.LangKey(config + "enable_skylight")
 		@Config.Comment("If the dimension has per-block skylight values. Disabling this will significantly improve world generation performance, at the cost of flat lighting everywhere." +

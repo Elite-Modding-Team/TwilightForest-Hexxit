@@ -1,6 +1,7 @@
 package twilightforest.block;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
@@ -19,12 +20,12 @@ public class BlockTFAuroraBrick extends Block implements ModelRegisterCallback {
 	public static final IProperty<Integer> VARIANT = PropertyInteger.create("variant", 0, 15);
 
 	public BlockTFAuroraBrick() {
-		super(Material.PACKED_ICE);
+		super(Material.ROCK);
 
 		this.setCreativeTab(TFItems.creativeTab);
 		this.setHardness(2.0F);
 		this.setResistance(10.0F);
-
+		this.setSoundType(SoundType.GLASS);
 	}
 
 	private static float getFractalNoise(int iteration, float size, BlockPos pos) {

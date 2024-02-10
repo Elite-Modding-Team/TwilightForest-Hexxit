@@ -1,6 +1,7 @@
 package twilightforest.block;
 
 import net.minecraft.block.BlockSlab;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
@@ -30,11 +31,12 @@ public class BlockTFAuroraSlab extends BlockSlab implements ModelRegisterCallbac
 	private final boolean isDouble;
 
 	public BlockTFAuroraSlab(boolean isDouble) {
-		super(Material.PACKED_ICE);
+		super(Material.ROCK);
 		this.isDouble = isDouble;
 		this.setCreativeTab(TFItems.creativeTab);
 		this.setHardness(2.0F);
 		this.setResistance(10.0F);
+		this.setSoundType(SoundType.GLASS);
 		this.setLightOpacity(isDouble ? 255 : 0);
 		this.useNeighborBrightness = !isDouble;
 
