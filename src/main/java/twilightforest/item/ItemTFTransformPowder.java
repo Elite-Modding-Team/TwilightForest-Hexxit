@@ -1,5 +1,7 @@
 package twilightforest.item;
 
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
@@ -17,13 +19,17 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import twilightforest.TwilightForestMod;
 import twilightforest.util.TFEntityNames;
 import twilightforest.util.VanillaEntityNames;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -46,9 +52,14 @@ public class ItemTFTransformPowder extends ItemTF {
 		addTwoWayTransformation(TFEntityNames.PENGUIN,        VanillaEntityNames.CHICKEN);
 		addTwoWayTransformation(TFEntityNames.HEDGE_SPIDER,   VanillaEntityNames.SPIDER);
 		addTwoWayTransformation(TFEntityNames.SWARM_SPIDER,   VanillaEntityNames.CAVE_SPIDER);
-		addTwoWayTransformation(TFEntityNames.WRAITH,         VanillaEntityNames.BLAZE);
-		addTwoWayTransformation(TFEntityNames.REDCAP,         VanillaEntityNames.VILLAGER);
+		addTwoWayTransformation(TFEntityNames.WRAITH,         VanillaEntityNames.VEX);
+		addTwoWayTransformation(TFEntityNames.STABLE_ICE_CORE, VanillaEntityNames.BLAZE);
+		//addTwoWayTransformation(TFEntityNames.REDCAP,       VanillaEntityNames.VILLAGER);
 		addTwoWayTransformation(TFEntityNames.SKELETON_DRUID, VanillaEntityNames.WITCH);
+		addTwoWayTransformation(TFEntityNames.TOWER_TERMITE,  VanillaEntityNames.SILVERFISH);
+		addTwoWayTransformation(TFEntityNames.MAZE_SLIME,     VanillaEntityNames.SLIME);
+		addTwoWayTransformation(TFEntityNames.TOWER_GHAST,    VanillaEntityNames.GHAST);
+
 	}
 
 	private void addTwoWayTransformation(ResourceLocation from, ResourceLocation to) {
@@ -124,5 +135,12 @@ public class ItemTFTransformPowder extends ItemTF {
 		Vec3d destVec = srcVec.add(lookVec.x * range, lookVec.y * range, lookVec.z * range);
 
 		return new AxisAlignedBB(destVec.x - radius, destVec.y - radius, destVec.z - radius, destVec.x + radius, destVec.y + radius, destVec.z + radius);
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flags) {
+		super.addInformation(stack, world, tooltip, flags);
+		tooltip.add(I18n.format(getTranslationKey() + ".tooltip"));
 	}
 }

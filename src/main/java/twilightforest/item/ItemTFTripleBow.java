@@ -1,5 +1,11 @@
 package twilightforest.item;
 
+import java.util.List;
+
+import javax.annotation.Nullable;
+
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,6 +19,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemTFTripleBow extends ItemTFBowBase {
 
@@ -115,5 +123,11 @@ public class ItemTFTripleBow extends ItemTFBowBase {
 				}
 			}
 		}
+	}
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flags) {
+		super.addInformation(stack, world, tooltip, flags);
+		tooltip.add(I18n.format(getTranslationKey() + ".tooltip"));
 	}
 }

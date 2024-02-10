@@ -23,6 +23,13 @@ public class VanillaEntityNames {
 	public static final ResourceLocation BLAZE         = prefix("blaze");
 	public static final ResourceLocation ZOMBIE_PIGMAN = prefix("zombie_pigman");
 	public static final ResourceLocation WITCH         = prefix("witch");
+	public static final ResourceLocation CREEPER       = prefix("creeper");
+	public static final ResourceLocation SILVERFISH    = prefix("silverfish");
+	public static final ResourceLocation IRON_GOLEM    = prefix("iron_golem");
+	public static final ResourceLocation SLIME         = prefix("slime");
+	public static final ResourceLocation GHAST         = prefix("ghast");
+	public static final ResourceLocation SNOW_GOLEM    = prefix("snow_golem");
+	public static final ResourceLocation VEX           = prefix("vex");
 
 	private static ResourceLocation prefix(String path) {
 		return new ResourceLocation("minecraft", path);

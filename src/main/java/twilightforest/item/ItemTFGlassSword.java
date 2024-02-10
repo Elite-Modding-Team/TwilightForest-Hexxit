@@ -1,6 +1,8 @@
 package twilightforest.item;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
@@ -11,10 +13,16 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.NonNullList;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import twilightforest.client.ModelRegisterCallback;
 import twilightforest.util.ParticleHelper;
 
+import java.util.List;
+
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class ItemTFGlassSword extends ItemSword implements ModelRegisterCallback {
 
@@ -48,5 +56,12 @@ public class ItemTFGlassSword extends ItemSword implements ModelRegisterCallback
 			stack.setTagCompound(tags);
 			items.add(stack);
 		}
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flags) {
+		super.addInformation(stack, world, tooltip, flags);
+		tooltip.add(I18n.format(getTranslationKey() + ".tooltip"));
 	}
 }
