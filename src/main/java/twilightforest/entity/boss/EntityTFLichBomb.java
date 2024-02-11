@@ -4,6 +4,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import twilightforest.entity.EntityTFThrowable;
 
@@ -56,14 +57,19 @@ public class EntityTFLichBomb extends EntityTFThrowable {
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float amount) {
 		super.attackEntityFrom(source, amount);
+		
+		if (!this.world.isRemote && source.getTrueSource() != null) {
+			Vec3d vec3d = source.getTrueSource().getLookVec();
+			// reflect faster and more accurately
+			this.shoot(vec3d.x, vec3d.y, vec3d.z, 1.5F, 0.1F);  // reflect faster and more accurately
 
-		if (source.getImmediateSource() != null) {
-			if (!source.isExplosion())
-				explode();
+			if (source.getImmediateSource() instanceof EntityLivingBase)
+				this.thrower = (EntityLivingBase) source.getImmediateSource();
+
 			return true;
-		} else {
-			return false;
 		}
+		
+		return false;
 	}
 
 	private void explode() {
@@ -81,8 +87,7 @@ public class EntityTFLichBomb extends EntityTFThrowable {
 	@Override
 	protected void onImpact(RayTraceResult result) {
 		if (result.entityHit instanceof EntityTFLichBolt
-				|| result.entityHit instanceof EntityTFLichBomb
-				|| result.entityHit instanceof EntityTFLich) {
+				|| result.entityHit instanceof EntityTFLichBomb) {
 			return;
 		}
 
