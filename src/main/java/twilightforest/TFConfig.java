@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings("deprecation")
 @Config(modid = TwilightForestMod.ID)
 @Mod.EventBusSubscriber(modid = TwilightForestMod.ID)
 public class TFConfig {
@@ -211,7 +211,7 @@ public class TFConfig {
 		public int leavesLightOpacity = 1;
 
 		@Config.LangKey(config + "glacier_packed_ice")
-		@Config.Comment("Setting this true will make Twilight Glaciers generate with Packed Ice instead of regular translucent Ice, decreasing amount of light checking calculations.")
+		@Config.Comment("Makes Twilight Glaciers generate with Packed Ice instead of regular translucent Ice, decreasing amount of light checking calculations.")
 		public boolean glacierPackedIce = true;
 
 		@Config.LangKey(config + "enable_skylight")
@@ -282,7 +282,7 @@ public class TFConfig {
 	@Config.Comment("Rotate trophy heads on item model. Has no performance impact at all. For those who don't like fun.")
 	public static boolean rotateTrophyHeadsGui = true;
 
-	@Config.LangKey(config + "shield_parry")
+	/*@Config.LangKey(config + "shield_parry")
 	@Config.Comment("We recommend downloading the Shield Parry mod for parrying, but these controls remain for without.")
 	public static ShieldInteractions shieldInteractions = new ShieldInteractions();
 
@@ -309,7 +309,7 @@ public class TFConfig {
 		@Config.LangKey(config + "parry_window_beam")
 		@Config.RangeInt(min = 0)
 		public int shieldParryTicksBeam = 10;
-	}
+	}*/
 
 	@Config.LangKey(config + "loading_screen")
 	@Config.Comment("Client only: Controls for the Loading screen")

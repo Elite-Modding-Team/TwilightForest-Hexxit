@@ -11,9 +11,6 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.entity.projectile.EntityFireball;
-import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
@@ -32,7 +29,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
@@ -41,7 +37,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.GameRuleChangeEvent;
-import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
@@ -74,7 +69,6 @@ import twilightforest.compat.TFCompat;
 import twilightforest.enchantment.TFEnchantment;
 import twilightforest.entity.EntityTFCharmEffect;
 import twilightforest.entity.IHostileMount;
-import twilightforest.entity.ITFProjectile;
 import twilightforest.item.ItemTFPhantomArmor;
 import twilightforest.item.TFItems;
 import twilightforest.network.*;
@@ -815,7 +809,7 @@ public class TFEventListener {
 
 	// Parrying
 
-	private static boolean globalParry = !Loader.isModLoaded("parry");
+	/*private static boolean globalParry = !Loader.isModLoaded("parry");
 
 	@SubscribeEvent
 	public static void arrowParry(ProjectileImpactEvent.Arrow event) {
@@ -907,5 +901,5 @@ public class TFEventListener {
 				}
 			}
 		}
-	}
+	}*/
 }
