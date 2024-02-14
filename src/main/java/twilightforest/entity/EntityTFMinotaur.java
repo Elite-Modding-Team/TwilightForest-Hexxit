@@ -2,6 +2,7 @@ package twilightforest.entity;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
@@ -33,119 +34,131 @@ import twilightforest.item.TFItems;
 
 public class EntityTFMinotaur extends EntityMob implements ITFCharger {
 
-	public static final ResourceLocation LOOT_TABLE = TwilightForestMod.prefix("entities/minotaur");
-	private static final DataParameter<Boolean> CHARGING = EntityDataManager.createKey(EntityTFMinotaur.class, DataSerializers.BOOLEAN);
+    public static final ResourceLocation LOOT_TABLE = TwilightForestMod.prefix("entities/minotaur");
+    private static final DataParameter<Boolean> CHARGING = EntityDataManager.createKey(EntityTFMinotaur.class, DataSerializers.BOOLEAN);
 
-	public EntityTFMinotaur(World world) {
-		super(world);
-	}
+    public EntityTFMinotaur(World world) {
+        super(world);
+    }
 
-	@Override
-	protected void initEntityAI() {
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(2, new EntityAITFChargeAttack(this, 2.0F, this instanceof EntityTFMinoshroom));
-		this.tasks.addTask(3, new EntityAIAttackMelee(this, 1.0D, false));
-		this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
-		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		this.tasks.addTask(7, new EntityAILookIdle(this));
-		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, false));
-	}
+    @Override
+    protected void initEntityAI() {
+        this.tasks.addTask(0, new EntityAISwimming(this));
+        this.tasks.addTask(2, new EntityAITFChargeAttack(this, this instanceof EntityTFMinoshroom ? 3.0F : 2.5F, this instanceof EntityTFMinoshroom));
+        this.tasks.addTask(3, new EntityAIAttackMelee(this, 1.0D, false) {
+            // Normally, the minoshroom attack reach is 9.5. It can hit you from nearly 2 blocks away!
+            // Lowering this to make the fight a bit more fair and more doable hitless with melee
+            @Override
+            protected double getAttackReachSqr(EntityLivingBase entity) {
+                return entity instanceof EntityTFMinoshroom ? 5.0D : super.getAttackReachSqr(entity);
+            }
+        });
+        this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
+        this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+        this.tasks.addTask(7, new EntityAILookIdle(this));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, false));
+    }
 
-	@Override
-	protected void applyEntityAttributes() {
-		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
-	}
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+    }
 
-	@Override
-	protected void entityInit() {
-		super.entityInit();
-		dataManager.register(CHARGING, false);
-	}
+    @Override
+    protected void entityInit() {
+        super.entityInit();
+        dataManager.register(CHARGING, false);
+    }
 
-	@Override
-	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData livingdata) {
-		IEntityLivingData data = super.onInitialSpawn(difficulty, livingdata);
-		this.setEquipmentBasedOnDifficulty(difficulty);
-		this.setEnchantmentBasedOnDifficulty(difficulty);
-		return data;
-	}
+    @Override
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData livingdata) {
+        IEntityLivingData data = super.onInitialSpawn(difficulty, livingdata);
+        this.setEquipmentBasedOnDifficulty(difficulty);
+        this.setEnchantmentBasedOnDifficulty(difficulty);
+        return data;
+    }
 
-	@Override
-	protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty) {
-		int random = this.rand.nextInt(10);
+    @Override
+    protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty) {
+        int random = this.rand.nextInt(10);
+        int random2 = this.rand.nextInt(100);
 
-		float additionalDiff = difficulty.getAdditionalDifficulty() + 1;
+        float additionalDiff = difficulty.getAdditionalDifficulty() + 1;
 
-		int result = (int) (random / additionalDiff);
+        int result = (int) (random / additionalDiff);
+        int result2 = (int) (random2 / additionalDiff);
 
-		if (result == 0)
-			this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(TFItems.minotaur_axe_gold));
-		else
-			this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.GOLDEN_AXE));
-	}
+        if (result == 0 && result2 != 0)
+            this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(TFItems.minotaur_axe_gold));
+        else if (result2 == 0)
+            this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(TFItems.minotaur_axe));
+        else
+            this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.GOLDEN_AXE));
+    }
 
-	@Override
-	public boolean isCharging() {
-		return dataManager.get(CHARGING);
-	}
+    @Override
+    public boolean isCharging() {
+        return dataManager.get(CHARGING);
+    }
 
-	@Override
-	public void setCharging(boolean flag) {
-		dataManager.set(CHARGING, flag);
-	}
+    @Override
+    public void setCharging(boolean flag) {
+        dataManager.set(CHARGING, flag);
+    }
 
-	@Override
-	public boolean attackEntityAsMob(Entity entity) {
-		boolean success = super.attackEntityAsMob(entity);
+    @Override
+    public boolean attackEntityAsMob(Entity entity) {
+        boolean success = super.attackEntityAsMob(entity);
+        if (success) {
+            if (this.isCharging()) {
+                entity.motionY += 0.4;
+                playSound(SoundEvents.ENTITY_IRONGOLEM_ATTACK, 1.0F, 1.0F);
+            }
+        }
 
-		if (success && this.isCharging()) {
-			entity.motionY += 0.4;
-			playSound(SoundEvents.ENTITY_IRONGOLEM_ATTACK, 1.0F, 1.0F);
-		}
+        return success;
+    }
 
-		return success;
-	}
+    @Override
+    public void onLivingUpdate() {
+        super.onLivingUpdate();
 
-	@Override
-	public void onLivingUpdate() {
-		super.onLivingUpdate();
+        if (isCharging()) {
+            this.limbSwingAmount += 0.6;
+        }
+    }
 
-		if (isCharging()) {
-			this.limbSwingAmount += 0.6;
-		}
-	}
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return SoundEvents.ENTITY_COW_AMBIENT;
+    }
 
-	@Override
-	protected SoundEvent getAmbientSound() {
-		return SoundEvents.ENTITY_COW_AMBIENT;
-	}
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return SoundEvents.ENTITY_COW_HURT;
+    }
 
-	@Override
-	protected SoundEvent getHurtSound(DamageSource source) {
-		return SoundEvents.ENTITY_COW_HURT;
-	}
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.ENTITY_COW_DEATH;
+    }
 
-	@Override
-	protected SoundEvent getDeathSound() {
-		return SoundEvents.ENTITY_COW_DEATH;
-	}
+    @Override
+    protected void playStepSound(BlockPos pos, Block block) {
+        playSound(SoundEvents.ENTITY_COW_STEP, 0.15F, 0.8F);
+    }
 
-	@Override
-	protected void playStepSound(BlockPos pos, Block block) {
-		playSound(SoundEvents.ENTITY_COW_STEP, 0.15F, 0.8F);
-	}
+    @Override
+    protected float getSoundPitch() {
+        return (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 0.7F;
+    }
 
-	@Override
-	protected float getSoundPitch() {
-		return (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 0.7F;
-	}
-
-	@Override
-	public ResourceLocation getLootTable() {
-		return LOOT_TABLE;
-	}
+    @Override
+    public ResourceLocation getLootTable() {
+        return LOOT_TABLE;
+    }
 
 }
