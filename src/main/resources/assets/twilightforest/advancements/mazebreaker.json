@@ -12,7 +12,8 @@
         { "translate": "item.twilightforest.mazebreakerPick.name" }
       ]
     },
-    "frame": "challenge"
+    "frame": "challenge",
+    "hidden": true
   },
   "parent": "twilightforest:progress_labyrinth",
   "criteria": {

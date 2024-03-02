@@ -12,38 +12,43 @@ import twilightforest.entity.EntityTFSlimeBeetle;
 
 public class RenderTFSlimeBeetle extends RenderLiving<EntityTFSlimeBeetle> {
 
-	private static final ResourceLocation textureLoc = TwilightForestMod.getModelTexture("slimebeetle.png");
+    private static final ResourceLocation textureLoc = TwilightForestMod.getModelTexture("slimebeetle.png");
 
-	public RenderTFSlimeBeetle(RenderManager manager, ModelBase par1ModelBase, float shadowSize) {
-		super(manager, par1ModelBase, shadowSize);
-		addLayer(new LayerInner());
-	}
+    public RenderTFSlimeBeetle(RenderManager manager, ModelBase par1ModelBase, float shadowSize) {
+        super(manager, par1ModelBase, shadowSize);
+        addLayer(new LayerInner());
+    }
 
-	@Override
-	protected ResourceLocation getEntityTexture(EntityTFSlimeBeetle entity) {
-		return textureLoc;
-	}
+    @Override
+    protected float getDeathMaxRotation(EntityTFSlimeBeetle entityLivingBaseIn) {
+        return 180.0F;
+    }
 
-	class LayerInner implements LayerRenderer<EntityTFSlimeBeetle> {
-		private final ModelBase innerModel = new ModelTFSlimeBeetle(true);
+    @Override
+    protected ResourceLocation getEntityTexture(EntityTFSlimeBeetle entity) {
+        return textureLoc;
+    }
 
-		@Override
-		public void doRenderLayer(EntityTFSlimeBeetle entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-			if (!entity.isInvisible()) {
-				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-				GlStateManager.enableNormalize();
-				GlStateManager.enableBlend();
-				GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-				this.innerModel.setModelAttributes(RenderTFSlimeBeetle.this.getMainModel());
-				this.innerModel.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-				GlStateManager.disableBlend();
-				GlStateManager.disableNormalize();
-			}
-		}
+    class LayerInner implements LayerRenderer<EntityTFSlimeBeetle> {
+        private final ModelBase innerModel = new ModelTFSlimeBeetle(true);
 
-		@Override
-		public boolean shouldCombineTextures() {
-			return true;
-		}
-	}
+        @Override
+        public void doRenderLayer(EntityTFSlimeBeetle entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+            if (!entity.isInvisible()) {
+                GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+                GlStateManager.enableNormalize();
+                GlStateManager.enableBlend();
+                GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+                this.innerModel.setModelAttributes(RenderTFSlimeBeetle.this.getMainModel());
+                this.innerModel.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+                GlStateManager.disableBlend();
+                GlStateManager.disableNormalize();
+            }
+        }
+
+        @Override
+        public boolean shouldCombineTextures() {
+            return true;
+        }
+    }
 }

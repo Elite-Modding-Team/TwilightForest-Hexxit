@@ -1,8 +1,6 @@
 {
   "result": {
-    "nbt": "{ench:[{lvl:2s,id:20s}]}",
-    "item": "twilightforest:fiery_sword",
-    "type": "minecraft:item_nbt"
+    "item": "twilightforest:fiery_sword"
   },
   "group": "fiery_convert_tool",
   "ingredients": [

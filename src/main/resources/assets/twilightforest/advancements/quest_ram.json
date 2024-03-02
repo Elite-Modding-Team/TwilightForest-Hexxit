@@ -12,7 +12,8 @@
       "with": [
         { "translate": "entity.twilightforest.quest_ram.name" }
       ]
-    }
+    },
+    "frame": "goal"
   },
   "parent": "twilightforest:root",
   "criteria": {
