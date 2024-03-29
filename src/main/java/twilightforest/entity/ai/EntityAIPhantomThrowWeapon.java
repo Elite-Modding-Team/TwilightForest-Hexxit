@@ -56,7 +56,7 @@ public class EntityAIPhantomThrowWeapon extends EntityAIBase {
 	}
 
 	private void launchPicks() {
-		boss.playSound(SoundEvents.ENTITY_ARROW_SHOOT, 1.0F, (boss.getRNG().nextFloat() - boss.getRNG().nextFloat()) * 0.2F + 0.4F);
+		boss.playSound(SoundEvents.ENTITY_SNOWBALL_THROW, 1.0F, (boss.getRNG().nextFloat() - boss.getRNG().nextFloat()) * 0.4F + 0.8F);
 
 		for (int i = 0; i < 8; i++) {
 			float throwAngle = i * 3.14159165F / 4F;
