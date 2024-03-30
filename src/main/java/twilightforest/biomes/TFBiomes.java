@@ -49,7 +49,7 @@ public class TFBiomes {
 	@ObjectHolder("spooky_forest")
 	public static final Biome spookyForest;
 
-	//Much as I hate doing this, it tricks IntelliJ into thinking they're not null
+	// Much as I hate doing this, it tricks IntelliJ into thinking they're not null
 	static {
 		tfLake = null;
 		twilightForest = null;

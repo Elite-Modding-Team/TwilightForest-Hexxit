@@ -13,66 +13,95 @@ import twilightforest.biomes.TFBiomes;
 
 @Mod.EventBusSubscriber(modid = TwilightForestMod.ID, value = Side.CLIENT)
 public class FogHandler {
+    private static final float[] fogColors = new float[3];
+    private static float fogColor = 0.0F;
+    private static float fogDensity = 1.0F;
+    private static float red;
+    private static float green;
+    private static float blue;
 
-	private static final float[] spoopColors = new float[3];
-	private static float spoopColor = 0F;
-	private static float spoopFog = 1F;
+    @SubscribeEvent
+    public static void fogColors(EntityViewRenderEvent.FogColors event) {
+        // Dark Forest
+        boolean isDark = isDark();
+        // Spooky Forest, Dark Forest Center
+        boolean isSpooky = isSpooky();
 
-	@SubscribeEvent
-	public static void fogColors(EntityViewRenderEvent.FogColors event) {
-		boolean flag = isSpooky();
-		if (flag || spoopColor > 0F) {
-			final float[] realColors = {event.getRed(), event.getGreen(), event.getBlue()};
-			final float[] lerpColors = {106F / 255F, 60F / 255F, 153F / 255F};
-			for (int i = 0; i < 3; i++) {
-				final float real = realColors[i];
-				final float spoop = lerpColors[i];
-				final boolean inverse = real > spoop;
-				spoopColors[i] = real == spoop ? spoop : (float) MathHelper.clampedLerp(inverse ? spoop : real, inverse ? real : spoop, spoopColor);
-			}
-			float shift = (float) (0.01F * event.getRenderPartialTicks());
-			if (flag)
-				spoopColor += shift;
-			else
-				spoopColor -= shift;
-			spoopColor = MathHelper.clamp(spoopColor, 0F, 1F);
-			event.setRed(spoopColors[0]);
-			event.setGreen(spoopColors[1]);
-			event.setBlue(spoopColors[2]);
-		}
-	}
+        // Purple
+        if (isSpooky) {
+            red = 106.0F;
+            green = 60.0F;
+            blue = 153.0F;
+        }
+        // Dark Green
+        else if (isDark) {
+            red = 50.0F;
+            green = 81.0F;
+            blue = 51.0F;
+        }
+        // Default (Green)
+        else {
+            red = event.getRed();
+            green = event.getGreen();
+            blue = event.getBlue();
+        }
 
-	@SubscribeEvent
-	public static void fog(EntityViewRenderEvent.RenderFogEvent event) {
-		boolean flag = isSpooky();
-		if (flag || spoopFog < 1F) {
-			float f = 48F;
-			f = f >= event.getFarPlaneDistance() ? event.getFarPlaneDistance() : (float) MathHelper.clampedLerp(f, event.getFarPlaneDistance(), spoopFog);
-			float shift = (float) (0.001F * event.getRenderPartialTicks());
-			if (flag)
-				spoopFog -= shift;
-			else
-				spoopFog += shift;
-			spoopFog = MathHelper.clamp(spoopFog, 0F, 1F);
+        if (isSpooky || isDark || fogColor > 0.0F) {
+            final float[] realColors = {event.getRed(), event.getGreen(), event.getBlue()};
+            final float[] lerpColors = {red / 255.0F, green / 255.0F, blue / 255.0F};
 
-			GlStateManager.setFog(GlStateManager.FogMode.LINEAR);
+            for (int i = 0; i < 3; i++) {
+                final float real = realColors[i];
+                final float lerp = lerpColors[i];
+                final boolean inverse = real > lerp;
+                fogColors[i] = real == lerp ? lerp : (float) MathHelper.clampedLerp(inverse ? lerp : real, inverse ? real : lerp, fogColor);
+            }
 
-			if (event.getFogMode() == -1) {
-				GlStateManager.setFogStart(0.0F);
-				GlStateManager.setFogEnd(f);
-			} else {
-				GlStateManager.setFogStart(f * 0.75F);
-				GlStateManager.setFogEnd(f);
-			}
+            fogColor = MathHelper.clamp(fogColor, 0F, 1F);
+            event.setRed(fogColors[0]);
+            event.setGreen(fogColors[1]);
+            event.setBlue(fogColors[2]);
+        }
+    }
 
-			if (GLContext.getCapabilities().GL_NV_fog_distance) {
-				GlStateManager.glFogi(0x855a, 0x855b);
-			}
-		}
-	}
+    @SubscribeEvent
+    public static void fog(EntityViewRenderEvent.RenderFogEvent event) {
+        boolean isSpooky = isSpooky();
+        boolean isDark = isDark();
 
-	private static boolean isSpooky() {
-		return Minecraft.getMinecraft().world != null && Minecraft.getMinecraft().player != null && Minecraft.getMinecraft().world.getBiome(Minecraft.getMinecraft().player.getPosition()) == TFBiomes.spookyForest;
-	}
+        // Spooky Forest, Dark Forest, Dark Forest Center
+        if (isSpooky || isDark || fogDensity < 1.0F) {
+            float f = 48.0F;
+            f = f >= event.getFarPlaneDistance() ? event.getFarPlaneDistance() : (float) MathHelper.clampedLerp(f, event.getFarPlaneDistance(), fogDensity);
+            float shift = (float) (0.001F * event.getRenderPartialTicks());
+            if (isSpooky || isDark)
+                fogDensity -= shift;
+            else
+                fogDensity += shift;
+            fogDensity = MathHelper.clamp(fogDensity, 0.0F, 1.0F);
 
+            GlStateManager.setFog(GlStateManager.FogMode.LINEAR);
+
+            if (event.getFogMode() == -1) {
+                GlStateManager.setFogStart(0.0F);
+                GlStateManager.setFogEnd(f);
+            } else {
+                GlStateManager.setFogStart(f * 0.75F);
+                GlStateManager.setFogEnd(f);
+            }
+
+            if (GLContext.getCapabilities().GL_NV_fog_distance) {
+                GlStateManager.glFogi(0x855a, 0x855b);
+            }
+        }
+    }
+
+    private static boolean isDark() {
+        return Minecraft.getMinecraft().world != null && Minecraft.getMinecraft().player != null && Minecraft.getMinecraft().world.getBiome(Minecraft.getMinecraft().player.getPosition()) == TFBiomes.darkForest;
+    }
+
+    private static boolean isSpooky() {
+        return Minecraft.getMinecraft().world != null && Minecraft.getMinecraft().player != null && Minecraft.getMinecraft().world.getBiome(Minecraft.getMinecraft().player.getPosition()) == TFBiomes.spookyForest ||
+                Minecraft.getMinecraft().world.getBiome(Minecraft.getMinecraft().player.getPosition()) == TFBiomes.darkForestCenter;
+    }
 }

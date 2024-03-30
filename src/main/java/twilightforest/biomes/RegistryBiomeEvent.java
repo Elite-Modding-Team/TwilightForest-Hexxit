@@ -15,7 +15,6 @@ public final class RegistryBiomeEvent {
 
 	public static final Type TWILIGHT = Type.getType("TWILIGHT");
 
-	@SuppressWarnings("OverlyCoupledMethod")
 	@SubscribeEvent
 	public static void onRegisterBiomes(Register<Biome> event) {
 
