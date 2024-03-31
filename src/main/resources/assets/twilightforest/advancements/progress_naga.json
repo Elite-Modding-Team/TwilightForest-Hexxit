@@ -16,7 +16,7 @@
     },
     "frame": "goal"
   },
-  "parent": "twilightforest:twilight_hunter",
+  "parent": "twilightforest:root",
   "criteria": {
     "naga": {
       "trigger": "minecraft:player_killed_entity",
@@ -35,17 +35,10 @@
           }
         ]
       }
-    },
-    "kill_mob": {
-      "trigger": "twilightforest:has_advancement",
-      "conditions": {
-        "advancement": "twilightforest:twilight_hunter"
-      }
     }
   },
   "requirements": [
-    [ "naga", "scale" ],
-    [ "kill_mob" ]
+    [ "naga", "scale" ]
   ],
   "rewards": {
     "function": "twilightforest:give_3_shields"
