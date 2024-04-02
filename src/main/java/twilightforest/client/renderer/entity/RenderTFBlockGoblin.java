@@ -18,10 +18,13 @@ public class RenderTFBlockGoblin extends RenderBiped<EntityTFBlockGoblin> {
 	@Override
 	public void doRender(EntityTFBlockGoblin goblin, double x, double y, double z, float yaw, float partialTicks) {
 		super.doRender(goblin, x, y, z, yaw, partialTicks);
-		renderManager.renderEntityStatic(goblin.block, partialTicks, false);
-		renderManager.renderEntityStatic(goblin.chain1, partialTicks, false);
-		renderManager.renderEntityStatic(goblin.chain2, partialTicks, false);
-		renderManager.renderEntityStatic(goblin.chain3, partialTicks, false);//renderEntity
+			renderManager.renderEntityStatic(goblin.block, partialTicks, false);
+			
+		if (goblin.isEntityAlive()) {
+			renderManager.renderEntityStatic(goblin.chain1, partialTicks, false);
+			renderManager.renderEntityStatic(goblin.chain2, partialTicks, false);
+			renderManager.renderEntityStatic(goblin.chain3, partialTicks, false);
+		}
 	}
 
 	@Override

@@ -110,7 +110,7 @@ public class EntityTFBlockGoblin extends EntityMob implements IEntityMultiPart {
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return TFSounds.REDCAP_AMBIENT;
+		return TFSounds.REDCAP_DEATH;
 	}
 
 	@Override
@@ -179,53 +179,54 @@ public class EntityTFBlockGoblin extends EntityMob implements IEntityMultiPart {
 			}
 		}
 
-		if (this.chainMoveLength > 0) {
+		if (this.isEntityAlive()) {
+			if (this.chainMoveLength > 0) {
 
-			Vec3d blockPos = this.getThrowPos();
+				Vec3d blockPos = this.getThrowPos();
 
-			double sx2 = this.posX;
-			double sy2 = this.posY + this.height - 0.1;
-			double sz2 = this.posZ;
+				double sx2 = this.posX;
+				double sy2 = this.posY + this.height - 0.1;
+				double sz2 = this.posZ;
 
-			double ox2 = sx2 - blockPos.x;
-			double oy2 = sy2 - blockPos.y - 0.25F;
-			double oz2 = sz2 - blockPos.z;
+				double ox2 = sx2 - blockPos.x;
+				double oy2 = sy2 - blockPos.y - 0.25F;
+				double oz2 = sz2 - blockPos.z;
 
-			//When the thrown chainblock exceeds a certain distance, return to the owner
-			if (this.chainMoveLength >= 6.0F || !this.isEntityAlive()) {
-				this.setThrowing(false);
+				//When the thrown chainblock exceeds a certain distance, return to the owner
+				if (this.chainMoveLength >= 6.0F || !this.isEntityAlive()) {
+					this.setThrowing(false);
+				}
+
+				this.chain1.setPosition(sx2 - ox2 * 0.25, sy2 - oy2 * 0.25, sz2 - oz2 * 0.25);
+				this.chain2.setPosition(sx2 - ox2 * 0.5, sy2 - oy2 * 0.5, sz2 - oz2 * 0.5);
+				this.chain3.setPosition(sx2 - ox2 * 0.85, sy2 - oy2 * 0.85, sz2 - oz2 * 0.85);
+
+				this.block.setPosition(sx2 - ox2 * 1.0, sy2 - oy2 * 1.0, sz2 - oz2 * 1.0);
+			} else {
+
+
+				// set block position
+				Vec3d blockPos = this.getChainPosition();
+				this.block.setPosition(blockPos.x, blockPos.y, blockPos.z);
+				this.block.rotationYaw = getChainAngle();
+
+				// interpolate chain position
+				double sx = this.posX;
+				double sy = this.posY + this.height - 0.1;
+				double sz = this.posZ;
+
+				double ox = sx - blockPos.x;
+				double oy = sy - blockPos.y - (block.height / 3D);
+				double oz = sz - blockPos.z;
+
+				this.chain1.setPosition(sx - ox * 0.4, sy - oy * 0.4, sz - oz * 0.4);
+				this.chain2.setPosition(sx - ox * 0.5, sy - oy * 0.5, sz - oz * 0.5);
+				this.chain3.setPosition(sx - ox * 0.6, sy - oy * 0.6, sz - oz * 0.6);
 			}
-
-			this.chain1.setPosition(sx2 - ox2 * 0.25, sy2 - oy2 * 0.25, sz2 - oz2 * 0.25);
-			this.chain2.setPosition(sx2 - ox2 * 0.5, sy2 - oy2 * 0.5, sz2 - oz2 * 0.5);
-			this.chain3.setPosition(sx2 - ox2 * 0.85, sy2 - oy2 * 0.85, sz2 - oz2 * 0.85);
-
-			this.block.setPosition(sx2 - ox2 * 1.0, sy2 - oy2 * 1.0, sz2 - oz2 * 1.0);
-		} else {
-
-
-			// set block position
-			Vec3d blockPos = this.getChainPosition();
-			this.block.setPosition(blockPos.x, blockPos.y, blockPos.z);
-			this.block.rotationYaw = getChainAngle();
-
-			// interpolate chain position
-			double sx = this.posX;
-			double sy = this.posY + this.height - 0.1;
-			double sz = this.posZ;
-
-			double ox = sx - blockPos.x;
-			double oy = sy - blockPos.y - (block.height / 3D);
-			double oz = sz - blockPos.z;
-
-			this.chain1.setPosition(sx - ox * 0.4, sy - oy * 0.4, sz - oz * 0.4);
-			this.chain2.setPosition(sx - ox * 0.5, sy - oy * 0.5, sz - oz * 0.5);
-			this.chain3.setPosition(sx - ox * 0.6, sy - oy * 0.6, sz - oz * 0.6);
-
 		}
 
 		// collide things with the block
-		if (!world.isRemote && (this.isThrowing() || this.isSwingingChain())) {
+		if (!world.isRemote && this.isEntityAlive() && (this.isThrowing() || this.isSwingingChain())) {
 			this.applyBlockCollisions(this.block);
 		}
 		this.chainMove();

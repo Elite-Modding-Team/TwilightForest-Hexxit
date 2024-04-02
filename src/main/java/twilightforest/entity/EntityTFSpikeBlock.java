@@ -1,13 +1,15 @@
 package twilightforest.entity;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.MoverType;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public class EntityTFSpikeBlock extends Entity {
-
 	private EntityTFBlockGoblin goblin;
+	private boolean isCollideBlock;
 
 	public EntityTFSpikeBlock(World world) {
 		super(world);
@@ -27,6 +29,10 @@ public class EntityTFSpikeBlock extends Entity {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
+		
+		if (this.goblin != null && !this.goblin.isEntityAlive()) {
+			this.doFall();
+		}
 
 		this.ticksExisted++;
 
@@ -41,6 +47,17 @@ public class EntityTFSpikeBlock extends Entity {
 		for (; rotationPitch - prevRotationPitch < -180F; prevRotationPitch -= 360F) {
 		}
 		for (; rotationPitch - prevRotationPitch >= 180F; prevRotationPitch += 360F) {
+		}
+	}
+	
+	public void doFall() {
+		if (this.onGround && !this.isCollideBlock) {
+			this.playSound(SoundEvents.BLOCK_ANVIL_LAND, 0.65F, 0.75F);
+			this.isCollideBlock = true;
+		} else {
+			this.motionY += -0.04F;
+			
+			this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
 		}
 	}
 
