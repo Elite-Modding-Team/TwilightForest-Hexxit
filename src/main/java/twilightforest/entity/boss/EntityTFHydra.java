@@ -718,6 +718,7 @@ public class EntityTFHydra extends EntityLiving implements IEntityMultiPart, IMo
 		super.onDeath(cause);
 		// mark the lair as defeated
 		if (!world.isRemote) {
+			this.bossInfo.setPercent(0.0F);
 			TFWorld.markStructureConquered(world, new BlockPos(this), TFFeature.HYDRA_LAIR);
 		}
 	}

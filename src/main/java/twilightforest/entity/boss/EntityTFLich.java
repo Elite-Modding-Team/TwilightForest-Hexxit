@@ -598,6 +598,7 @@ public class EntityTFLich extends EntityMob {
 		super.onDeath(cause);
 		// mark the tower as defeated
 		if (!world.isRemote && !this.isShadowClone()) {
+			this.bossInfo.setPercent(0.0F);
 			TFWorld.markStructureConquered(world, new BlockPos(this), TFFeature.LICH_TOWER);
 		}
 	}

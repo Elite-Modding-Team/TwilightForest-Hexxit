@@ -400,6 +400,7 @@ public class EntityTFYetiAlpha extends EntityMob implements IRangedAttackMob, IH
 		super.onDeath(cause);
 		// mark the lair as defeated
 		if (!world.isRemote) {
+			this.bossInfo.setPercent(0.0F);
 			TFWorld.markStructureConquered(world, new BlockPos(this), TFFeature.YETI_CAVE);
 		}
 	}

@@ -838,6 +838,7 @@ public class EntityTFNaga extends EntityMob implements IEntityMultiPart {
 		super.onDeath(cause);
 		// mark the courtyard as defeated
 		if (!world.isRemote) {
+			this.bossInfo.setPercent(0.0F);
 			TFWorld.markStructureConquered(world, new BlockPos(this), TFFeature.NAGA_COURTYARD);
 		}
 	}
