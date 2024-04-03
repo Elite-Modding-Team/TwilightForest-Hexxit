@@ -25,7 +25,7 @@ public enum RenderEffect {
 
 		@Override
 		public boolean shouldRender(EntityLivingBase entity, boolean firstPerson) {
-			return !firstPerson && entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getModifier(PotionFrosted.MODIFIER_UUID) != null;
+			return !firstPerson && entity.isEntityAlive() && entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getModifier(PotionFrosted.MODIFIER_UUID) != null;
 		}
 
 		@Override

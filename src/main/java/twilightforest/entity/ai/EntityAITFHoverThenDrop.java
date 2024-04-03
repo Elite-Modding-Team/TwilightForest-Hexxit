@@ -1,5 +1,7 @@
 package twilightforest.entity.ai;
 
+import com.bobmowzie.mowziesmobs.server.sound.MMSounds;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.MathHelper;
 import twilightforest.entity.boss.EntityTFSnowQueen;
@@ -112,6 +114,8 @@ public class EntityAITFHoverThenDrop extends EntityAITFHoverBase<EntityTFSnowQue
 		} else {
 			// drop!
 			this.dropTimer++;
+			
+			if (this.dropTimer == 1) this.attacker.playSound(MMSounds.ENTITY_FROSTMAW_WHOOSH, 1.5F, 1.25F);
 
 			if (this.attacker.posY > this.dropY) {
 				this.attacker.destroyBlocksInAABB(this.attacker.getEntityBoundingBox().grow(1, 0.5F, 1));

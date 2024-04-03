@@ -13,6 +13,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import twilightforest.TwilightForestMod;
 import twilightforest.client.particle.TFParticleType;
+import twilightforest.entity.boss.EntityTFSnowQueen;
+import twilightforest.entity.boss.EntityTFSnowQueen.Phase;
 import twilightforest.potions.TFPotions;
 
 public abstract class EntityTFIceMob extends EntityMob {
@@ -55,6 +57,36 @@ public abstract class EntityTFIceMob extends EntityMob {
         }
 
         return flag;
+    }
+	
+	@Override
+	public boolean attackEntityFrom(DamageSource source, float damage) {	
+		Entity entity = source.getTrueSource();
+		
+		if (entity != null && entity instanceof EntityLivingBase && ((EntityLivingBase)entity).isOnSameTeam(this)) {
+            return false;
+        }
+		
+		return super.attackEntityFrom(source, damage);
+	}
+	
+	@Override
+	public boolean isOnSameTeam(Entity entity) {
+        if (entity == null) {
+            return false;
+        }
+        else if (entity == this) {
+            return true;
+        }
+        else if (super.isOnSameTeam(entity)) {
+            return true;
+        }
+        else if (entity instanceof EntityTFSnowQueen || entity instanceof EntityTFIceMob) {
+            return this.getTeam() == null && entity.getTeam() == null;
+        }
+        else {
+            return false;
+        }
     }
 
 	// Immune to ice effects

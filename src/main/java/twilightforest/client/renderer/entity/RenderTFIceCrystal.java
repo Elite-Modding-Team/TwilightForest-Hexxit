@@ -11,21 +11,74 @@ import twilightforest.entity.boss.EntityTFIceCrystal;
 
 public class RenderTFIceCrystal extends RenderLiving<EntityTFIceCrystal> {
 
-	private static final ResourceLocation textureLoc = TwilightForestMod.getModelTexture("icecrystal.png");
+    private static final ResourceLocation textureLoc = TwilightForestMod.getModelTexture("icecrystal.png");
 
-	public RenderTFIceCrystal(RenderManager manager) {
-		super(manager, new ModelTFIceCrystal(), 0.25F);
-	}
+    public RenderTFIceCrystal(RenderManager manager) {
+        super(manager, new ModelTFIceCrystal(), 0.25F);
+    }
 
-	@Override
-	protected void preRenderCallback(EntityTFIceCrystal entity, float partialTicks) {
-		float bounce = entity.ticksExisted + partialTicks;
-		GlStateManager.translate(0F, MathHelper.sin((bounce) * 0.2F) * 0.15F, 0F);
-	}
+    @Override
+    protected void preRenderCallback(EntityTFIceCrystal entity, float partialTicks) {
+        float bounce = entity.ticksExisted + partialTicks;
+        GlStateManager.translate(0F, MathHelper.sin((bounce) * 0.2F) * 0.15F, 0F);
 
-	@Override
-	protected ResourceLocation getEntityTexture(EntityTFIceCrystal entity) {
-		return textureLoc;
-	}
+        // flash
 
+        float f1 = entity.deathTime;
+        if (f1 > 0) {
+            float f2 = 1.0F + MathHelper.sin(f1 * 100.0F) * f1 * 0.01F;
+
+            if (f1 < 0.0F) {
+                f1 = 0.0F;
+            }
+
+            if (f1 > 1.0F) {
+                f1 = 1.0F;
+            }
+
+            f1 *= f1;
+            f1 *= f1;
+            float f3 = (1.0F + f1 * 0.4F) * f2;
+            float f4 = (1.0F + f1 * 0.1F) / f2;
+            GlStateManager.scale(f3, f4, f3);
+        }
+    }
+
+    @Override
+    protected ResourceLocation getEntityTexture(EntityTFIceCrystal entity) {
+        return textureLoc;
+    }
+
+    @Override
+    protected void applyRotations(EntityTFIceCrystal entity, float ageInTicks, float rotationYaw, float partialTicks) {
+        GlStateManager.rotate(180.0F - rotationYaw, 0.0F, 1.0F, 0.0F);
+    }
+
+    @Override
+    protected int getColorMultiplier(EntityTFIceCrystal entity, float brightness, float partialTicks) {
+        if (entity.deathTime > 0) {
+            float f2 = entity.deathTime + partialTicks;
+
+            if ((int) (f2 / 2) % 2 == 0) {
+                return 0;
+            } else {
+                int i = (int) (f2 * 0.2F * 255.0F);
+
+                if (i < 0) {
+                    i = 0;
+                }
+
+                if (i > 255) {
+                    i = 255;
+                }
+
+                short short1 = 255;
+                short short2 = 255;
+                short short3 = 255;
+                return i << 24 | short1 << 16 | short2 << 8 | short3;
+            }
+        } else {
+            return 0;
+        }
+    }
 }

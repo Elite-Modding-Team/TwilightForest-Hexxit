@@ -11,12 +11,12 @@ import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -29,6 +29,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfoServer;
@@ -41,6 +42,7 @@ import twilightforest.TwilightForestMod;
 import twilightforest.block.BlockTFBossSpawner;
 import twilightforest.block.TFBlocks;
 import twilightforest.client.particle.TFParticleType;
+import twilightforest.entity.EntityTFIceMob;
 import twilightforest.entity.IBreathAttacker;
 import twilightforest.entity.ai.EntityAITFHoverBeam;
 import twilightforest.entity.ai.EntityAITFHoverSummon;
@@ -53,6 +55,7 @@ import twilightforest.world.TFWorld;
 import java.util.List;
 
 import com.bobmowzie.mowziesmobs.server.potion.PotionHandler;
+import com.bobmowzie.mowziesmobs.server.sound.MMSounds;
 
 public class EntityTFSnowQueen extends EntityMob implements IEntityMultiPart, IBreathAttacker {
 
@@ -91,10 +94,9 @@ public class EntityTFSnowQueen extends EntityMob implements IEntityMultiPart, IB
 	protected void initEntityAI() {
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAITFHoverSummon(this, 1.0D));
-		this.tasks.addTask(2, new EntityAITFHoverThenDrop(this, 80, 20));
-		this.tasks.addTask(3, new EntityAITFHoverBeam(this, 80, 100));
+		this.tasks.addTask(2, new EntityAITFHoverThenDrop(this, 50, 10));
+		this.tasks.addTask(3, new EntityAITFHoverBeam(this, 60, 80));
 		this.tasks.addTask(6, new EntityAIAttackMelee(this, 1.0D, true));
-		this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 1.0D));
 		this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		this.tasks.addTask(8, new EntityAILookIdle(this));
 		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
@@ -109,10 +111,11 @@ public class EntityTFSnowQueen extends EntityMob implements IEntityMultiPart, IB
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23000000417232513D);
+		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23D);
 		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(7.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.75D);
 	}
 
 	@Override
@@ -145,6 +148,8 @@ public class EntityTFSnowQueen extends EntityMob implements IEntityMultiPart, IB
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
+		
+		if (isBreathing()) playSound(MMSounds.ENTITY_FROSTMAW_ICEBREATH_START, rand.nextFloat() * 0.5F, rand.nextFloat() * 1.5F);
 		if (!world.isRemote) {
 			bossInfo.setPercent(getHealth() / getMaxHealth());
 		} else {
@@ -206,7 +211,7 @@ public class EntityTFSnowQueen extends EntityMob implements IEntityMultiPart, IB
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-
+		
 		for (int i = 0; i < this.iceArray.length; i++) {
 
 			this.iceArray[i].onUpdate();
@@ -292,8 +297,9 @@ public class EntityTFSnowQueen extends EntityMob implements IEntityMultiPart, IB
 		if (collided != this) {
 			collided.applyEntityCollision(collider);
 			if (collided instanceof EntityLivingBase && super.attackEntityAsMob(collided)) {
-				collided.motionY += 0.4;
-				this.playSound(SoundEvents.ENTITY_IRONGOLEM_ATTACK, 1.0F, 1.0F);
+				((EntityLivingBase)collided).knockBack(collided, 1.5F * 0.5F, (double)MathHelper.sin(this.rotationYaw * ((float)Math.PI / 180F)), (double)(-MathHelper.cos(this.rotationYaw * ((float)Math.PI / 180F))));
+				this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_KNOCKBACK, 1.0F, 1.0F);
+				this.playSound(MMSounds.EFFECT_GEOMANCY_HIT_SMALL, 1.0F, 1.0F);
 			}
 		}
 	}
@@ -321,11 +327,17 @@ public class EntityTFSnowQueen extends EntityMob implements IEntityMultiPart, IB
 		if (result && this.getCurrentPhase() == Phase.BEAM) {
 			this.damageWhileBeaming += damage;
 		}
+		
+		Entity entity = source.getTrueSource();
+		
+		if (entity != null && entity instanceof EntityLivingBase && ((EntityLivingBase)entity).isOnSameTeam(this)) {
+            return false;
+        }
 
 		return result;
 
 	}
-
+	
 	private Vec3d getIceShieldPosition(int idx) {
 		return this.getIceShieldPosition(getIceShieldAngle(idx), 1F);
 	}
@@ -421,6 +433,8 @@ public class EntityTFSnowQueen extends EntityMob implements IEntityMultiPart, IB
 		minion.setPositionAndRotation(posX, posY, posZ, 0, 0);
 
 		world.spawnEntity(minion);
+		this.playSound(MMSounds.ENTITY_FROSTMAW_ICEBALL_SHOOT, 1.0F, 0.75F);
+		this.playSound(MMSounds.ENTITY_FROSTMAW_FROZEN_CRASH, 0.8F, 1.5F);
 
 		for (int i = 0; i < 100; i++) {
 			double attemptX;
@@ -442,7 +456,7 @@ public class EntityTFSnowQueen extends EntityMob implements IEntityMultiPart, IB
 		}
 
 		minion.setAttackTarget(targetedEntity);
-		minion.setToDieIn30Seconds(); // don't stick around
+		minion.setToDieIn10Seconds(); // don't stick around
 
 		this.summonsRemaining--;
 	}
@@ -458,7 +472,8 @@ public class EntityTFSnowQueen extends EntityMob implements IEntityMultiPart, IB
 	@Override
 	public void doBreathAttack(Entity target) {
 		target.attackEntityFrom(DamageSource.causeMobDamage(this), BREATH_DAMAGE);
-		// TODO: slow target?
+		((EntityLivingBase)target).addPotionEffect(new PotionEffect(TFPotions.frosty, 8 * 20, 4)); // 8 seconds
+		((EntityLivingBase)target).addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 8 * 20, 3)); // 8 seconds
 	}
 
 	@Override
@@ -485,6 +500,25 @@ public class EntityTFSnowQueen extends EntityMob implements IEntityMultiPart, IB
 		if (this.hasCustomName())
 			this.bossInfo.setName(this.getDisplayName());
 	}
+	
+	@Override
+	public boolean isOnSameTeam(Entity entity) {
+        if (entity == null) {
+            return false;
+        }
+        else if (entity == this) {
+            return true;
+        }
+        else if (super.isOnSameTeam(entity)) {
+            return true;
+        }
+        else if (entity instanceof EntityTFSnowQueen || entity instanceof EntityTFIceMob) {
+            return this.getTeam() == null && entity.getTeam() == null;
+        }
+        else {
+            return false;
+        }
+    }
 
 	@Override
 	public boolean isNonBoss() {
