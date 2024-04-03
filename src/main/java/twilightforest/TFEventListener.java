@@ -1,5 +1,6 @@
 package twilightforest;
 
+import com.bobmowzie.mowziesmobs.server.entity.frostmaw.EntityFrostmaw;
 import com.bobmowzie.mowziesmobs.server.entity.wroughtnaut.EntityWroughtnaut;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.Block;
@@ -804,6 +805,19 @@ public class TFEventListener {
 		EntityLivingBase living = event.getEntityLiving();
 		if (!living.world.isRemote && living instanceof EntityPlayerMP) {
 			TFAdvancements.ARMOR_CHANGED.trigger((EntityPlayerMP) living, event.getFrom(), event.getTo());
+		}
+	}
+
+	@SubscribeEvent
+	public static void customBossDeath(LivingDeathEvent event) {
+		EntityLivingBase entity = event.getEntityLiving();
+		World world = entity.getEntityWorld();
+		if (!world.isRemote) {
+			if (entity instanceof EntityFrostmaw) {
+				TFWorld.markStructureConquered(world, new BlockPos(entity), TFFeature.YETI_CAVE);
+			} else if (entity instanceof EntityWroughtnaut) {
+				TFWorld.markStructureConquered(world, new BlockPos(entity), TFFeature.FINAL_CASTLE);
+			}
 		}
 	}
 
