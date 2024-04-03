@@ -297,7 +297,7 @@ public class EntityTFSnowQueen extends EntityMob implements IEntityMultiPart, IB
 		if (collided != this) {
 			collided.applyEntityCollision(collider);
 			if (collided instanceof EntityLivingBase && super.attackEntityAsMob(collided)) {
-				((EntityLivingBase)collided).knockBack(collided, 1.5F * 0.5F, (double)MathHelper.sin(this.rotationYaw * ((float)Math.PI / 180F)), (double)(-MathHelper.cos(this.rotationYaw * ((float)Math.PI / 180F))));
+				((EntityLivingBase)collided).knockBack(collided, 1.5F * 0.5F, (double)MathHelper.sin(this.rotationYaw * ((float)Math.PI / 180.0F)), (double)(-MathHelper.cos(this.rotationYaw * ((float)Math.PI / 180.0F))));
 				this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_KNOCKBACK, 1.0F, 1.0F);
 				this.playSound(MMSounds.EFFECT_GEOMANCY_HIT_SMALL, 1.0F, 1.0F);
 			}
@@ -472,8 +472,11 @@ public class EntityTFSnowQueen extends EntityMob implements IEntityMultiPart, IB
 	@Override
 	public void doBreathAttack(Entity target) {
 		target.attackEntityFrom(DamageSource.causeMobDamage(this), BREATH_DAMAGE);
-		((EntityLivingBase)target).addPotionEffect(new PotionEffect(TFPotions.frosty, 8 * 20, 4)); // 8 seconds
-		((EntityLivingBase)target).addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 8 * 20, 3)); // 8 seconds
+		
+		if (target instanceof EntityLivingBase) {
+			((EntityLivingBase)target).addPotionEffect(new PotionEffect(TFPotions.frosty, 7 * 20, 4)); // 7 seconds
+			((EntityLivingBase)target).addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 7 * 20, 3)); // 7 seconds
+		}
 	}
 
 	@Override
