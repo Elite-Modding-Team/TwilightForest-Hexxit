@@ -393,15 +393,12 @@ public enum TFFeature {
 			TFFinalCastlePieces.registerFinalCastlePieces();
 
 			// plain parts of the castle, like the tower maze
-			this.addMonster(EntityTFKobold.class, 10, 4, 4)
-					.addMonster(EntityTFAdherent.class, 10, 1, 1)
+			this.addMonster(EntityTFAdherent.class, 10, 1, 1)
 					.addMonster(EntityTFHarbingerCube.class, 10, 1, 1)
-					.addMonster(EntityEnderman.class, 10, 1, 1)
 					// internal castle
-					.addMonster(1, EntityTFKobold.class, 10, 4, 4)
 					.addMonster(1, EntityTFAdherent.class, 10, 1, 1)
 					.addMonster(1, EntityTFHarbingerCube.class, 10, 1, 1)
-					.addMonster(1, EntityTFArmoredGiant.class, 10, 1, 1)
+					.addMonster(1, EntityTFArmoredGiant.class, 10, 1, 1) // Placeholder
 					// dungeons
 					.addMonster(2, EntityTFAdherent.class, 10, 1, 1)
 					// forge

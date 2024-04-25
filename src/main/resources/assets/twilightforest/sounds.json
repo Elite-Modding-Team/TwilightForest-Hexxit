@@ -33,33 +33,6 @@
       }
     ]
   },
-  "mob.final_kobold.die": {
-    "sounds": [
-      {
-        "type": "event",
-        "name": "twilightforest:mob.kobold.die",
-        "pitch": 0.1
-      }
-    ]
-  },
-  "mob.final_kobold.kobold": {
-    "sounds": [
-      {
-        "type": "event",
-        "name": "twilightforest:mob.kobold.kobold",
-        "pitch": 0.1
-      }
-    ]
-  },
-  "mob.final_kobold.hurt": {
-    "sounds": [
-      {
-        "type": "event",
-        "name": "twilightforest:mob.kobold.hurt",
-        "pitch": 0.1
-      }
-    ]
-  },
   "mob.cicada": {
     "sounds": [
       "twilightforest:mob/cicada0",

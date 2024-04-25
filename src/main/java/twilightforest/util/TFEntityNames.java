@@ -90,11 +90,10 @@ public class TFEntityNames {
 	public static final ResourceLocation GIANT_MINER = prefix("giant_miner");
 	public static final ResourceLocation ARMORED_GIANT = prefix("armored_giant");
 
+	// Final Castle
 	public static final ResourceLocation HARBINGER_CUBE = prefix("harbinger_cube");
 	public static final ResourceLocation ADHERENT = prefix("adherent");
-	public static final ResourceLocation ROVING_CUBE = prefix("roving_cube");
-	public static final ResourceLocation SLIDER = prefix("slider");
-	public static final ResourceLocation CASTLE_GUARDIAN = prefix("castle_guardian");
+	// More castle mobs here
 
 	// Technical
 	public static final ResourceLocation HYDRA_HEAD = prefix("hydra_head");
@@ -118,6 +117,11 @@ public class TFEntityNames {
 	public static final ResourceLocation SEEKER_ARROW = prefix("seeker_arrow");
 	public static final ResourceLocation ICE_ARROW = prefix("ice_arrow");
 	public static final ResourceLocation ICE_SNOWBALL = prefix("ice_snowball");
+	
+	// Unused
+	public static final ResourceLocation ROVING_CUBE = prefix("roving_cube");
+	public static final ResourceLocation SLIDER = prefix("slider");
+	public static final ResourceLocation CASTLE_GUARDIAN = prefix("castle_guardian");
 
 	private static ResourceLocation prefix(String path) {
 		return new ResourceLocation(TwilightForestMod.ID, path);

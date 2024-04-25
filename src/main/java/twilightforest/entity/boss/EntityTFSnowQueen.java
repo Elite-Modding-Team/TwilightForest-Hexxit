@@ -149,7 +149,7 @@ public class EntityTFSnowQueen extends EntityMob implements IEntityMultiPart, IB
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
 		
-		if (isBreathing()) playSound(MMSounds.ENTITY_FROSTMAW_ICEBREATH_START, rand.nextFloat() * 0.5F, rand.nextFloat() * 1.5F);
+		if (isBreathing()) playSound(MMSounds.ENTITY_FROSTMAW_ICEBREATH_START, rand.nextFloat() * 0.75F, rand.nextFloat() * 1.5F);
 		if (!world.isRemote) {
 			bossInfo.setPercent(getHealth() / getMaxHealth());
 		} else {
