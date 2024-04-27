@@ -18,7 +18,7 @@ import java.util.List;
 public class ItemRegalShield extends ItemShield implements ModelRegisterCallback {
 
     public ItemRegalShield() {
-        this.setMaxDamage(1024);
+        this.setMaxDamage(1448);
         this.setCreativeTab(TFItems.creativeTab);
     }
 

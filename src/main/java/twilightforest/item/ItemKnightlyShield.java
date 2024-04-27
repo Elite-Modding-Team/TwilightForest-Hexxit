@@ -18,7 +18,7 @@ import java.util.List;
 public class ItemKnightlyShield extends ItemShield implements ModelRegisterCallback {
 
     public ItemKnightlyShield() {
-        this.setMaxDamage(524);
+        this.setMaxDamage(824);
         this.setCreativeTab(TFItems.creativeTab);
     }
 
