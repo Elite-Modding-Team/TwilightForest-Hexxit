@@ -18,7 +18,7 @@ public class ItemTFHydraChops extends ItemTFFood {
 	@Override
 	public ItemStack onItemUseFinish(ItemStack itemStack, World world, EntityLivingBase living) {
 		// if the player is at zero food, achievements
-		if (living instanceof EntityPlayerMP && ((EntityPlayerMP) living).getFoodStats().getFoodLevel() <= 0) {
+		if (living instanceof EntityPlayerMP && ((EntityPlayerMP) living).getFoodStats().getFoodLevel() <= 10) {
 			TFAdvancements.CONSUME_HYDRA_CHOP.trigger((EntityPlayerMP) living);
 		}
 		// then normal effects
