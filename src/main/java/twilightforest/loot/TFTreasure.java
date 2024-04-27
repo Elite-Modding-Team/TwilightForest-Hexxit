@@ -146,6 +146,7 @@ public class TFTreasure {
 		if (event.getName().equals(new ResourceLocation(MowziesMobs.MODID, "entities/ferrous_wroughtnaut"))) {
 			LootTable lootFinalBoss = event.getLootTableManager().getLootTableFromLocation(FINAL_BOSS_LOOT_TABLE);
 			event.getTable().addPool(lootFinalBoss.getPool("trophy"));
+			event.getTable().addPool(lootFinalBoss.getPool("sword"));
 		}
 	}
 }
