@@ -549,6 +549,12 @@ item.twilightforest.chainBlock.name=Block and Chain
 item.twilightforest.cubeTalisman.name=Talisman of the Cube
 item.twilightforest.cubeOfAnnihilation.name=Cube of Annihilation
 item.twilightforest.moonDial.name=Moon Dial
+item.twilightforest.regalHelm.name=Regal Helmet
+item.twilightforest.regalPlate.name=Regal Platebody
+item.twilightforest.regalLegs.name=Regal Greaves
+item.twilightforest.regalBoots.name=Regal Boots
+item.twilightforest.regalSword.name=Regal Sword
+item.twilightforest.regalShield.name=Regal Shield
 
 item.twilightforest.guide.name=Traveller's Logbook
 

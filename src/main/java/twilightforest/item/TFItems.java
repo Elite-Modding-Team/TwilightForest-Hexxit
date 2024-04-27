@@ -22,6 +22,7 @@ public class TFItems {
 	public static ItemArmor.ArmorMaterial ARMOR_PHANTOM = EnumHelper.addArmorMaterial("KNIGHTPHANTOM", "phantom", 30, new int[]{3, 6, 8, 3}, 8, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 2.5F);
 	public static ItemArmor.ArmorMaterial ARMOR_YETI = EnumHelper.addArmorMaterial("YETI", "yetiarmor", 20, new int[]{3, 6, 7, 4}, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 3F);
 	public static ItemArmor.ArmorMaterial ARMOR_ARCTIC = EnumHelper.addArmorMaterial("ARCTIC", "arcticarmor", 10, new int[]{2, 5, 7, 2}, 8, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 2F);
+	public static ItemArmor.ArmorMaterial ARMOR_REGAL = EnumHelper.addArmorMaterial("REGAL", "regal", 20, new int[]{4, 7, 9, 4}, 15, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 2.0F);
 
 	// harvestLevel, maxUses, efficiency, damage, enchantability
 	public static Item.ToolMaterial TOOL_IRONWOOD = EnumHelper.addToolMaterial("IRONWOOD", 2, 512, 6.5F, 2, 20);
@@ -31,6 +32,7 @@ public class TFItems {
 	public static Item.ToolMaterial TOOL_GIANT = EnumHelper.addToolMaterial("GIANTSTONE", 2, 1024, 4.0F, 1.0F, 5);
 	public static Item.ToolMaterial TOOL_ICE = EnumHelper.addToolMaterial("TFICE", 0, 32, 1.0F, 3.5F, 5);
 	public static Item.ToolMaterial TOOL_GLASS = EnumHelper.addToolMaterial("TFGLASS", 0, 1, 1.0F, 36.0F, 30);
+	public static Item.ToolMaterial TOOL_REGAL = EnumHelper.addToolMaterial("REGAL", 4, 1524, 8.0F, 4, 15);
 
 	static final UUID GIANT_REACH_MODIFIER = UUID.fromString("7f10172d-de69-49d7-81bd-9594286a6827");
 
@@ -264,6 +266,18 @@ public class TFItems {
 	public static final Item castle_door;
 	@GameRegistry.ObjectHolder("block_storage")
 	public static final Item block_storage;
+	@GameRegistry.ObjectHolder("regal_helmet")
+	public static final Item regal_helmet;
+	@GameRegistry.ObjectHolder("regal_chestplate")
+	public static final Item regal_chestplate;
+	@GameRegistry.ObjectHolder("regal_leggings")
+	public static final Item regal_leggings;
+	@GameRegistry.ObjectHolder("regal_boots")
+	public static final Item regal_boots;
+	@GameRegistry.ObjectHolder("regal_shield")
+	public static final Item regal_shield;
+	@GameRegistry.ObjectHolder("regal_sword")
+	public static final Item regal_sword;
 
 	public static CreativeTabTwilightForest creativeTab = new CreativeTabTwilightForest("twilightForest");
 
@@ -402,5 +416,11 @@ public class TFItems {
 		miniature_structure = null;
 		castle_door = null;
 		block_storage = null;
+		regal_helmet = null;
+		regal_chestplate = null;
+		regal_leggings = null;
+		regal_boots = null;
+		regal_shield = null;
+		regal_sword = null;
 	}
 }

@@ -154,6 +154,12 @@ public class RegisterItemEvent {
 		items.register("cube_talisman", "cubeTalisman", new ItemTF(EnumRarity.UNCOMMON));
 		items.register("cube_of_annihilation", "cubeOfAnnihilation", new ItemTFCubeOfAnnihilation(EnumRarity.UNCOMMON).setMaxStackSize(1));
 		items.register("moon_dial", "moonDial", new ItemTFMoonDial());
+		items.register("regal_helmet", "regalHelm", new ItemTFRegalArmor(ARMOR_REGAL, HEAD, EnumRarity.RARE).setMaxStackSize(1));
+		items.register("regal_chestplate", "regalPlate", new ItemTFRegalArmor(ARMOR_REGAL, CHEST, EnumRarity.RARE).setMaxStackSize(1));
+		items.register("regal_leggings", "regalLegs", new ItemTFRegalArmor(ARMOR_REGAL, LEGS, EnumRarity.RARE).setMaxStackSize(1));
+		items.register("regal_boots", "regalBoots", new ItemTFRegalArmor(ARMOR_REGAL, FEET, EnumRarity.RARE).setMaxStackSize(1));
+		items.register("regal_sword", "regalSword", new ItemTFRegalSword(TOOL_REGAL).setMaxStackSize(1));
+		items.register("regal_shield", "regalShield", new ItemRegalShield().setMaxStackSize(1));
 
 		String[] thornNames = stream(ThornVariant.values()).map(IStringSerializable::getName).toArray(String[]::new);
 		String[] deadrockNames = stream(DeadrockVariant.values()).map(IStringSerializable::getName).toArray(String[]::new);

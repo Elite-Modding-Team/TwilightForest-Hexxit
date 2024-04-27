@@ -15,10 +15,10 @@ import twilightforest.client.ModelRegisterCallback;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemKnightlyShield extends ItemShield implements ModelRegisterCallback {
+public class ItemRegalShield extends ItemShield implements ModelRegisterCallback {
 
-    public ItemKnightlyShield() {
-        this.setMaxDamage(524);
+    public ItemRegalShield() {
+        this.setMaxDamage(1024);
         this.setCreativeTab(TFItems.creativeTab);
     }
 
@@ -31,6 +31,7 @@ public class ItemKnightlyShield extends ItemShield implements ModelRegisterCallb
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {}
 
+    // TODO: Add repair item
     @Override
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
         return repair.getItem() == TFItems.knightmetal_ingot || repair.getItem() != Item.getItemFromBlock(Blocks.PLANKS) && super.getIsRepairable(toRepair, repair);
