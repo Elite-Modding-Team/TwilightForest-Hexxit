@@ -15,11 +15,13 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -105,6 +107,19 @@ public class BlockTFExperiment115 extends Block implements ModelRegisterCallback
                 if (player instanceof EntityPlayerMP) CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP) player, pos, stack);
                 return true;
             }
+        } else {
+            if (bitesTaken < 7) worldIn.setBlockState(pos, state.withProperty(NOMS, bitesTaken + 1));
+            else worldIn.setBlockToAir(pos);
+            if (!player.isCreative()) {
+                ItemStack cakeBite = new ItemStack(TFItems.experiment_115);
+                if (player.inventory.addItemStackToInventory(cakeBite)) {
+                    player.world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.2F, ((player.getRNG().nextFloat() - player.getRNG().nextFloat()) * 0.7F + 1.0F) * 2.0F);
+                    player.inventoryContainer.detectAndSendChanges();
+                } else {
+                    player.dropItem(cakeBite, false);
+                }
+            }
+            return true;
         }
 
         return this.eatCake(worldIn, pos, state, player) || stack.isEmpty();

@@ -145,7 +145,7 @@ dependencies {
     deobfCompile "thaumcraft:Thaumcraft:${minecraft_version}:${thaumcraft_version}"
 
     // curse
-    deobfCompile "curse.maven:llibrary-243298:3116493"
+    compileOnly "curse.maven:llibrary-243298:3116493"
     deobfCompile "curse.maven:mowzies-mobs-250498:3048685"
 }
 
