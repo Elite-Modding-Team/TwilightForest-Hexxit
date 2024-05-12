@@ -85,6 +85,8 @@ public class TFBiomeSwamp extends TFBiomeBase {
 			return new WorldGenTallGrass(BlockTallGrass.EnumType.FERN);
 		} else if (random.nextInt(4) == 0) {
 			return new TFGenTallGrass(TFBlocks.twilight_plant.getDefaultState().withProperty(BlockTFPlant.VARIANT, PlantVariant.MAYAPPLE));
+		} else if (random.nextInt(6) == 0) {
+			return new TFGenTallGrass(TFBlocks.twilight_plant.getDefaultState().withProperty(BlockTFPlant.VARIANT, PlantVariant.CLOVERPATCH));
 		} else {
 			return new WorldGenTallGrass(BlockTallGrass.EnumType.GRASS);
 		}

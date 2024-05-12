@@ -47,6 +47,8 @@ public class TFBiomeTwilightForestVariant extends TFBiomeBase {
 			return new WorldGenTallGrass(BlockTallGrass.EnumType.FERN);
 		} else if (random.nextBoolean()) {
 			return new TFGenTallGrass(TFBlocks.twilight_plant.getDefaultState().withProperty(BlockTFPlant.VARIANT, PlantVariant.MAYAPPLE));
+		} else if (random.nextInt(2) != 0) {
+			return new TFGenTallGrass(TFBlocks.twilight_plant.getDefaultState().withProperty(BlockTFPlant.VARIANT, PlantVariant.CLOVERPATCH));
 		} else {
 			return new WorldGenTallGrass(BlockTallGrass.EnumType.GRASS);
 		}
