@@ -553,8 +553,13 @@ item.twilightforest.regalHelm.name=Regal Helmet
 item.twilightforest.regalPlate.name=Regal Platebody
 item.twilightforest.regalLegs.name=Regal Greaves
 item.twilightforest.regalBoots.name=Regal Boots
+item.twilightforest.regalAxe.name=Regal Axe
+item.twilightforest.regalPick.name=Regal Pickaxe
 item.twilightforest.regalSword.name=Regal Sword
 item.twilightforest.regalShield.name=Regal Shield
+item.twilightforest.regalIngot.name=Regal Ingot
+item.twilightforest.regalShard.name=Regal Shard
+item.twilightforest.regalShardCluster.name=Regal Shard Cluster
 
 item.twilightforest.guide.name=Traveller's Logbook
 
@@ -584,6 +589,9 @@ item.twilightforest.yetiHelm.tooltip=Chills attackers
 item.twilightforest.yetiPlate.tooltip=Chills attackers
 item.twilightforest.yetiLegs.tooltip=Chills attackers
 item.twilightforest.yetiBoots.tooltip=Chills attackers
+item.twilightforest.regalSword.tooltip=Extra damage to armored targets
+item.twilightforest.regalPick.tooltip=Extra damage to armored targets
+item.twilightforest.regalAxe.tooltip=Extra damage to unarmored targets
 
 item.twilightforest.arctic_armor.tooltip=Dyeable like Leather Armor
 

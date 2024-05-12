@@ -278,6 +278,16 @@ public class TFItems {
 	public static final Item regal_shield;
 	@GameRegistry.ObjectHolder("regal_sword")
 	public static final Item regal_sword;
+	@GameRegistry.ObjectHolder("regal_pickaxe")
+	public static final Item regal_pickaxe;
+	@GameRegistry.ObjectHolder("regal_axe")
+	public static final Item regal_axe;
+	@GameRegistry.ObjectHolder("regal_shard_cluster")
+	public static final Item regal_shard_cluster;
+	@GameRegistry.ObjectHolder("regal_ingot")
+	public static final Item regal_ingot;
+	@GameRegistry.ObjectHolder("regal_shard")
+	public static final Item regal_shard;
 
 	public static CreativeTabTwilightForest creativeTab = new CreativeTabTwilightForest("twilightForest");
 
@@ -290,6 +300,7 @@ public class TFItems {
 		ARMOR_PHANTOM.setRepairItem(new ItemStack(knightmetal_ingot));
 		ARMOR_YETI.setRepairItem(new ItemStack(alpha_fur));
 		ARMOR_ARCTIC.setRepairItem(new ItemStack(arctic_fur));
+		ARMOR_REGAL.setRepairItem(new ItemStack(regal_ingot));
 
 		TOOL_IRONWOOD.setRepairItem(new ItemStack(ironwood_ingot));
 		TOOL_FIERY.setRepairItem(new ItemStack(fiery_ingot));
@@ -297,6 +308,7 @@ public class TFItems {
 		TOOL_KNIGHTLY.setRepairItem(new ItemStack(knightmetal_ingot));
 		TOOL_GIANT.setRepairItem(new ItemStack(TFBlocks.giant_cobblestone));
 		TOOL_ICE.setRepairItem(new ItemStack(Blocks.PACKED_ICE));
+		TOOL_REGAL.setRepairItem(new ItemStack(regal_ingot));
 	}
 
 	static {
@@ -422,5 +434,10 @@ public class TFItems {
 		regal_boots = null;
 		regal_shield = null;
 		regal_sword = null;
+		regal_pickaxe = null;
+		regal_axe = null;
+		regal_shard_cluster = null;
+		regal_ingot = null;
+		regal_shard = null;
 	}
 }

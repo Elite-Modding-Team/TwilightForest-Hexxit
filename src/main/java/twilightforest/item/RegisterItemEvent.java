@@ -48,7 +48,7 @@ public class RegisterItemEvent {
 		items.register("zombie_scepter", "scepterZombie", new ItemTFZombieWand(EnumRarity.UNCOMMON).setMaxStackSize(1));
 		items.register("shield_scepter", "scepterShield", new ItemTFShieldWand(EnumRarity.UNCOMMON).setMaxStackSize(1));
 		//items.register("Wand of Pacification [NYI]", new ItemTF().setIconIndex(6).setTranslationKey("wandPacification").setMaxStackSize(1));
-		items.register("ore_meter", "oreMeter", new ItemTFOreMeter().setMaxStackSize(1));
+		//items.register("ore_meter", "oreMeter", new ItemTFOreMeter().setMaxStackSize(1));
 		items.register("magic_map", "magicMap", new ItemTFMagicMap().setMaxStackSize(1));
 		items.register("maze_map", "mazeMap", new ItemTFMazeMap(false).setMaxStackSize(1));
 		items.register("ore_map", "oreMap", new ItemTFMazeMap(true).setMaxStackSize(1));
@@ -152,14 +152,19 @@ public class RegisterItemEvent {
 		items.register("knightmetal_ring", "knightmetalRing", new ItemTF());
 		items.register("block_and_chain", "chainBlock", new ItemTFChainBlock().setMaxStackSize(1));
 		items.register("cube_talisman", "cubeTalisman", new ItemTF(EnumRarity.UNCOMMON));
-		items.register("cube_of_annihilation", "cubeOfAnnihilation", new ItemTFCubeOfAnnihilation(EnumRarity.UNCOMMON).setMaxStackSize(1));
+		//items.register("cube_of_annihilation", "cubeOfAnnihilation", new ItemTFCubeOfAnnihilation(EnumRarity.UNCOMMON).setMaxStackSize(1));
 		items.register("moon_dial", "moonDial", new ItemTFMoonDial());
 		items.register("regal_helmet", "regalHelm", new ItemTFRegalArmor(ARMOR_REGAL, HEAD, EnumRarity.RARE).setMaxStackSize(1));
 		items.register("regal_chestplate", "regalPlate", new ItemTFRegalArmor(ARMOR_REGAL, CHEST, EnumRarity.RARE).setMaxStackSize(1));
 		items.register("regal_leggings", "regalLegs", new ItemTFRegalArmor(ARMOR_REGAL, LEGS, EnumRarity.RARE).setMaxStackSize(1));
 		items.register("regal_boots", "regalBoots", new ItemTFRegalArmor(ARMOR_REGAL, FEET, EnumRarity.RARE).setMaxStackSize(1));
 		items.register("regal_sword", "regalSword", new ItemTFRegalSword(TOOL_REGAL).setMaxStackSize(1));
+		items.register("regal_pickaxe", "regalPick", new ItemTFRegalPick(TOOL_REGAL).setMaxStackSize(1));
+		items.register("regal_axe", "regalAxe", new ItemTFRegalAxe(TOOL_REGAL).setMaxStackSize(1));
 		items.register("regal_shield", "regalShield", new ItemRegalShield().setMaxStackSize(1));
+		items.register("regal_shard", "regalShard", new ItemTF());
+		items.register("regal_ingot", "regalIngot", new ItemTF());
+		items.register("regal_shard_cluster", "regalShardCluster", new ItemTF());
 
 		String[] thornNames = stream(ThornVariant.values()).map(IStringSerializable::getName).toArray(String[]::new);
 		String[] deadrockNames = stream(DeadrockVariant.values()).map(IStringSerializable::getName).toArray(String[]::new);
@@ -231,7 +236,7 @@ public class RegisterItemEvent {
 		items.registerBlock(TFBlocks.knightmetal_block);
 		items.register(new ItemBlockTFHugeLilyPad(TFBlocks.huge_lilypad));
 		items.register(new ItemBlockTFHugeWaterLily(TFBlocks.huge_waterlily));
-		items.registerSubItemBlock(TFBlocks.slider);
+		//items.registerSubItemBlock(TFBlocks.slider);
 		items.registerSubItemBlock(TFBlocks.castle_brick);
 		items.registerBlock(TFBlocks.castle_stairs_brick);
 		items.registerBlock(TFBlocks.castle_stairs_cracked);
@@ -241,7 +246,7 @@ public class RegisterItemEvent {
 		items.registerSubItemBlock(TFBlocks.castle_stairs);
 		items.registerSubItemBlock(TFBlocks.castle_rune_brick);
 		items.registerSubItemBlock(TFBlocks.force_field);
-		items.registerBlock(TFBlocks.cinder_furnace);
+		//items.registerBlock(TFBlocks.cinder_furnace);
 		items.registerBlock(TFBlocks.cinder_log);
 		items.registerSubItemBlock(TFBlocks.castle_door);
 		items.register(new ItemTFMiniatureStructure(TFBlocks.miniature_structure));
