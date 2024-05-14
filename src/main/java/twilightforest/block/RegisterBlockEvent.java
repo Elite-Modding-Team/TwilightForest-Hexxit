@@ -227,7 +227,7 @@ public final class RegisterBlockEvent {
     static {
         moltenFiery = registerFluid(new Fluid("fierymetal", moltenFieryStill, moltenFieryFlow).setTemperature(1000).setLuminosity(15));
         moltenKnightmetal = registerFluid(new Fluid("knightmetal", moltenKnightmetalStill, moltenKnightmetalFlow).setTemperature(1000).setLuminosity(15));
-        essenceFiery = registerFluid(new Fluid("fiery_essence", essenceFieryStill, essenceFieryFlow).setTemperature(1000));
+        essenceFiery = registerFluid(new Fluid("fiery_essence", essenceFieryStill, essenceFieryFlow).setTemperature(1800));
         moltenRegal = registerFluid(new Fluid("regal", moltenRegalStill, moltenRegalFlow).setTemperature(1000).setLuminosity(15));
     }
 

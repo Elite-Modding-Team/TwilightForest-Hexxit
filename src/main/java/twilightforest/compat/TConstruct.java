@@ -162,5 +162,8 @@ public class TConstruct {
 
     static void postInit() {
         TinkerRegistry.registerSmelteryFuel(new FluidStack(RegisterBlockEvent.essenceFiery, 50), 1000);
+        
+    	TinkerRegistry.registerMelting(TFItems.fiery_blood, RegisterBlockEvent.essenceFiery, Material.VALUE_Ingot);
+    	TinkerRegistry.registerMelting(TFItems.fiery_tears, RegisterBlockEvent.essenceFiery, Material.VALUE_Ingot);
     }
 }
