@@ -12,6 +12,7 @@ import twilightforest.TFFeature;
 import twilightforest.TwilightForestMod;
 import twilightforest.entity.EntityTFWinterWolf;
 import twilightforest.entity.EntityTFYeti;
+import twilightforest.entity.boss.EntityTFYetiAlpha;
 import twilightforest.potions.TFPotions;
 import twilightforest.world.feature.TFGenLargeWinter;
 
@@ -24,7 +25,7 @@ import java.util.Random;
  */
 public class TFBiomeSnow extends TFBiomeBase {
 
-	private static final int MONSTER_SPAWN_RATE = 10;
+	private static final int MONSTER_SPAWN_RATE = 40;
 
 	private final Random monsterRNG = new Random(53439L);
 
@@ -38,7 +39,8 @@ public class TFBiomeSnow extends TFBiomeBase {
 		getTFBiomeDecorator().generateFalls = false;
 
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityTFYeti.class, 20, 4, 4));
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityTFWinterWolf.class, 5, 1, 4));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityTFWinterWolf.class, 20, 1, 4));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityTFYetiAlpha.class, 1, 1, 1));
 	}
 
 	@Override
