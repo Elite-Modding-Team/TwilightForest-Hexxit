@@ -841,6 +841,7 @@ twilightforest.subtitle.finalboss.spawn=Hollow steel, forgotten kingdom...
 fluid.fierymetal=Molten Fiery
 fluid.knightmetal=Molten Knightmetal
 fluid.fiery_essence=Fiery Essence
+fluid.regal=Molten Regal
 
 # TCon
 material.nagascale.name=Naga Scale
@@ -848,6 +849,7 @@ material.steeleaf.name=Steeleaf
 material.fierymetal.name=Fiery
 material.knightmetal.name=Knightly
 material.raven_feather.name=Raven Feather
+material.regal.name=Regal
 
 modifier.twilit.name=Twilit
 modifier.twilit.desc=§oThe Twilight Forest's illuminating blessing.§r\nSpeedier in the Twilight Forest.\nMore damage outside the Twilight Forest.

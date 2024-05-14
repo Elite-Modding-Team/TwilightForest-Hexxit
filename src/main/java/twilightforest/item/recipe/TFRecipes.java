@@ -41,6 +41,10 @@ public class TFRecipes {
 		OreDictionary.registerOre("oreKnightmetal", new ItemStack(TFItems.armor_shard_cluster));
 		OreDictionary.registerOre("ingotKnightmetal", new ItemStack(TFItems.knightmetal_ingot));
 		OreDictionary.registerOre("blockKnightmetal", new ItemStack(TFBlocks.knightmetal_block));
+		
+		OreDictionary.registerOre("oreRegal", new ItemStack(TFItems.regal_shard_cluster));
+		OreDictionary.registerOre("ingotRegal", new ItemStack(TFItems.regal_ingot));
+		//OreDictionary.registerOre("blockRegal", new ItemStack(TFBlocks.knightmetal_block));
 
 		OreDictionary.registerOre("carminite", new ItemStack(TFItems.carminite));
 		OreDictionary.registerOre("furArctic", new ItemStack(TFItems.arctic_fur));

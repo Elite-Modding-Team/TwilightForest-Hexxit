@@ -137,6 +137,7 @@ public final class RegisterBlockEvent {
 		registerFluidBlock(blocks, moltenFiery);
 		registerFluidBlock(blocks, moltenKnightmetal);
 		registerFluidBlock("fiery_essence", blocks, essenceFiery);
+		registerFluidBlock(blocks, moltenRegal);
 	}
 
 	private static <T extends Enum<T> & IStringSerializable & IMapColorSupplier> void registerWoodVariants(BlockRegistryHelper blocks, final IProperty<T> key, final T[] types) {
@@ -208,6 +209,7 @@ public final class RegisterBlockEvent {
 	public static final Fluid moltenFiery;
 	public static final Fluid moltenKnightmetal;
 	public static final Fluid essenceFiery;
+	public static final Fluid moltenRegal;
 
 	public static final ResourceLocation moltenFieryStill = TwilightForestMod.prefix("blocks/molten_fiery_still");
 	public static final ResourceLocation moltenFieryFlow  = TwilightForestMod.prefix("blocks/molten_fiery_flow");
@@ -217,11 +219,15 @@ public final class RegisterBlockEvent {
 
 	public static final ResourceLocation essenceFieryStill = TwilightForestMod.prefix("blocks/fluid_fiery_still");
 	public static final ResourceLocation essenceFieryFlow  = TwilightForestMod.prefix("blocks/fluid_fiery_flow");
+	
+	public static final ResourceLocation moltenRegalStill = TwilightForestMod.prefix("blocks/molten_regal_still");
+	public static final ResourceLocation moltenRegalFlow  = TwilightForestMod.prefix("blocks/molten_regal_flow");
 
 	static {
 		moltenFiery       = registerFluid(new Fluid("fierymetal" , moltenFieryStill, moltenFieryFlow).setTemperature(1000).setLuminosity(15));
 		moltenKnightmetal = registerFluid(new Fluid("knightmetal", moltenKnightmetalStill, moltenKnightmetalFlow).setTemperature(1000).setLuminosity(15));
 		essenceFiery      = registerFluid(new Fluid("fiery_essence", essenceFieryStill, essenceFieryFlow).setTemperature(1000));
+		moltenRegal = registerFluid(new Fluid("regal", moltenRegalStill, moltenRegalFlow).setTemperature(1000).setLuminosity(15));
 	}
 
 	private static Fluid registerFluid(Fluid fluid) {

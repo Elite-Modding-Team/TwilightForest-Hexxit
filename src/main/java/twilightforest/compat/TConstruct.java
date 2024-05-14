@@ -18,21 +18,24 @@ import twilightforest.item.TFItems;
 
 public class TConstruct {
 
-    public static final Material nagascale    = new Material("nagascale"    , 0x32_5D_25);
-    public static final Material steeleaf     = new Material("steeleaf"     , 0x52_87_3A);
-    public static final Material fierymetal   = new Material("fierymetal"   , 0xFD_D4_5D);
-    public static final Material knightmetal  = new Material("knightmetal"  , 0xC4_E6_AE);
+    public static final Material nagascale = new Material("nagascale"    , 0x32_5D_25);
+    public static final Material steeleaf = new Material("steeleaf"     , 0x52_87_3A);
+    public static final Material fierymetal = new Material("fierymetal"   , 0xFD_D4_5D);
+    public static final Material knightmetal = new Material("knightmetal"  , 0xC4_E6_AE);
     public static final Material ravenFeather = new Material("raven_feather", 0x47_4C_52);
+    public static final Material regal = new Material("regal"  , 0x77_77_77);
 
-    public static final AbstractTrait twilit      = new TraitTwilit();
+    public static final AbstractTrait twilit = new TraitTwilit();
     public static final AbstractTrait precipitate = new TraitPrecipitate();
-    public static final AbstractTrait stalwart    = new TraitStalwart();
-    public static final AbstractTrait synergy     = new TraitSynergy();
-    public static final AbstractTrait veiled      = new TraitVeiled();
+    public static final AbstractTrait stalwart = new TraitStalwart();
+    public static final AbstractTrait synergy = new TraitSynergy();
+    public static final AbstractTrait veiled = new TraitVeiled();
 
     static void preInit() {
         TinkerRegistry.addMaterialStats(TConstruct.nagascale,
                 new HeadMaterialStats(460, 8.9f, 4.3f, HarvestLevels.IRON),
+                new HandleMaterialStats(0.5f, 50),
+                new ExtraMaterialStats(150),
                 new BowMaterialStats(0.6f, 2f, 0f),
                 new ArrowShaftMaterialStats(1.4f, 20)
         );
@@ -60,7 +63,8 @@ public class TConstruct {
         TinkerRegistry.addMaterialStats(TConstruct.knightmetal,
                 new HeadMaterialStats(900, 7f, 6f, HarvestLevels.COBALT),
                 new HandleMaterialStats(1.25f, 100),
-                new ExtraMaterialStats(400)
+                new ExtraMaterialStats(400),
+                new BowMaterialStats(0.4f, 2f, 3.5f)
         );
         TinkerRegistry.integrate(new MaterialIntegration(TConstruct.knightmetal, RegisterBlockEvent.moltenKnightmetal, "Knightmetal")).preInit();
 
@@ -68,6 +72,14 @@ public class TConstruct {
                 new FletchingMaterialStats(0.95f, 1.15f)
         );
         TinkerRegistry.integrate(TConstruct.ravenFeather).preInit();
+        
+        TinkerRegistry.addMaterialStats(TConstruct.regal,
+                new HeadMaterialStats(950, 8f, 7.5f, HarvestLevels.COBALT),
+                new HandleMaterialStats(1.3f, 200),
+                new ExtraMaterialStats(450),
+                new BowMaterialStats(0.5f, 2.5f, 4f)
+        );
+        TinkerRegistry.integrate(new MaterialIntegration(TConstruct.regal, RegisterBlockEvent.moltenRegal, "Regal")).preInit();
 
         if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
             MaterialRenderInfoLoader.addRenderInfo("gradient_map_colors", GradientMapInfoDeserializer.class);
@@ -78,25 +90,26 @@ public class TConstruct {
     static void init() {
         TConstruct.nagascale.addItem(TFItems.naga_scale, 1, Material.VALUE_Ingot);
         TConstruct.nagascale
-                .addTrait(TConstruct.twilit)
+                .addTrait(TConstruct.twilit, MaterialTypes.HEAD)
+                .addTrait(TConstruct.precipitate, MaterialTypes.HEAD)
                 .addTrait(TConstruct.precipitate)
                 .setCraftable(true).setCastable(false)
                 .setRepresentativeItem(TFItems.naga_scale);
 
         TConstruct.steeleaf.addCommonItems("Steeleaf");
         TConstruct.steeleaf
-                .addTrait(TConstruct.twilit)
+                .addTrait(TConstruct.twilit, MaterialTypes.HEAD)
+                .addTrait(TConstruct.synergy, MaterialTypes.HEAD)
                 .addTrait(TConstruct.synergy)
                 .setCraftable(true).setCastable(false)
                 .setRepresentativeItem(TFItems.steeleaf_ingot);
 
         TConstruct.fierymetal.addCommonItems("Fiery");
         TConstruct.fierymetal
-                .addTrait(TConstruct.twilit)
-                .addTrait(TinkerTraits.flammable)
+                .addTrait(TinkerTraits.superheat)
                 .addTrait(TConstruct.twilit, MaterialTypes.HEAD)
                 .addTrait(TinkerTraits.autosmelt, MaterialTypes.HEAD)
-                .addTrait(TinkerTraits.superheat, MaterialTypes.HEAD)
+                //.addTrait(TinkerTraits.superheat, MaterialTypes.HEAD)
                 .addTrait(TinkerTraits.flammable, MaterialTypes.HEAD)
                 .setCraftable(false).setCastable(true)
                 .setRepresentativeItem(TFItems.fiery_ingot);
@@ -105,17 +118,28 @@ public class TConstruct {
         TConstruct.knightmetal.addItem(TFItems.armor_shard, 1, Material.VALUE_Nugget);
         TConstruct.knightmetal.addItem(TFItems.block_and_chain, 1, (Material.VALUE_Ingot * 7) + Material.VALUE_Block);
         TConstruct.knightmetal
-                .addTrait(TConstruct.twilit)
+                .addTrait(TConstruct.twilit, MaterialTypes.HEAD)
+                .addTrait(TConstruct.stalwart, MaterialTypes.HEAD)
                 .addTrait(TConstruct.stalwart)
                 .setCraftable(false).setCastable(true)
                 .setRepresentativeItem(TFItems.knightmetal_ingot);
 
         TConstruct.ravenFeather.addItem(TFItems.raven_feather, 1, Material.VALUE_Ingot);
         TConstruct.ravenFeather
-                .addTrait(TConstruct.twilit)
+                .addTrait(TConstruct.twilit, MaterialTypes.HEAD)
+                .addTrait(TConstruct.veiled, MaterialTypes.HEAD)
                 .addTrait(TConstruct.veiled)
                 .setCraftable(true).setCastable(false)
                 .setRepresentativeItem(TFItems.raven_feather);
+        
+        TConstruct.regal.addCommonItems("Regal");
+        TConstruct.regal.addItem(TFItems.regal_shard, 1, Material.VALUE_Nugget);
+        TConstruct.regal
+                .addTrait(TConstruct.twilit, MaterialTypes.HEAD)
+                .addTrait(TinkerTraits.shocking, MaterialTypes.HEAD)
+                .addTrait(TinkerTraits.shocking)
+                .setCraftable(false).setCastable(true)
+                .setRepresentativeItem(TFItems.regal_ingot);
     }
 
     static void postInit() {

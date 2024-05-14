@@ -114,6 +114,8 @@ public class TFClientEvents {
         map.setTextureEntry(new GradientMappedTexture(new ResourceLocation("minecraft", "blocks/lava_flow"), RegisterBlockEvent.moltenKnightmetalFlow, true, KNIGHTMETAL_GRADIENT_MAP));
         map.setTextureEntry(new GradientMappedTexture(new ResourceLocation("minecraft", "blocks/water_still"), RegisterBlockEvent.essenceFieryStill, true, FIERY_ESSENCE_GRADIENT_MAP));
         map.setTextureEntry(new GradientMappedTexture(new ResourceLocation("minecraft", "blocks/water_flow"), RegisterBlockEvent.essenceFieryFlow, true, FIERY_ESSENCE_GRADIENT_MAP));
+        map.setTextureEntry(new GradientMappedTexture(new ResourceLocation("minecraft", "blocks/lava_still"), RegisterBlockEvent.moltenRegalStill, true, EASY_GRAYSCALING_MAP));
+        map.setTextureEntry(new GradientMappedTexture(new ResourceLocation("minecraft", "blocks/lava_flow"), RegisterBlockEvent.moltenRegalFlow, true, EASY_GRAYSCALING_MAP));
 
         if (TFCompat.IMMERSIVEENGINEERING.isActivated()) {
             map.setTextureEntry(new GradientMappedTexture(new ResourceLocation("immersiveengineering", "revolvers/shaders/revolver_grip"), IEShaderRegister.PROCESSED_REVOLVER_GRIP_LAYER, true, EASY_GRAYSCALING_MAP));
