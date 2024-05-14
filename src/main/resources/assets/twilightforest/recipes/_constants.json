@@ -152,5 +152,12 @@
       "ore": "brickStone"
     },
     "name": "STONEBRICK"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "ingotRegal"
+    },
+    "name": "INGOTREGAL"
   }
 ]

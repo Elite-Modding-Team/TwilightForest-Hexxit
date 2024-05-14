@@ -1,0 +1,22 @@
+{
+  "result": {
+    "item": "twilightforest:regal_shield"
+  },
+  "pattern": [
+    "#I",
+    "#R",
+    "#I"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "#": {
+      "item": "#INGOTREGAL"
+    },
+    "R": {
+      "item": "twilightforest:knightmetal_ring"
+    },
+    "I": {
+      "item": "#INGOTIRON"
+    }
+  }
+}

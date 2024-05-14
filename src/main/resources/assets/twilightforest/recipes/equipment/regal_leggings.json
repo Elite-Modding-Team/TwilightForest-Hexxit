@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "twilightforest:regal_leggings"
+  },
+  "group": "regal_armor",
+  "pattern": [
+    "###",
+    "# #",
+    "# #"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "#": {
+      "item": "#INGOTREGAL"
+    }
+  }
+}

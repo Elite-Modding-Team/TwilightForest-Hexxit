@@ -1,0 +1,16 @@
+{
+  "result": {
+    "item": "twilightforest:regal_shard_cluster"
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "twilightforest:regal_shard"
+    }
+  }
+}

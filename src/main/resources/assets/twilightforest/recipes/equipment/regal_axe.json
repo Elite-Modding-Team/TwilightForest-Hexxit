@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "twilightforest:regal_axe"
+  },
+  "group": "regal_tool",
+  "pattern": [
+    "##",
+    "#X",
+    " X"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "#": {
+      "item": "#INGOTREGAL"
+    },
+    "X": {
+      "item": "#STICKWOOD"
+    }
+  }
+}
