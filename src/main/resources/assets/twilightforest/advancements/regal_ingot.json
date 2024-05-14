@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "twilightforest:regal_ingot"
+    },
+    "title": {
+      "translate": "advancement.twilightforest.regal_ingot"
+    },
+    "description": {
+      "translate": "advancement.twilightforest.regal_ingot.desc"
+    }
+  },
+  "parent": "twilightforest:progress_castle",
+  "criteria": {
+    "ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "item": {
+          "item": "twilightforest:regal_ingot"
+        }
+      }
+    }
+  }
+}

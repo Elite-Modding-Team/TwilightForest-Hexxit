@@ -90,10 +90,15 @@ advancement.twilightforest.progress_troll=I Wish For More Burning
 advancement.twilightforest.progress_troll.desc=Find the %s in the troll caves, and you can burn away the thorn barriers.
 advancement.twilightforest.progress_thorns=Past the Thorns
 advancement.twilightforest.progress_thorns.desc=Make it past the Thornlands, and unlock the door of the castle.
+
+# Final Castle
 advancement.twilightforest.progress_castle=So Castle Very Wow
 advancement.twilightforest.progress_castle.desc=What could even be in that castle?!?
 advancement.twilightforest.progress_finalboss=Stillness, but the Peaceful Kind
 advancement.twilightforest.progress_finalboss.desc=Is it brighter now, or is it just me?
+
+advancement.twilightforest.regal_ingot=Fresh Off the Shelf
+advancement.twilightforest.regal_ingot.desc=Obtain an elusive bar of regal.
 
 # Collections
 advancement.twilightforest.twilight_dining=We Dine At Eternal Sundown
