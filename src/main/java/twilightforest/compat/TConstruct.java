@@ -18,10 +18,11 @@ import twilightforest.item.TFItems;
 
 public class TConstruct {
 
-    public static final Material nagascale = new Material("nagascale"    , 0x32_5D_25);
-    public static final Material steeleaf = new Material("steeleaf"     , 0x52_87_3A);
-    public static final Material fierymetal = new Material("fierymetal"   , 0xFD_D4_5D);
-    public static final Material knightmetal = new Material("knightmetal"  , 0xC4_E6_AE);
+    public static final Material nagascale = new Material("nagascale", 0x32_5D_25);
+    public static final Material ironwood = new Material("ironwood", 0x83_7C_62);
+    public static final Material steeleaf = new Material("steeleaf", 0x52_87_3A);
+    public static final Material fierymetal = new Material("fierymetal", 0xFD_D4_5D);
+    public static final Material knightmetal = new Material("knightmetal", 0xC4_E6_AE);
     public static final Material ravenFeather = new Material("raven_feather", 0x47_4C_52);
     public static final Material regal = new Material("regal"  , 0x77_77_77);
 
@@ -40,9 +41,18 @@ public class TConstruct {
                 new ArrowShaftMaterialStats(1.4f, 20)
         );
         TinkerRegistry.integrate(TConstruct.nagascale).preInit();
+        
+        TinkerRegistry.addMaterialStats(TConstruct.ironwood,
+                new HeadMaterialStats(450, 6f, 5f, HarvestLevels.DIAMOND),
+                new HandleMaterialStats(1.1f, 100),
+                new ExtraMaterialStats(120),
+                new BowMaterialStats(0.7f, 1.5f, 7f),
+                new ArrowShaftMaterialStats(1.25f, 15)
+        );
+        TinkerRegistry.integrate(new MaterialIntegration(TConstruct.ironwood, null, "Ironwood")).toolforge().preInit();
 
         TinkerRegistry.addMaterialStats(TConstruct.steeleaf,
-                new HeadMaterialStats(180, 7f, 6f, HarvestLevels.DIAMOND),
+                new HeadMaterialStats(180, 7f, 6f, HarvestLevels.OBSIDIAN),
                 new HandleMaterialStats(0.8f, 100),
                 new ExtraMaterialStats(90),
                 new BowMaterialStats(1.2f, 1.5f, 2f),
@@ -52,7 +62,7 @@ public class TConstruct {
         TinkerRegistry.integrate(new MaterialIntegration(TConstruct.steeleaf, null, "Steeleaf")).toolforge().preInit();
 
         TinkerRegistry.addMaterialStats(TConstruct.fierymetal,
-                new HeadMaterialStats(720, 7.2f, 6.6f, HarvestLevels.OBSIDIAN),
+                new HeadMaterialStats(720, 7.2f, 6.6f, HarvestLevels.COBALT),
                 new HandleMaterialStats(0.7f, 400),
                 new ExtraMaterialStats(200),
                 new BowMaterialStats(1f, 0.9f, 4f),
@@ -64,7 +74,7 @@ public class TConstruct {
                 new HeadMaterialStats(900, 7f, 6f, HarvestLevels.COBALT),
                 new HandleMaterialStats(1.25f, 100),
                 new ExtraMaterialStats(400),
-                new BowMaterialStats(0.4f, 2f, 3.5f)
+                new BowMaterialStats(0.4f, 2f, 7.5f)
         );
         TinkerRegistry.integrate(new MaterialIntegration(TConstruct.knightmetal, RegisterBlockEvent.moltenKnightmetal, "Knightmetal")).preInit();
 
@@ -74,10 +84,10 @@ public class TConstruct {
         TinkerRegistry.integrate(TConstruct.ravenFeather).preInit();
         
         TinkerRegistry.addMaterialStats(TConstruct.regal,
-                new HeadMaterialStats(950, 8f, 7.5f, HarvestLevels.COBALT),
+                new HeadMaterialStats(950, 8f, 7f, HarvestLevels.COBALT),
                 new HandleMaterialStats(1.3f, 200),
                 new ExtraMaterialStats(450),
-                new BowMaterialStats(0.5f, 2.5f, 4f)
+                new BowMaterialStats(0.5f, 2.5f, 7f)
         );
         TinkerRegistry.integrate(new MaterialIntegration(TConstruct.regal, RegisterBlockEvent.moltenRegal, "Regal")).preInit();
 
@@ -95,6 +105,14 @@ public class TConstruct {
                 .addTrait(TConstruct.precipitate)
                 .setCraftable(true).setCastable(false)
                 .setRepresentativeItem(TFItems.naga_scale);
+        
+        TConstruct.ironwood.addCommonItems("Ironwood");
+        TConstruct.ironwood
+                .addTrait(TConstruct.twilit, MaterialTypes.HEAD)
+                .addTrait(TinkerTraits.stiff, MaterialTypes.HEAD)
+                .addTrait(TinkerTraits.ecological)
+                .setCraftable(true).setCastable(false)
+                .setRepresentativeItem(TFItems.ironwood_ingot);
 
         TConstruct.steeleaf.addCommonItems("Steeleaf");
         TConstruct.steeleaf

@@ -845,6 +845,7 @@ fluid.regal=Molten Regal
 
 # TCon
 material.nagascale.name=Naga Scale
+material.ironwood.name=Ironwood
 material.steeleaf.name=Steeleaf
 material.fierymetal.name=Fiery
 material.knightmetal.name=Knightly

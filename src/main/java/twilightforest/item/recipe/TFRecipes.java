@@ -34,6 +34,7 @@ public class TFRecipes {
 
 		OreDictionary.registerOre("oreIronwood", new ItemStack(TFItems.ironwood_raw));
 		OreDictionary.registerOre("ingotIronwood", new ItemStack(TFItems.ironwood_ingot));
+		OreDictionary.registerOre("blockIronwood", new ItemStack(TFBlocks.block_storage, 1, CompressedVariant.IRONWOOD.ordinal()));
 
 		OreDictionary.registerOre("ingotSteeleaf", new ItemStack(TFItems.steeleaf_ingot));
 		OreDictionary.registerOre("blockSteeleaf", new ItemStack(TFBlocks.block_storage, 1, CompressedVariant.STEELLEAF.ordinal()));
