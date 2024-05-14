@@ -24,7 +24,7 @@ public class TConstruct {
     public static final Material fierymetal = new Material("fierymetal", 0xFD_D4_5D);
     public static final Material knightmetal = new Material("knightmetal", 0xC4_E6_AE);
     public static final Material ravenFeather = new Material("raven_feather", 0x47_4C_52);
-    public static final Material regal = new Material("regal"  , 0x77_77_77);
+    public static final Material regal = new Material("regal", 0x77_77_77);
 
     public static final AbstractTrait twilit = new TraitTwilit();
     public static final AbstractTrait precipitate = new TraitPrecipitate();

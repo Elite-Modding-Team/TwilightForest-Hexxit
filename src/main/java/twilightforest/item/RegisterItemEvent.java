@@ -268,6 +268,7 @@ public class RegisterItemEvent {
 		items.registerBlock(TFBlocks.terrorcotta_diagonal);
 		items.registerBlock(TFBlocks.stone_twist);
 		items.registerBlock(TFBlocks.stone_twist_thin);
+		items.registerBlock(TFBlocks.regal_block);
 
 		registerWoodVariants(items, BlockTFLog.VARIANT, WoodVariant.values());
 		registerWoodVariants(items, BlockTFMagicLog.VARIANT, MagicWoodVariant.values());
