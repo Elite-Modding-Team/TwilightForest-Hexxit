@@ -807,6 +807,22 @@ public class TFEventListener {
 			TFAdvancements.ARMOR_CHANGED.trigger((EntityPlayerMP) living, event.getFrom(), event.getTo());
 		}
 	}
+	
+	public static float armorPercentage(EntityLivingBase entity) {
+        Iterable<ItemStack> iterable = entity.getArmorInventoryList();
+        int i = 0;
+        int j = 0;
+
+        for (ItemStack itemstack : iterable) {
+            if (!itemstack.isEmpty()) {
+                ++j;
+            }
+
+            ++i;
+        }
+
+        return i > 0 ? (float)j / (float)i : 0.0F;
+    }
 
 	@SubscribeEvent
 	public static void customBossDeath(LivingDeathEvent event) {
