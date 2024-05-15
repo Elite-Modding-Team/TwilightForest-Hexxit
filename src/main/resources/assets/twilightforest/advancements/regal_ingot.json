@@ -12,12 +12,14 @@
   },
   "parent": "twilightforest:progress_castle",
   "criteria": {
-    "ingot": {
+    "get_regal_ingot": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "item": {
-          "item": "twilightforest:regal_ingot"
-        }
+        "items": [
+          {
+            "item": "twilightforest:regal_ingot"
+          }
+        ]
       }
     }
   }
