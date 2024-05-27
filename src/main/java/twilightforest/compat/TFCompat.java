@@ -93,7 +93,6 @@ public enum TFCompat {
     },
     FORESTRY("Forestry"),
     IMMERSIVEENGINEERING("Immersive Engineering") {
-
         @Override
         protected void initItems(RegisterItemEvent.ItemRegistryHelper items) {
             items.register("shader", ItemTFShader.shader.setTranslationKey("tfEngineeringShader"));
@@ -105,7 +104,7 @@ public enum TFCompat {
         @Override
         protected void init() {
             // Yeah, it's a thing! https://twitter.com/AtomicBlom/status/1004931868012056583
-            blusunrize.immersiveengineering.api.tool.RailgunHandler.projectilePropertyMap.add(Pair.of(blusunrize.immersiveengineering.api.ApiUtils.createIngredientStack(TFBlocks.cicada), new blusunrize.immersiveengineering.api.tool.RailgunHandler.RailgunProjectileProperties(2, 0.25){
+            blusunrize.immersiveengineering.api.tool.RailgunHandler.projectilePropertyMap.add(Pair.of(blusunrize.immersiveengineering.api.ApiUtils.createIngredientStack(TFBlocks.cicada), new blusunrize.immersiveengineering.api.tool.RailgunHandler.RailgunProjectileProperties(2, 0.25) {
                 @Override
                 public boolean overrideHitEntity(Entity entityHit, Entity shooter) {
                     World world = entityHit.getEntityWorld();
@@ -154,6 +153,18 @@ public enum TFCompat {
             TConstruct.postInit();
         }
     },
+    CONSTRUCTSARMORY("Construct's Armory") {
+        @Override
+        protected boolean preInit() {
+            ConstructsArmory.preInit();
+            return true;
+        }
+
+        @Override
+        protected void init() {
+            ConstructsArmory.init();
+        }
+    },
     THAUMCRAFT("Thaumcraft") {
         @Override
         protected boolean preInit() {
@@ -164,11 +175,18 @@ public enum TFCompat {
 
     private static final TFCompat[] VALUES = values();
 
-    protected boolean preInit() { return true; }
-    protected void init() {}
-    protected void postInit() {}
+    protected boolean preInit() {
+        return true;
+    }
 
-    protected void initItems(RegisterItemEvent.ItemRegistryHelper items) {}
+    protected void init() {
+    }
+
+    protected void postInit() {
+    }
+
+    protected void initItems(RegisterItemEvent.ItemRegistryHelper items) {
+    }
 
     private final String modName;
 
