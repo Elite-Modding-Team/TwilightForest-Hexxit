@@ -53,7 +53,7 @@ public class EntityTFTowerGolem extends EntityMob {
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
 		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(9.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(8.0D);
 	}
 
 	@Override
