@@ -1114,11 +1114,11 @@ public class ComponentTFDarkTowerMain extends ComponentTFDarkTowerWing
 
 		// anvils
 		IBlockState anvil = Blocks.ANVIL.getDefaultState()
-				.withProperty(BlockAnvil.DAMAGE, decoRNG.nextInt(2))
+				.withProperty(BlockAnvil.DAMAGE, decoRNG.nextInt(1) + 1)
 				.withProperty(BlockAnvil.FACING, EnumFacing.HORIZONTALS[decoRNG.nextInt(4)]);
 		this.setBlockStateRotated(world, anvil, 13, y + 2, 5, rotation, sbb);
 		anvil = Blocks.ANVIL.getDefaultState()
-				.withProperty(BlockAnvil.DAMAGE, decoRNG.nextInt(2))
+				.withProperty(BlockAnvil.DAMAGE, decoRNG.nextInt(1) + 1)
 				.withProperty(BlockAnvil.FACING, EnumFacing.HORIZONTALS[decoRNG.nextInt(4)]);
 		this.setBlockStateRotated(world, anvil, 13, y + 2, 13, rotation, sbb);
 
