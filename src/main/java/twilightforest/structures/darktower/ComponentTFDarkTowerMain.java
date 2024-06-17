@@ -912,7 +912,7 @@ public class ComponentTFDarkTowerMain extends ComponentTFDarkTowerWing
 	private void decorateExperiment(World world, Random decoRNG, StructureBoundingBox sbb, Rotation rotation, int y)
 	{
 		final IBlockState obsidian = Blocks.OBSIDIAN.getDefaultState();
-		final IBlockState netherrack = Blocks.NETHERRACK.getDefaultState();
+		final IBlockState netherrack = Blocks.MAGMA.getDefaultState();
 		final IBlockState redstone = Blocks.REDSTONE_BLOCK.getDefaultState();
 		final IBlockState inactiveReactor = TFBlocks.tower_device.getDefaultState().withProperty(BlockTFTowerDevice.VARIANT, TowerDeviceVariant.REACTOR_INACTIVE);
 
@@ -1175,7 +1175,7 @@ public class ComponentTFDarkTowerMain extends ComponentTFDarkTowerWing
 		setBlockStateRotated(world, myDeco.pillarState, x - 1, y, z + 1, rotation, sbb);
 		setBlockStateRotated(world, myDeco.pillarState, x - 1, y, z - 1, rotation, sbb);
 
-		setBlockStateRotated(world, Blocks.NETHERRACK.getDefaultState(), x, y, z, rotation, sbb);
+		setBlockStateRotated(world, Blocks.MAGMA.getDefaultState(), x, y, z, rotation, sbb);
 		setBlockStateRotated(world, Blocks.FIRE.getDefaultState(), x, y + 1, z, rotation, sbb);
 	}
 

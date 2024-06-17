@@ -386,7 +386,7 @@ public class ComponentTFDarkTowerWing extends ComponentTFTowerWing {
 
 	private void testAndChangeToNetherrack(World world, Random rand, int x, int y, int z, StructureBoundingBox sbb) {
 		if (this.getBlockStateFromPos(world, x, y, z, sbb).getBlock() != Blocks.AIR) {
-			this.setBlockState(world, Blocks.NETHERRACK.getDefaultState(), x, y, z, sbb);
+			this.setBlockState(world, Blocks.MAGMA.getDefaultState(), x, y, z, sbb);
 
 			if (this.getBlockStateFromPos(world, x, y + 1, z, sbb).getBlock() == Blocks.AIR && rand.nextBoolean()) {
 				this.setBlockState(world, Blocks.FIRE.getDefaultState(), x, y + 1, z, sbb);
