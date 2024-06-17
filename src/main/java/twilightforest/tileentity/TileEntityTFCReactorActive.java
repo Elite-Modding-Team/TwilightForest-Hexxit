@@ -221,7 +221,7 @@ public class TileEntityTFCReactorActive extends TileEntity implements ITickable 
 		}
 
 		if (netherTransform && stateThere.getBlock() != Blocks.AIR) {
-			world.setBlockState(pos, Blocks.NETHERRACK.getDefaultState(), 3);
+			world.setBlockState(pos, Blocks.MAGMA.getDefaultState(), 3);
 			// fire on top?
 			if (world.isAirBlock(pos.up()) && fuzz % 3 == 0) {
 				world.setBlockState(pos.up(), Blocks.FIRE.getDefaultState(), 3);
