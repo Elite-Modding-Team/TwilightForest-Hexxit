@@ -1,5 +1,6 @@
 package twilightforest.biomes;
 
+import net.minecraft.entity.passive.EntityMooshroom;
 import twilightforest.TFFeature;
 
 public class TFBiomeDeepMushrooms extends TFBiomeBase {
@@ -14,6 +15,10 @@ public class TFBiomeDeepMushrooms extends TFBiomeBase {
 
 		getTFBiomeDecorator().myceliumPerChunk = 3;
 		getTFBiomeDecorator().alternateCanopyChance = 0.9F;
+		
+		// custom creature list.
+		spawnableCreatureList.clear();
+		spawnableCreatureList.add(new SpawnListEntry(EntityMooshroom.class, 10, 4, 4));
 	}
 
 	@Override
