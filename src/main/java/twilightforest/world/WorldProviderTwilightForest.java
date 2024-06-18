@@ -165,8 +165,7 @@ public class WorldProviderTwilightForest extends WorldProviderSurface {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Vec3d getSkyColor(Entity cameraEntity, float partialTicks) {
-        if (TwilightForestMod.proxy.doesClientPlayerHaveAdvancement(TFClientProxy.BEATEN_TF)) return super.getSkyColor(cameraEntity, partialTicks);
-		// TODO Maybe in the future we can get the return of sky color by biome?
+        if (TwilightForestMod.proxy.doesClientPlayerHaveAdvancement(TFClientProxy.BEATEN_TF)) return new Vec3d(133 / 256.0, 152 / 256.0, 191 / 256.0);
 		return new Vec3d(32 / 256.0, 34 / 256.0, 74 / 256.0);
 	}
 
