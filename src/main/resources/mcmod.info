@@ -1,8 +1,8 @@
 [
   {
     "modid": "twilightforest",
-    "name": "The Twilight Forest",
-    "description": "An enchanted forest dimension.",
+    "name": "Hexxit's Twilight Forest",
+    "description": "An enchanted forest dimension. Modified exclusively for use with Hexxit II.",
     "version": "${version}",
     "mcversion": "${mcversion}",
     "url": "https://github.com/ACGaming/twilightforest",
@@ -14,7 +14,8 @@
       "quadraxis",
       "Tamaized",
       "williewillus",
-      "ACGaming"
+      "ACGaming",
+      "IcarussOne"
     ],
     "credits": "By Benimatic (Ben Mazur)",
     "logoFile": "assets/twilightforest/textures/twilightforest_logo.png"
