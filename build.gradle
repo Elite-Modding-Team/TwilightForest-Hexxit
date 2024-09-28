@@ -144,7 +144,8 @@ dependencies {
     deobfCompile "baubles:Baubles:${minecraft_sub_version}:${baubles_version}"
     deobfCompile "thaumcraft:Thaumcraft:${minecraft_version}:${thaumcraft_version}"
 
-    compileOnly "curse.maven:llibrary-243298:3116493"
+    // LLibrary must be 1.7.9 or it'll crash during testing
+    compileOnly "curse.maven:llibrary-243298:2504999"
     deobfCompile "curse.maven:mowzies-mobs-250498:3048685"
 
     deobfCompile "curse.maven:constructs-armory-287683:3174535"
