@@ -53,7 +53,10 @@ public class TFGenTreeOfTime extends TFGenHollowTree {
 		buildBranchRing(world, random, pos, diameter, 1, 2, 18, 0, 0.9D, 0, 3, 5, 3, false);
 
 		// add clock block
-		this.setBlockAndNotifyAdequately(world, pos.add(-1, 2, 0), TFBlocks.magic_log_core.getDefaultState());
+		EnumFacing facing = EnumFacing.HORIZONTALS[random.nextInt(4)];
+		int xOff = facing.getXOffset();
+		int zOff = facing.getZOffset();
+		this.setBlockAndNotifyAdequately(world, pos.add(xOff, 2, zOff), TFBlocks.magic_log_core.getDefaultState());
 
 		return true;
 	}
