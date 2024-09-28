@@ -21,6 +21,10 @@ import twilightforest.enums.DeadrockVariant;
 import twilightforest.enums.MagicWoodVariant;
 import twilightforest.enums.ThornVariant;
 import twilightforest.enums.WoodVariant;
+import twilightforest.item.scepter.ItemTFScepterLifeDrain;
+import twilightforest.item.scepter.ItemTFScepterShield;
+import twilightforest.item.scepter.ItemTFScepterTwilight;
+import twilightforest.item.scepter.ItemTFScepterZombie;
 import twilightforest.util.IMapColorSupplier;
 
 import java.util.ArrayList;
@@ -43,10 +47,10 @@ public class RegisterItemEvent {
 		items.register("naga_scale", "nagaScale", new ItemTF(EnumRarity.UNCOMMON));
 		items.register("naga_chestplate", "plateNaga", new ItemTFNagaArmor(ARMOR_NAGA, CHEST, EnumRarity.UNCOMMON).setMaxStackSize(1));
 		items.register("naga_leggings", "legsNaga", new ItemTFNagaArmor(ARMOR_NAGA, LEGS, EnumRarity.UNCOMMON).setMaxStackSize(1));
-		items.register("twilight_scepter", "scepterTwilight", new ItemTFTwilightWand(EnumRarity.UNCOMMON).setMaxStackSize(1));
-		items.register("lifedrain_scepter", "scepterLifeDrain", new ItemTFScepterLifeDrain(EnumRarity.UNCOMMON).setMaxStackSize(1));
-		items.register("zombie_scepter", "scepterZombie", new ItemTFZombieWand(EnumRarity.UNCOMMON).setMaxStackSize(1));
-		items.register("shield_scepter", "scepterShield", new ItemTFShieldWand(EnumRarity.UNCOMMON).setMaxStackSize(1));
+		items.register("twilight_scepter", "scepterTwilight", new ItemTFScepterTwilight(EnumRarity.UNCOMMON, 99));
+		items.register("lifedrain_scepter", "scepterLifeDrain", new ItemTFScepterLifeDrain(EnumRarity.UNCOMMON, 99));
+		items.register("zombie_scepter", "scepterZombie", new ItemTFScepterZombie(EnumRarity.UNCOMMON, 9));
+		items.register("shield_scepter", "scepterShield", new ItemTFScepterShield(EnumRarity.UNCOMMON, 9));
 		//items.register("Wand of Pacification [NYI]", new ItemTF().setIconIndex(6).setTranslationKey("wandPacification").setMaxStackSize(1));
 		//items.register("ore_meter", "oreMeter", new ItemTFOreMeter().setMaxStackSize(1));
 		items.register("magic_map", "magicMap", new ItemTFMagicMap().setMaxStackSize(1));
