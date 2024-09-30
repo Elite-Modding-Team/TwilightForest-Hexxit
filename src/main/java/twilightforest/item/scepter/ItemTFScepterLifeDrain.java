@@ -107,7 +107,7 @@ public class ItemTFScepterLifeDrain extends ItemTFScepter {
                     } else {
                         // we have hit this creature recently
                         if (!world.isRemote) {
-                            target.attackEntityFrom(DamageSource.causeIndirectMagicDamage(living, living), 3);
+                            target.attackEntityFrom(DamageSource.causeIndirectMagicDamage(living, living), 5);
 
                             // only do lifting effect on creatures weaker than the player
                             if (getMaxHealth(target) <= getMaxHealth(living)) {

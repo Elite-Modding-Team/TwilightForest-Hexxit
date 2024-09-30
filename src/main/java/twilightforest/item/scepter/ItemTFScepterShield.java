@@ -43,7 +43,7 @@ public class ItemTFScepterShield extends ItemTFScepter {
         }
 
         if (!player.isCreative())
-            player.getCooldownTracker().setCooldown(this, 1200);
+            player.getCooldownTracker().setCooldown(this, 200);
 
         return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
     }

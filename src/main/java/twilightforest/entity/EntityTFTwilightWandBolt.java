@@ -70,7 +70,7 @@ public class EntityTFTwilightWandBolt extends EntityTFThrowable {
 	protected void onImpact(RayTraceResult result) {
 		if (!this.world.isRemote) {
 			if (result.entityHit instanceof EntityLivingBase) {
-				result.entityHit.attackEntityFrom(DamageSource.causeIndirectMagicDamage(this, this.getThrower()), 6);
+				result.entityHit.attackEntityFrom(DamageSource.causeIndirectMagicDamage(this, this.getThrower()), 8);
 			}
 
 			this.world.setEntityState(this, (byte) 3);

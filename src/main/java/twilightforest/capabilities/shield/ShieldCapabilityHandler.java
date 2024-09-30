@@ -59,7 +59,7 @@ public class ShieldCapabilityHandler implements IShieldCapability {
 	@Override
 	public void replenishShields() {
 		setShields(5, true);
-		host.world.playSound(null, host.getPosition(), SoundEvents.ENTITY_CHICKEN_EGG, SoundCategory.PLAYERS, 1.0F, (host.getRNG().nextFloat() - host.getRNG().nextFloat()) * 0.2F + 1.0F);
+		host.world.playSound(null, host.getPosition(), SoundEvents.ENTITY_BLAZE_HURT, SoundCategory.PLAYERS, 1.0F, (host.getRNG().nextFloat() - host.getRNG().nextFloat()) * 0.2F + 1.0F);
 	}
 
 	@Override
