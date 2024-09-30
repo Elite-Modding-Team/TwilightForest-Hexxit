@@ -40,6 +40,7 @@ public class ItemTFScepterZombie extends ItemTFScepter {
         	return ActionResult.newResult(EnumActionResult.FAIL, stack);
         } else {
         	player.playSound(SoundEvents.ENTITY_ZOMBIE_VILLAGER_CONVERTED, 1.0F, (world.rand.nextFloat() - world.rand.nextFloat()) * 0.2F + 1.0F);
+        	player.swingArm(hand);
         }
 
         if (!world.isRemote) {

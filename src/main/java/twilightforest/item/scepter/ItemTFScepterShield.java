@@ -33,6 +33,8 @@ public class ItemTFScepterShield extends ItemTFScepter {
 
         if (stack.getItemDamage() == stack.getMaxDamage()) {
             return ActionResult.newResult(EnumActionResult.FAIL, stack);
+        } else {
+        	player.swingArm(hand);
         }
 
         if (!world.isRemote && player.hasCapability(CapabilityList.SHIELDS, null)) {
