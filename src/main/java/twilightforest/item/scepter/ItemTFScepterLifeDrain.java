@@ -97,7 +97,7 @@ public class ItemTFScepterLifeDrain extends ItemTFScepter {
                         if (target instanceof EntityLiving) {
                             ((EntityLiving) target).spawnExplosionParticle();
                         }
-                        target.playSound(SoundEvents.ENTITY_GENERIC_BIG_FALL, 1.0F, ((itemRand.nextFloat() - itemRand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+                        target.playSound(SoundEvents.ENTITY_ZOMBIE_VILLAGER_CURE, 1.0F, ((itemRand.nextFloat() - itemRand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
                         spawnShatteringParticles(world, target);
                         if (!world.isRemote) {
                             target.setDead();
@@ -131,7 +131,7 @@ public class ItemTFScepterLifeDrain extends ItemTFScepter {
                     // this is a new creature to start draining
                     spawnRedParticles(world, living.posX, living.posY + living.getEyeHeight(), living.posZ, target.posX, target.posY + target.getEyeHeight(), target.posZ);
 
-                    living.playSound(SoundEvents.ITEM_FLINTANDSTEEL_USE, 1.0F, (world.rand.nextFloat() - world.rand.nextFloat()) * 0.2F + 1.0F);
+                    living.playSound(SoundEvents.ENTITY_ZOMBIE_INFECT, 1.0F, (world.rand.nextFloat() - world.rand.nextFloat()) * 0.2F + 1.0F);
 
                     if (!world.isRemote) {
                         target.attackEntityFrom(DamageSource.causeIndirectMagicDamage(living, living), 1);
