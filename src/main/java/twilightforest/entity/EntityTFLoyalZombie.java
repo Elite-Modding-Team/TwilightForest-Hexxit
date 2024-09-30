@@ -75,7 +75,7 @@ public class EntityTFLoyalZombie extends EntityTameable {
 		return success;
 	}
 
-	@Override
+	/*@Override
 	public void onLivingUpdate() {
 		// once our damage boost effect wears out, start to burn
 		// the effect here is that we die shortly after our 60 second lifespan
@@ -84,7 +84,7 @@ public class EntityTFLoyalZombie extends EntityTameable {
 		}
 
 		super.onLivingUpdate();
-	}
+	}*/
 
 	// [VanillaCopy] EntityWolf.shouldAttackEntity, substituting with our class
 	@Override

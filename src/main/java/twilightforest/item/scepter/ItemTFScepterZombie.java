@@ -3,6 +3,7 @@ package twilightforest.item.scepter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -36,7 +37,9 @@ public class ItemTFScepterZombie extends ItemTFScepter {
         ItemStack stack = player.getHeldItem(hand);
 
         if (stack.getItemDamage() == stack.getMaxDamage()) {
-            return ActionResult.newResult(EnumActionResult.FAIL, stack);
+        	return ActionResult.newResult(EnumActionResult.FAIL, stack);
+        } else {
+        	player.playSound(SoundEvents.ENTITY_ZOMBIE_VILLAGER_CONVERTED, 1.0F, (world.rand.nextFloat() - world.rand.nextFloat()) * 0.2F + 1.0F);
         }
 
         if (!world.isRemote) {
@@ -53,6 +56,9 @@ public class ItemTFScepterZombie extends ItemTFScepter {
 
                 stack.damageItem(1, player);
             }
+            
+            if (!player.isCreative())
+                player.getCooldownTracker().setCooldown(this, 100);
         }
 
         return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
