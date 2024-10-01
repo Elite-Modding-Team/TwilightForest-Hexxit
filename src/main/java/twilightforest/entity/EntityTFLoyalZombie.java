@@ -23,7 +23,6 @@ import net.minecraft.entity.passive.AbstractHorse;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
@@ -64,17 +63,6 @@ public class EntityTFLoyalZombie extends EntityTameable {
 		this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(3.0D);
 	}
 
-	@Override
-	public boolean attackEntityAsMob(Entity entity) {
-		boolean success = entity.attackEntityFrom(DamageSource.causeMobDamage(this), 7);
-
-		if (success) {
-			entity.motionY += 0.2;
-		}
-
-		return success;
-	}
-
 	/*@Override
 	public void onLivingUpdate() {
 		// once our damage boost effect wears out, start to burn
@@ -106,7 +94,7 @@ public class EntityTFLoyalZombie extends EntityTameable {
 
 	@Override
 	protected boolean canDespawn() {
-		return !this.isTamed();
+		return true;
 	}
 
 	@Override

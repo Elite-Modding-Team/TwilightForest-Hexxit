@@ -52,14 +52,13 @@ public class ItemTFScepterZombie extends ItemTFScepter {
                 zombie.setPositionAndRotation(ray.hitVec.x, ray.hitVec.y, ray.hitVec.z, 1.0F, 1.0F);
                 zombie.setTamed(true);
                 zombie.setOwnerId(player.getUniqueID());
-                zombie.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 1200, 1));
                 world.spawnEntity(zombie);
 
                 stack.damageItem(1, player);
             }
             
             if (!player.isCreative())
-                player.getCooldownTracker().setCooldown(this, 100);
+                player.getCooldownTracker().setCooldown(this, 200);
         }
 
         return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
