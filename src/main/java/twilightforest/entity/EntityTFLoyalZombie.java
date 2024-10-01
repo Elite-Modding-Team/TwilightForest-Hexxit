@@ -63,6 +63,17 @@ public class EntityTFLoyalZombie extends EntityTameable {
 		this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(3.0D);
 	}
 
+	@Override
+	public boolean attackEntityAsMob(Entity entity) {
+		boolean success = entity.attackEntityFrom(DamageSource.causeMobDamage(this), 5);
+
+		if (success) {
+			entity.motionY += 0.2;
+		}
+
+		return success;
+	}
+
 	/*@Override
 	public void onLivingUpdate() {
 		// once our damage boost effect wears out, start to burn

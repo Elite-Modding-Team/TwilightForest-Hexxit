@@ -58,7 +58,7 @@ public class ItemTFScepterZombie extends ItemTFScepter {
             }
             
             if (!player.isCreative())
-                player.getCooldownTracker().setCooldown(this, 200);
+                player.getCooldownTracker().setCooldown(this, 140);
         }
 
         return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
