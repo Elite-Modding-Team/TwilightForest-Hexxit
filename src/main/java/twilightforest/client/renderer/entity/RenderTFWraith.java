@@ -31,7 +31,7 @@ public class RenderTFWraith extends RenderBiped<EntityTFWraith> {
 		public void doRenderLayer(@Nonnull EntityTFWraith wraith, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
 			RenderTFWraith.this.bindTexture(textureWraith);
 			GlStateManager.enableBlendProfile(GlStateManager.Profile.TRANSPARENT_MODEL);
-			RenderTFWraith.this.mainModel.render(wraith, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+			RenderTFWraith.this.getMainModel().render(wraith, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 			GlStateManager.disableBlendProfile(GlStateManager.Profile.TRANSPARENT_MODEL);
 		}
 
