@@ -229,11 +229,11 @@ public class TileEntityTFTrophyRenderer extends TileEntitySpecialRenderer<TileEn
 
         GlStateManager.scale(1f, -1f, -1f);
 
-        // we seem to be getting a 180-degree rotation here
+        // we seem to be getting a 180 degree rotation here
         GlStateManager.rotate(rotation, 0F, 1F, 0F);
         GlStateManager.rotate(180F, 0F, 1F, 0F);
 
-        GlStateManager.translate(0.0F, 1.0F, 1.5F);
+        GlStateManager.translate(0, onGround ? 1.0F : -0.0F, 1.5F);
 
         // open mouth
         if (onGround) {
@@ -306,7 +306,7 @@ public class TileEntityTFTrophyRenderer extends TileEntitySpecialRenderer<TileEn
         GlStateManager.rotate(rotation, 0F, 1F, 0F);
         GlStateManager.rotate(180F, 0F, 1F, 0F);
 
-        GlStateManager.translate(0, 1F, 0F);
+        GlStateManager.translate(0.0F, 1.0F, 0.0F);
 
         // render the head
         float ageInTicks = 0F;
