@@ -60,8 +60,8 @@ public class TileEntityTFTrophyRenderer extends TileEntitySpecialRenderer<TileEn
     private static final ResourceLocation textureLocQuestRam = TwilightForestMod.getModelTexture("questram.png");
     private static final ResourceLocation textureLocQuestRamLines = TwilightForestMod.getModelTexture("questram_lines.png");
 
-    private final ModelTFYetiAlpha eliteYetiModel = new ModelTFYetiAlpha();
-    private static final ResourceLocation textureLocEliteYeti = TwilightForestMod.getModelTexture("yetialpha.png");
+    //private final ModelTFYetiAlpha eliteYetiModel = new ModelTFYetiAlpha();
+    //private static final ResourceLocation textureLocEliteYeti = TwilightForestMod.getModelTexture("yetialpha.png");
 
 	/*private final ModelTFKobold finalKoboldModel = new ModelTFKobold();
 	private static final ResourceLocation textureLocFinalKobold = TwilightForestMod.getModelTexture("kobold.png");*/
@@ -208,9 +208,9 @@ public class TileEntityTFTrophyRenderer extends TileEntitySpecialRenderer<TileEn
             case FINAL_BOSS:
                 renderWroughtnautHead(rotation, onGround);
                 break;
-            case ELITE_YETI:
+            /*case ELITE_YETI:
                 renderEliteYetiHead(rotation, onGround);
-                break;
+                break;*/
             default:
                 break;
         }
@@ -463,7 +463,7 @@ public class TileEntityTFTrophyRenderer extends TileEntitySpecialRenderer<TileEn
         new ModelWroughtnaut().head.render(0.0625F);
     }
 
-    private void renderEliteYetiHead(float rotation, boolean onGround) {
+    /*private void renderEliteYetiHead(float rotation, boolean onGround) {
         GlStateManager.translate(0, 1, 0);
 
         this.bindTexture(textureLocEliteYeti);
@@ -478,5 +478,5 @@ public class TileEntityTFTrophyRenderer extends TileEntitySpecialRenderer<TileEn
 
         // render the head
         eliteYetiModel.bipedHead.render(0.0625F);
-    }
+    }*/
 }
