@@ -49,7 +49,7 @@ public class TConstruct {
                 new BowMaterialStats(0.7f, 1.5f, 7f),
                 new ArrowShaftMaterialStats(1.25f, 15)
         );
-        TinkerRegistry.integrate(new MaterialIntegration(TConstruct.ironwood, null, "Ironwood")).toolforge().preInit();
+        TinkerRegistry.integrate(new MaterialIntegration(TConstruct.ironwood, null, "Ironwood")).preInit();
 
         TinkerRegistry.addMaterialStats(TConstruct.steeleaf,
                 new HeadMaterialStats(180, 7f, 6f, HarvestLevels.OBSIDIAN),
@@ -59,7 +59,7 @@ public class TConstruct {
                 new ArrowShaftMaterialStats(0.6f, 10),
                 new FletchingMaterialStats(1f, 0.8f)
         );
-        TinkerRegistry.integrate(new MaterialIntegration(TConstruct.steeleaf, null, "Steeleaf")).toolforge().preInit();
+        TinkerRegistry.integrate(new MaterialIntegration(TConstruct.steeleaf, null, "Steeleaf")).preInit();
 
         TinkerRegistry.addMaterialStats(TConstruct.fierymetal,
                 new HeadMaterialStats(720, 7.2f, 6.6f, HarvestLevels.COBALT),
@@ -68,7 +68,7 @@ public class TConstruct {
                 new BowMaterialStats(1f, 0.9f, 4f),
                 new ArrowShaftMaterialStats(0.8f, 0)
         );
-        TinkerRegistry.integrate(new MaterialIntegration(TConstruct.fierymetal, RegisterBlockEvent.moltenFiery, "Fiery")).toolforge().preInit();
+        TinkerRegistry.integrate(new MaterialIntegration(TConstruct.fierymetal, RegisterBlockEvent.moltenFiery, "Fiery")).preInit();
 
         TinkerRegistry.addMaterialStats(TConstruct.knightmetal,
                 new HeadMaterialStats(900, 7f, 6f, HarvestLevels.COBALT),
