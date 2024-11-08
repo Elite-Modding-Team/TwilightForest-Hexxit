@@ -29,22 +29,16 @@ public class ComponentTFMazeRoomVault extends ComponentTFMazeRoom {
 	public boolean addComponentParts(World world, Random rand, StructureBoundingBox sbb) {
 		// fill room with bricks
 		fillWithBlocks(world, sbb, 0, 1, 0, 15, 4, 15, TFBlocks.maze_stone.getDefaultState().withProperty(BlockTFMazestone.VARIANT, MazestoneVariant.DECORATIVE), AIR, false);
-		fillWithBlocks(world, sbb, 0, 2, 0, 15, 3, 15, TFBlocks.maze_stone.getDefaultState().withProperty(BlockTFMazestone.VARIANT, MazestoneVariant.BRICK), AIR, false);
+		fillWithBlocks(world, sbb, 0, 2, 0, 15, 3, 15, TFBlocks.maze_stone.getDefaultState().withProperty(BlockTFMazestone.VARIANT, MazestoneVariant.CRACKED), AIR, false);
 
-		// 4x4 room in the middle
-		fillWithAir(world, sbb, 6, 2, 6, 9, 3, 9);
+		// 6x6x3 room in the middle
+		fillWithAir(world, sbb, 5, 2, 5, 10, 4, 10);
 
-		// pressure plates, sand & tnt
+		// pressure plates & tnt
 		fillWithBlocks(world, sbb, 6, 2, 5, 9, 2, 5, Blocks.WOODEN_PRESSURE_PLATE.getDefaultState(), AIR, false);
 		fillWithBlocks(world, sbb, 6, 2, 10, 9, 2, 10, Blocks.WOODEN_PRESSURE_PLATE.getDefaultState(), AIR, false);
 		fillWithBlocks(world, sbb, 5, 2, 6, 5, 2, 9, Blocks.WOODEN_PRESSURE_PLATE.getDefaultState(), AIR, false);
 		fillWithBlocks(world, sbb, 10, 2, 6, 10, 2, 9, Blocks.WOODEN_PRESSURE_PLATE.getDefaultState(), AIR, false);
-
-		// unfair sand
-		fillWithBlocks(world, sbb, 6, 4, 5, 9, 4, 5, Blocks.SAND.getDefaultState(), AIR, false);
-		fillWithBlocks(world, sbb, 6, 4, 10, 9, 4, 10, Blocks.SAND.getDefaultState(), AIR, false);
-		fillWithBlocks(world, sbb, 5, 4, 6, 5, 4, 9, Blocks.SAND.getDefaultState(), AIR, false);
-		fillWithBlocks(world, sbb, 10, 4, 6, 10, 4, 9, Blocks.SAND.getDefaultState(), AIR, false);
 
 		fillWithBlocks(world, sbb, 6, 0, 5, 9, 0, 5, Blocks.TNT.getDefaultState(), AIR, false);
 		fillWithBlocks(world, sbb, 6, 0, 10, 9, 0, 10, Blocks.TNT.getDefaultState(), AIR, false);
