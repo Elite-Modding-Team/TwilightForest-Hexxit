@@ -14,7 +14,7 @@ public class TraitStalwart extends AbstractTrait {
 
     @Override
     public void onHit(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damage, boolean isCritical) {
-        if (isCritical || random.nextInt(10) == 0)
-            player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 200));
+        if (isCritical || random.nextInt(5) == 0)
+            player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 200, 1));
     }
 }

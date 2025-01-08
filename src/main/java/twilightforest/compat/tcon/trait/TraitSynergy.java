@@ -36,9 +36,9 @@ public class TraitSynergy extends AbstractTrait {
                 if (i != itemSlot) {
                     ItemStack stack = playerInv.get(i);
                     if (stack.getItem() == TFItems.steeleaf_ingot) {
-                        healPower += stack.getCount();
+                        healPower += 1;
                     } else if (stack.getItem() == TFItems.block_storage && stack.getMetadata() == CompressedVariant.STEELLEAF.ordinal()) {
-                        healPower += stack.getCount() * 9;
+                        healPower += 2;
                     } else if (TFItemStackUtils.hasToolMaterial(stack, TFItems.TOOL_STEELEAF)) {
                         healPower += 1;
                     }
