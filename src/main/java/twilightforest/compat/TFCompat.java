@@ -153,7 +153,7 @@ public enum TFCompat {
             TConstruct.postInit();
         }
     },
-    CONSTRUCTSARMORY("Construct's Armory") {
+    CONARM("Construct's Armory") {
         @Override
         protected boolean preInit() {
             ConstructsArmory.preInit();
