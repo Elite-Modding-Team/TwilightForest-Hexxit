@@ -34,6 +34,7 @@ import twilightforest.TFSounds;
 import twilightforest.TwilightForestMod;
 import twilightforest.biomes.TFBiomes;
 import twilightforest.client.particle.TFParticleType;
+import twilightforest.entity.EntityTFTwilightWandBolt;
 import twilightforest.entity.IHostileMount;
 import twilightforest.entity.ai.EntityAITFThrowRider;
 import twilightforest.entity.ai.EntityAITFYetiRampage;
@@ -174,6 +175,16 @@ public class EntityTFYetiAlpha extends EntityMob implements IRangedAttackMob, IH
         }
     }
 
+    @Override
+    public boolean isPushedByWater() {
+        return false;
+    }
+
+    @Override
+    protected boolean canBeRidden(Entity entity) {
+        return false;
+    }
+
     // Immune to ice effects
     public boolean isPotionApplicable(PotionEffect effect) {
         return effect.getPotion() != TFPotions.frosty && effect.getPotion() != PotionHandler.FROZEN && super.isPotionApplicable(effect);
@@ -197,12 +208,18 @@ public class EntityTFYetiAlpha extends EntityMob implements IRangedAttackMob, IH
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
         // no arrow damage when in ranged mode
-        if (!this.canRampage && !this.isTired() && source.isProjectile()) {
+        if (!this.canRampage && !this.isTired() && source.isProjectile() || source.getTrueSource() instanceof EntityTFTwilightWandBolt) {
             return false;
         }
 
         this.canRampage = true;
-        return super.attackEntityFrom(source, amount);
+        boolean flag = super.attackEntityFrom(source, amount);
+
+        if (flag) {
+            this.canRampage = true;
+        }
+
+        return flag;
     }
 
     @Nullable

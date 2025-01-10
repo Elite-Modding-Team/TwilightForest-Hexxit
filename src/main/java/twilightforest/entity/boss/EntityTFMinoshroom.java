@@ -2,6 +2,7 @@ package twilightforest.entity.boss;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -159,6 +160,16 @@ public class EntityTFMinoshroom extends EntityTFMinotaur {
 
     @Override
     protected boolean canDespawn() {
+        return false;
+    }
+
+    @Override
+    public boolean isPushedByWater() {
+        return false;
+    }
+
+    @Override
+    protected boolean canBeRidden(Entity entity) {
         return false;
     }
 

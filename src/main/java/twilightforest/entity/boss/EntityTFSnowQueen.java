@@ -59,472 +59,479 @@ import com.bobmowzie.mowziesmobs.server.sound.MMSounds;
 
 public class EntityTFSnowQueen extends EntityMob implements IEntityMultiPart, IBreathAttacker {
 
-	public static final ResourceLocation LOOT_TABLE = TwilightForestMod.prefix("entities/snow_queen");
-	private static final int MAX_SUMMONS = 6;
-	private static final DataParameter<Boolean> BEAM_FLAG = EntityDataManager.createKey(EntityTFSnowQueen.class, DataSerializers.BOOLEAN);
-	private static final DataParameter<Byte> PHASE_FLAG = EntityDataManager.createKey(EntityTFSnowQueen.class, DataSerializers.BYTE);
-	private final BossInfoServer bossInfo = new BossInfoServer(getDisplayName(), BossInfo.Color.WHITE, BossInfo.Overlay.PROGRESS);
-	private static final int MAX_DAMAGE_WHILE_BEAMING = 25;
-	private static final float BREATH_DAMAGE = 4.0F;
+    public static final ResourceLocation LOOT_TABLE = TwilightForestMod.prefix("entities/snow_queen");
+    private static final int MAX_SUMMONS = 6;
+    private static final DataParameter<Boolean> BEAM_FLAG = EntityDataManager.createKey(EntityTFSnowQueen.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Byte> PHASE_FLAG = EntityDataManager.createKey(EntityTFSnowQueen.class, DataSerializers.BYTE);
+    private final BossInfoServer bossInfo = new BossInfoServer(getDisplayName(), BossInfo.Color.WHITE, BossInfo.Overlay.PROGRESS);
+    private static final int MAX_DAMAGE_WHILE_BEAMING = 25;
+    private static final float BREATH_DAMAGE = 4.0F;
 
-	public enum Phase {SUMMON, DROP, BEAM}
+    public enum Phase {SUMMON, DROP, BEAM}
 
-	public final Entity[] iceArray = new Entity[7];
+    public final Entity[] iceArray = new Entity[7];
 
-	private int summonsRemaining = 0;
-	private int successfulDrops;
-	private int maxDrops;
-	private int damageWhileBeaming;
+    private int summonsRemaining = 0;
+    private int successfulDrops;
+    private int maxDrops;
+    private int damageWhileBeaming;
 
-	public EntityTFSnowQueen(World world) {
-		super(world);
-		this.setSize(0.7F, 2.2F);
+    public EntityTFSnowQueen(World world) {
+        super(world);
+        this.setSize(0.7F, 2.2F);
 
-		for (int i = 0; i < this.iceArray.length; i++) {
-			this.iceArray[i] = new EntityTFSnowQueenIceShield(this);
-		}
+        for (int i = 0; i < this.iceArray.length; i++) {
+            this.iceArray[i] = new EntityTFSnowQueenIceShield(this);
+        }
 
-		this.setCurrentPhase(Phase.SUMMON);
+        this.setCurrentPhase(Phase.SUMMON);
 
-		this.isImmuneToFire = true;
-		this.experienceValue = 317;
-	}
+        this.isImmuneToFire = true;
+        this.experienceValue = 317;
+    }
 
-	@Override
-	protected void initEntityAI() {
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAITFHoverSummon(this, 1.0D));
-		this.tasks.addTask(2, new EntityAITFHoverThenDrop(this, 50, 10));
-		this.tasks.addTask(3, new EntityAITFHoverBeam(this, 60, 80));
-		this.tasks.addTask(6, new EntityAIAttackMelee(this, 1.0D, true));
-		this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		this.tasks.addTask(8, new EntityAILookIdle(this));
-		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
-	}
+    @Override
+    protected void initEntityAI() {
+        this.tasks.addTask(0, new EntityAISwimming(this));
+        this.tasks.addTask(1, new EntityAITFHoverSummon(this, 1.0D));
+        this.tasks.addTask(2, new EntityAITFHoverThenDrop(this, 50, 10));
+        this.tasks.addTask(3, new EntityAITFHoverBeam(this, 60, 80));
+        this.tasks.addTask(6, new EntityAIAttackMelee(this, 1.0D, true));
+        this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+        this.tasks.addTask(8, new EntityAILookIdle(this));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
+    }
 
-	@Override
-	public boolean canBePushed() {
-		return false;
-	}
+    @Override
+    public boolean canBePushed() {
+        return false;
+    }
 
-	@Override
-	protected void applyEntityAttributes() {
-		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23D);
-		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(7.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.75D);
-	}
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(7.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.75D);
+    }
 
-	@Override
-	protected void entityInit() {
-		super.entityInit();
-		dataManager.register(BEAM_FLAG, false);
-		dataManager.register(PHASE_FLAG, (byte) 0);
-	}
+    @Override
+    protected void entityInit() {
+        super.entityInit();
+        dataManager.register(BEAM_FLAG, false);
+        dataManager.register(PHASE_FLAG, (byte) 0);
+    }
 
-	@Override
-	protected SoundEvent getAmbientSound() {
-		return TFSounds.ICE_AMBIENT;
-	}
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return TFSounds.ICE_AMBIENT;
+    }
 
-	@Override
-	protected SoundEvent getHurtSound(DamageSource source) {
-		return TFSounds.ICE_HURT;
-	}
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return TFSounds.ICE_HURT;
+    }
 
-	@Override
-	protected SoundEvent getDeathSound() {
-		return TFSounds.ICE_DEATH;
-	}
+    @Override
+    protected SoundEvent getDeathSound() {
+        return TFSounds.ICE_DEATH;
+    }
 
-	@Override
-	public ResourceLocation getLootTable() {
-		return LOOT_TABLE;
-	}
+    @Override
+    public ResourceLocation getLootTable() {
+        return LOOT_TABLE;
+    }
 
-	@Override
-	public void onLivingUpdate() {
-		super.onLivingUpdate();
-		
-		if (isBreathing()) playSound(MMSounds.ENTITY_FROSTMAW_ICEBREATH_START, rand.nextFloat() * 0.75F, rand.nextFloat() * 1.5F);
-		if (!world.isRemote) {
-			bossInfo.setPercent(getHealth() / getMaxHealth());
-		} else {
-			spawnParticles();
-		}
-	}
+    @Override
+    public void onLivingUpdate() {
+        super.onLivingUpdate();
 
-	private void spawnParticles() {
-		// make snow particles
-		for (int i = 0; i < 3; i++) {
-			float px = (this.rand.nextFloat() - this.rand.nextFloat()) * 0.3F;
-			float py = this.getEyeHeight() + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.5F;
-			float pz = (this.rand.nextFloat() - this.rand.nextFloat()) * 0.3F;
+        if (isBreathing())
+            playSound(MMSounds.ENTITY_FROSTMAW_ICEBREATH_START, rand.nextFloat() * 0.75F, rand.nextFloat() * 1.5F);
+        if (!world.isRemote) {
+            bossInfo.setPercent(getHealth() / getMaxHealth());
+        } else {
+            spawnParticles();
+        }
+    }
 
-			TwilightForestMod.proxy.spawnParticle(TFParticleType.SNOW_GUARDIAN, this.lastTickPosX + px, this.lastTickPosY + py, this.lastTickPosZ + pz, 0, 0, 0);
-		}
+    private void spawnParticles() {
+        // make snow particles
+        for (int i = 0; i < 3; i++) {
+            float px = (this.rand.nextFloat() - this.rand.nextFloat()) * 0.3F;
+            float py = this.getEyeHeight() + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.5F;
+            float pz = (this.rand.nextFloat() - this.rand.nextFloat()) * 0.3F;
 
-		// during drop phase, all the ice blocks should make particles
-		if (this.getCurrentPhase() == Phase.DROP) {
-			for (Entity ice : this.iceArray) {
-				float px = (this.rand.nextFloat() - this.rand.nextFloat()) * 0.5F;
-				float py = (this.rand.nextFloat() - this.rand.nextFloat()) * 0.5F;
-				float pz = (this.rand.nextFloat() - this.rand.nextFloat()) * 0.5F;
+            TwilightForestMod.proxy.spawnParticle(TFParticleType.SNOW_GUARDIAN, this.lastTickPosX + px, this.lastTickPosY + py, this.lastTickPosZ + pz, 0, 0, 0);
+        }
 
-				TwilightForestMod.proxy.spawnParticle(TFParticleType.SNOW_WARNING, ice.lastTickPosX + px, ice.lastTickPosY + py, ice.lastTickPosZ + pz, 0, 0, 0);
-			}
-		}
+        // during drop phase, all the ice blocks should make particles
+        if (this.getCurrentPhase() == Phase.DROP) {
+            for (Entity ice : this.iceArray) {
+                float px = (this.rand.nextFloat() - this.rand.nextFloat()) * 0.5F;
+                float py = (this.rand.nextFloat() - this.rand.nextFloat()) * 0.5F;
+                float pz = (this.rand.nextFloat() - this.rand.nextFloat()) * 0.5F;
 
-		// when ice beaming, spew particles
-		if (isBreathing() && this.isEntityAlive()) {
-			Vec3d look = this.getLookVec();
+                TwilightForestMod.proxy.spawnParticle(TFParticleType.SNOW_WARNING, ice.lastTickPosX + px, ice.lastTickPosY + py, ice.lastTickPosZ + pz, 0, 0, 0);
+            }
+        }
 
-			double dist = 0.5;
-			double px = this.posX + look.x * dist;
-			double py = this.posY + 1.7F + look.y * dist;
-			double pz = this.posZ + look.z * dist;
+        // when ice beaming, spew particles
+        if (isBreathing() && this.isEntityAlive()) {
+            Vec3d look = this.getLookVec();
 
-			for (int i = 0; i < 10; i++) {
-				double dx = look.x;
-				double dy = 0;//look.y;
-				double dz = look.z;
+            double dist = 0.5;
+            double px = this.posX + look.x * dist;
+            double py = this.posY + 1.7F + look.y * dist;
+            double pz = this.posZ + look.z * dist;
 
-				double spread = 2 + this.getRNG().nextDouble() * 2.5;
-				double velocity = 2.0 + this.getRNG().nextDouble() * 0.15;
+            for (int i = 0; i < 10; i++) {
+                double dx = look.x;
+                double dy = 0;//look.y;
+                double dz = look.z;
 
-				// beeeam
-				dx += this.getRNG().nextGaussian() * 0.0075D * spread;
-				dy += this.getRNG().nextGaussian() * 0.0075D * spread;
-				dz += this.getRNG().nextGaussian() * 0.0075D * spread;
-				dx *= velocity;
-				dy *= velocity;
-				dz *= velocity;
+                double spread = 2 + this.getRNG().nextDouble() * 2.5;
+                double velocity = 2.0 + this.getRNG().nextDouble() * 0.15;
 
-				TwilightForestMod.proxy.spawnParticle(TFParticleType.ICE_BEAM, px, py, pz, dx, dy, dz);
-			}
-		}
-	}
+                // beeeam
+                dx += this.getRNG().nextGaussian() * 0.0075D * spread;
+                dy += this.getRNG().nextGaussian() * 0.0075D * spread;
+                dz += this.getRNG().nextGaussian() * 0.0075D * spread;
+                dx *= velocity;
+                dy *= velocity;
+                dz *= velocity;
 
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		
-		for (int i = 0; i < this.iceArray.length; i++) {
+                TwilightForestMod.proxy.spawnParticle(TFParticleType.ICE_BEAM, px, py, pz, dx, dy, dz);
+            }
+        }
+    }
 
-			this.iceArray[i].onUpdate();
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
 
-			if (i < this.iceArray.length - 1) {
-				// set block position
-				Vec3d blockPos = this.getIceShieldPosition(i);
+        for (int i = 0; i < this.iceArray.length; i++) {
 
-				this.iceArray[i].setPosition(blockPos.x, blockPos.y, blockPos.z);
-				this.iceArray[i].rotationYaw = this.getIceShieldAngle(i);
-			} else {
-				// last block beneath
-				this.iceArray[i].setPosition(this.posX, this.posY - 1, this.posZ);
-				this.iceArray[i].rotationYaw = this.getIceShieldAngle(i);
-			}
+            this.iceArray[i].onUpdate();
 
-			// collide things with the block
-			if (!world.isRemote) {
-				this.applyShieldCollisions(this.iceArray[i]);
-			}
-		}
+            if (i < this.iceArray.length - 1) {
+                // set block position
+                Vec3d blockPos = this.getIceShieldPosition(i);
 
-		// death animation
-		if (deathTime > 0) {
-			for (int k = 0; k < 5; k++) {
-				double d = rand.nextGaussian() * 0.02D;
-				double d1 = rand.nextGaussian() * 0.02D;
-				double d2 = rand.nextGaussian() * 0.02D;
-				EnumParticleTypes explosionType = rand.nextBoolean() ? EnumParticleTypes.EXPLOSION_HUGE : EnumParticleTypes.EXPLOSION_NORMAL;
+                this.iceArray[i].setPosition(blockPos.x, blockPos.y, blockPos.z);
+                this.iceArray[i].rotationYaw = this.getIceShieldAngle(i);
+            } else {
+                // last block beneath
+                this.iceArray[i].setPosition(this.posX, this.posY - 1, this.posZ);
+                this.iceArray[i].rotationYaw = this.getIceShieldAngle(i);
+            }
 
-				world.spawnParticle(explosionType, (posX + rand.nextFloat() * width * 2.0F) - width, posY + rand.nextFloat() * height, (posZ + rand.nextFloat() * width * 2.0F) - width, d, d1, d2);
-			}
-		}
-	}
+            // collide things with the block
+            if (!world.isRemote) {
+                this.applyShieldCollisions(this.iceArray[i]);
+            }
+        }
 
-	@Override
-	protected boolean canDespawn() {
-		return false;
-	}
+        // death animation
+        if (deathTime > 0) {
+            for (int k = 0; k < 5; k++) {
+                double d = rand.nextGaussian() * 0.02D;
+                double d1 = rand.nextGaussian() * 0.02D;
+                double d2 = rand.nextGaussian() * 0.02D;
+                EnumParticleTypes explosionType = rand.nextBoolean() ? EnumParticleTypes.EXPLOSION_HUGE : EnumParticleTypes.EXPLOSION_NORMAL;
 
-	@Override
-	protected void despawnEntity() {
-		if (world.getDifficulty() == EnumDifficulty.PEACEFUL) {
-			if (hasHome()) {
-				world.setBlockState(getHomePosition(), TFBlocks.boss_spawner.getDefaultState().withProperty(BlockTFBossSpawner.VARIANT, BossVariant.SNOW_QUEEN));
-			}
-			setDead();
-		} else {
-			super.despawnEntity();
-		}
-	}
+                world.spawnParticle(explosionType, (posX + rand.nextFloat() * width * 2.0F) - width, posY + rand.nextFloat() * height, (posZ + rand.nextFloat() * width * 2.0F) - width, d, d1, d2);
+            }
+        }
+    }
 
-	@Override
-	public void onDeath(DamageSource cause) {
-		super.onDeath(cause);
-		// mark the tower as defeated
-		if (!world.isRemote) {
-			this.bossInfo.setPercent(0.0F);
-			TFWorld.markStructureConquered(world, new BlockPos(this), TFFeature.ICE_TOWER);
-		}
-	}
+    @Override
+    protected boolean canDespawn() {
+        return false;
+    }
 
-	// Immune to ice effects
-	@Override
-	public boolean isPotionApplicable(PotionEffect effect) {
-		return effect.getPotion() != TFPotions.frosty && effect.getPotion() != PotionHandler.FROZEN && super.isPotionApplicable(effect);
-	}
+    @Override
+    public boolean isPushedByWater() {
+        return false;
+    }
 
-	private void applyShieldCollisions(Entity collider) {
-		List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(collider, collider.getEntityBoundingBox().grow(-0.2F, -0.2F, -0.2F));
+    @Override
+    protected boolean canBeRidden(Entity entity) {
+        return false;
+    }
 
-		for (Entity collided : list) {
-			if (collided.canBePushed()) {
-				applyShieldCollision(collider, collided);
-			}
-		}
-	}
+    @Override
+    protected void despawnEntity() {
+        if (world.getDifficulty() == EnumDifficulty.PEACEFUL) {
+            if (hasHome()) {
+                world.setBlockState(getHomePosition(), TFBlocks.boss_spawner.getDefaultState().withProperty(BlockTFBossSpawner.VARIANT, BossVariant.SNOW_QUEEN));
+            }
+            setDead();
+        } else {
+            super.despawnEntity();
+        }
+    }
 
-	/**
-	 * Do the effect where the shield hits something
-	 */
-	private void applyShieldCollision(Entity collider, Entity collided) {
-		if (collided != this) {
-			collided.applyEntityCollision(collider);
-			if (collided instanceof EntityLivingBase && super.attackEntityAsMob(collided)) {
-				((EntityLivingBase)collided).knockBack(collided, 1.5F * 0.5F, (double)MathHelper.sin(this.rotationYaw * ((float)Math.PI / 180.0F)), (double)(-MathHelper.cos(this.rotationYaw * ((float)Math.PI / 180.0F))));
-				this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_KNOCKBACK, 1.0F, 1.0F);
-				this.playSound(MMSounds.EFFECT_GEOMANCY_HIT_SMALL, 1.0F, 1.0F);
-			}
-		}
-	}
+    @Override
+    public void onDeath(DamageSource cause) {
+        super.onDeath(cause);
+        // mark the tower as defeated
+        if (!world.isRemote) {
+            this.bossInfo.setPercent(0.0F);
+            TFWorld.markStructureConquered(world, new BlockPos(this), TFFeature.ICE_TOWER);
+        }
+    }
 
-	@Override
-	protected void updateAITasks() {
-		super.updateAITasks();
+    // Immune to ice effects
+    @Override
+    public boolean isPotionApplicable(PotionEffect effect) {
+        return effect.getPotion() != TFPotions.frosty && effect.getPotion() != PotionHandler.FROZEN && super.isPotionApplicable(effect);
+    }
 
-		// switch phases
-		if (this.getCurrentPhase() == Phase.SUMMON && this.getSummonsRemaining() == 0 && this.countMyMinions() <= 0) {
-			this.setCurrentPhase(Phase.DROP);
-		}
-		if (this.getCurrentPhase() == Phase.DROP && this.successfulDrops >= this.maxDrops) {
-			this.setCurrentPhase(Phase.BEAM);
-		}
-		if (this.getCurrentPhase() == Phase.BEAM && this.damageWhileBeaming >= MAX_DAMAGE_WHILE_BEAMING) {
-			this.setCurrentPhase(Phase.SUMMON);
-		}
-	}
+    private void applyShieldCollisions(Entity collider) {
+        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(collider, collider.getEntityBoundingBox().grow(-0.2F, -0.2F, -0.2F));
 
-	@Override
-	public boolean attackEntityFrom(DamageSource source, float damage) {
-		boolean result = super.attackEntityFrom(source, damage);
+        for (Entity collided : list) {
+            if (collided.canBePushed()) {
+                applyShieldCollision(collider, collided);
+            }
+        }
+    }
 
-		if (result && this.getCurrentPhase() == Phase.BEAM) {
-			this.damageWhileBeaming += damage;
-		}
-		
-		Entity entity = source.getTrueSource();
-		
-		if (entity != null && entity instanceof EntityLivingBase && ((EntityLivingBase)entity).isOnSameTeam(this)) {
+    /**
+     * Do the effect where the shield hits something
+     */
+    private void applyShieldCollision(Entity collider, Entity collided) {
+        if (collided != this) {
+            collided.applyEntityCollision(collider);
+            if (collided instanceof EntityLivingBase && super.attackEntityAsMob(collided)) {
+                ((EntityLivingBase) collided).knockBack(collided, 1.5F * 0.5F, (double) MathHelper.sin(this.rotationYaw * ((float) Math.PI / 180.0F)), (double) (-MathHelper.cos(this.rotationYaw * ((float) Math.PI / 180.0F))));
+                this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_KNOCKBACK, 1.0F, 1.0F);
+                this.playSound(MMSounds.EFFECT_GEOMANCY_HIT_SMALL, 1.0F, 1.0F);
+            }
+        }
+    }
+
+    @Override
+    protected void updateAITasks() {
+        super.updateAITasks();
+
+        // switch phases
+        if (this.getCurrentPhase() == Phase.SUMMON && this.getSummonsRemaining() == 0 && this.countMyMinions() <= 0) {
+            this.setCurrentPhase(Phase.DROP);
+        }
+        if (this.getCurrentPhase() == Phase.DROP && this.successfulDrops >= this.maxDrops) {
+            this.setCurrentPhase(Phase.BEAM);
+        }
+        if (this.getCurrentPhase() == Phase.BEAM && this.damageWhileBeaming >= MAX_DAMAGE_WHILE_BEAMING) {
+            this.setCurrentPhase(Phase.SUMMON);
+        }
+    }
+
+    @Override
+    public boolean attackEntityFrom(DamageSource source, float damage) {
+        boolean result = super.attackEntityFrom(source, damage);
+
+        if (result && this.getCurrentPhase() == Phase.BEAM) {
+            this.damageWhileBeaming += damage;
+        }
+
+        Entity entity = source.getTrueSource();
+
+        if (entity != null && entity instanceof EntityLivingBase && ((EntityLivingBase) entity).isOnSameTeam(this)) {
             return false;
         }
 
-		return result;
+        return result;
 
-	}
-	
-	private Vec3d getIceShieldPosition(int idx) {
-		return this.getIceShieldPosition(getIceShieldAngle(idx), 1F);
-	}
+    }
 
-	private float getIceShieldAngle(int idx) {
-		return 60F * idx + (this.ticksExisted * 5F);
-	}
+    private Vec3d getIceShieldPosition(int idx) {
+        return this.getIceShieldPosition(getIceShieldAngle(idx), 1F);
+    }
 
-	private Vec3d getIceShieldPosition(float angle, float distance) {
-		double dx = Math.cos((angle) * Math.PI / 180.0D) * distance;
-		double dz = Math.sin((angle) * Math.PI / 180.0D) * distance;
+    private float getIceShieldAngle(int idx) {
+        return 60F * idx + (this.ticksExisted * 5F);
+    }
 
-		return new Vec3d(this.posX + dx, this.posY + this.getShieldYOffset(), this.posZ + dz);
-	}
+    private Vec3d getIceShieldPosition(float angle, float distance) {
+        double dx = Math.cos((angle) * Math.PI / 180.0D) * distance;
+        double dz = Math.sin((angle) * Math.PI / 180.0D) * distance;
 
-	private double getShieldYOffset() {
-		return 0.1F;
-	}
+        return new Vec3d(this.posX + dx, this.posY + this.getShieldYOffset(), this.posZ + dz);
+    }
 
-	@Override
-	public void fall(float distance, float damageMultiplier) {
-	}
+    private double getShieldYOffset() {
+        return 0.1F;
+    }
 
-	@Override
-	public World getWorld() {
-		return this.world;
-	}
+    @Override
+    public void fall(float distance, float damageMultiplier) {
+    }
 
-	@Override
-	public boolean attackEntityFromPart(MultiPartEntityPart part, DamageSource source, float damage) {
-		return false;
-	}
+    @Override
+    public World getWorld() {
+        return this.world;
+    }
 
-	/**
-	 * We need to do this for the bounding boxes on the parts to become active
-	 */
-	@Override
-	public Entity[] getParts() {
-		return iceArray;
-	}
+    @Override
+    public boolean attackEntityFromPart(MultiPartEntityPart part, DamageSource source, float damage) {
+        return false;
+    }
 
-	public void destroyBlocksInAABB(AxisAlignedBB box) {
-		if (ForgeEventFactory.getMobGriefingEvent(world, this)) {
-			for (BlockPos pos : WorldUtil.getAllInBB(box)) {
-				IBlockState state = world.getBlockState(pos);
-				if (state.getBlock() == Blocks.ICE || state.getBlock() == Blocks.PACKED_ICE) {
-					world.destroyBlock(pos, false);
-				}
-			}
-		}
-	}
+    /**
+     * We need to do this for the bounding boxes on the parts to become active
+     */
+    @Override
+    public Entity[] getParts() {
+        return iceArray;
+    }
 
-	@Override
-	public boolean isBreathing() {
-		return dataManager.get(BEAM_FLAG);
-	}
+    public void destroyBlocksInAABB(AxisAlignedBB box) {
+        if (ForgeEventFactory.getMobGriefingEvent(world, this)) {
+            for (BlockPos pos : WorldUtil.getAllInBB(box)) {
+                IBlockState state = world.getBlockState(pos);
+                if (state.getBlock() == Blocks.ICE || state.getBlock() == Blocks.PACKED_ICE) {
+                    world.destroyBlock(pos, false);
+                }
+            }
+        }
+    }
 
-	@Override
-	public void setBreathing(boolean flag) {
-		dataManager.set(BEAM_FLAG, flag);
-	}
+    @Override
+    public boolean isBreathing() {
+        return dataManager.get(BEAM_FLAG);
+    }
 
-	public Phase getCurrentPhase() {
-		return Phase.values()[dataManager.get(PHASE_FLAG)];
-	}
+    @Override
+    public void setBreathing(boolean flag) {
+        dataManager.set(BEAM_FLAG, flag);
+    }
 
-	public void setCurrentPhase(Phase currentPhase) {
-		dataManager.set(PHASE_FLAG, (byte) currentPhase.ordinal());
+    public Phase getCurrentPhase() {
+        return Phase.values()[dataManager.get(PHASE_FLAG)];
+    }
 
-		// set variables for current phase
-		if (currentPhase == Phase.SUMMON) {
-			this.setSummonsRemaining(MAX_SUMMONS);
-		}
-		if (currentPhase == Phase.DROP) {
-			this.successfulDrops = 0;
-			this.maxDrops = 2 + this.rand.nextInt(3);
-		}
-		if (currentPhase == Phase.BEAM) {
-			this.damageWhileBeaming = 0;
-		}
-	}
+    public void setCurrentPhase(Phase currentPhase) {
+        dataManager.set(PHASE_FLAG, (byte) currentPhase.ordinal());
 
-	public int getSummonsRemaining() {
-		return summonsRemaining;
-	}
+        // set variables for current phase
+        if (currentPhase == Phase.SUMMON) {
+            this.setSummonsRemaining(MAX_SUMMONS);
+        }
+        if (currentPhase == Phase.DROP) {
+            this.successfulDrops = 0;
+            this.maxDrops = 2 + this.rand.nextInt(3);
+        }
+        if (currentPhase == Phase.BEAM) {
+            this.damageWhileBeaming = 0;
+        }
+    }
 
-	public void setSummonsRemaining(int summonsRemaining) {
-		this.summonsRemaining = summonsRemaining;
-	}
+    public int getSummonsRemaining() {
+        return summonsRemaining;
+    }
 
-	public void summonMinionAt(EntityLivingBase targetedEntity) {
-		EntityTFIceCrystal minion = new EntityTFIceCrystal(world);
-		minion.setPositionAndRotation(posX, posY, posZ, 0, 0);
+    public void setSummonsRemaining(int summonsRemaining) {
+        this.summonsRemaining = summonsRemaining;
+    }
 
-		world.spawnEntity(minion);
-		this.playSound(MMSounds.ENTITY_FROSTMAW_ICEBALL_SHOOT, 1.0F, 0.75F);
-		this.playSound(MMSounds.ENTITY_FROSTMAW_FROZEN_CRASH, 0.8F, 1.5F);
+    public void summonMinionAt(EntityLivingBase targetedEntity) {
+        EntityTFIceCrystal minion = new EntityTFIceCrystal(world);
+        minion.setPositionAndRotation(posX, posY, posZ, 0, 0);
 
-		for (int i = 0; i < 100; i++) {
-			double attemptX;
-			double attemptY;
-			double attemptZ;
-			if (hasHome()) {
-				BlockPos home = getHomePosition();
-				attemptX = home.getX() + rand.nextGaussian() * 7D;
-				attemptY = home.getY() + rand.nextGaussian() * 2D;
-				attemptZ = home.getZ() + rand.nextGaussian() * 7D;
-			} else {
-				attemptX = targetedEntity.posX + rand.nextGaussian() * 16D;
-				attemptY = targetedEntity.posY + rand.nextGaussian() * 8D;
-				attemptZ = targetedEntity.posZ + rand.nextGaussian() * 16D;
-			}
-			if (minion.attemptTeleport(attemptX, attemptY, attemptZ)) {
-				break;
-			}
-		}
+        world.spawnEntity(minion);
+        this.playSound(MMSounds.ENTITY_FROSTMAW_ICEBALL_SHOOT, 1.0F, 0.75F);
+        this.playSound(MMSounds.ENTITY_FROSTMAW_FROZEN_CRASH, 0.8F, 1.5F);
 
-		minion.setAttackTarget(targetedEntity);
-		minion.setToDieIn10Seconds(); // don't stick around
+        for (int i = 0; i < 100; i++) {
+            double attemptX;
+            double attemptY;
+            double attemptZ;
+            if (hasHome()) {
+                BlockPos home = getHomePosition();
+                attemptX = home.getX() + rand.nextGaussian() * 7D;
+                attemptY = home.getY() + rand.nextGaussian() * 2D;
+                attemptZ = home.getZ() + rand.nextGaussian() * 7D;
+            } else {
+                attemptX = targetedEntity.posX + rand.nextGaussian() * 16D;
+                attemptY = targetedEntity.posY + rand.nextGaussian() * 8D;
+                attemptZ = targetedEntity.posZ + rand.nextGaussian() * 16D;
+            }
+            if (minion.attemptTeleport(attemptX, attemptY, attemptZ)) {
+                break;
+            }
+        }
 
-		this.summonsRemaining--;
-	}
+        minion.setAttackTarget(targetedEntity);
+        minion.setToDieIn10Seconds(); // don't stick around
 
-	public int countMyMinions() {
-		return world.getEntitiesWithinAABB(EntityTFIceCrystal.class, new AxisAlignedBB(posX, posY, posZ, posX + 1, posY + 1, posZ + 1).grow(32.0D, 16.0D, 32.0D)).size();
-	}
+        this.summonsRemaining--;
+    }
 
-	public void incrementSuccessfulDrops() {
-		this.successfulDrops++;
-	}
+    public int countMyMinions() {
+        return world.getEntitiesWithinAABB(EntityTFIceCrystal.class, new AxisAlignedBB(posX, posY, posZ, posX + 1, posY + 1, posZ + 1).grow(32.0D, 16.0D, 32.0D)).size();
+    }
 
-	@Override
-	public void doBreathAttack(Entity target) {
-		target.attackEntityFrom(DamageSource.causeMobDamage(this), BREATH_DAMAGE);
-		
-		if (target instanceof EntityLivingBase) {
-			((EntityLivingBase)target).addPotionEffect(new PotionEffect(TFPotions.frosty, 7 * 20, 4)); // 7 seconds
-			((EntityLivingBase)target).addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 7 * 20, 3)); // 7 seconds
-		}
-	}
+    public void incrementSuccessfulDrops() {
+        this.successfulDrops++;
+    }
 
-	@Override
-	public void setCustomNameTag(String name) {
-		super.setCustomNameTag(name);
-		this.bossInfo.setName(this.getDisplayName());
-	}
+    @Override
+    public void doBreathAttack(Entity target) {
+        target.attackEntityFrom(DamageSource.causeMobDamage(this), BREATH_DAMAGE);
 
-	@Override
-	public void addTrackingPlayer(EntityPlayerMP player) {
-		super.addTrackingPlayer(player);
-		this.bossInfo.addPlayer(player);
-	}
+        if (target instanceof EntityLivingBase) {
+            ((EntityLivingBase) target).addPotionEffect(new PotionEffect(TFPotions.frosty, 7 * 20, 4)); // 7 seconds
+            ((EntityLivingBase) target).addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 7 * 20, 3)); // 7 seconds
+        }
+    }
 
-	@Override
-	public void removeTrackingPlayer(EntityPlayerMP player) {
-		super.removeTrackingPlayer(player);
-		this.bossInfo.removePlayer(player);
-	}
+    @Override
+    public void setCustomNameTag(String name) {
+        super.setCustomNameTag(name);
+        this.bossInfo.setName(this.getDisplayName());
+    }
 
-	@Override
-	public void readEntityFromNBT(NBTTagCompound compound) {
-		super.readEntityFromNBT(compound);
-		if (this.hasCustomName())
-			this.bossInfo.setName(this.getDisplayName());
-	}
-	
-	@Override
-	public boolean isOnSameTeam(Entity entity) {
+    @Override
+    public void addTrackingPlayer(EntityPlayerMP player) {
+        super.addTrackingPlayer(player);
+        this.bossInfo.addPlayer(player);
+    }
+
+    @Override
+    public void removeTrackingPlayer(EntityPlayerMP player) {
+        super.removeTrackingPlayer(player);
+        this.bossInfo.removePlayer(player);
+    }
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound compound) {
+        super.readEntityFromNBT(compound);
+        if (this.hasCustomName())
+            this.bossInfo.setName(this.getDisplayName());
+    }
+
+    @Override
+    public boolean isOnSameTeam(Entity entity) {
         if (entity == null) {
             return false;
-        }
-        else if (entity == this) {
+        } else if (entity == this) {
             return true;
-        }
-        else if (super.isOnSameTeam(entity)) {
+        } else if (super.isOnSameTeam(entity)) {
             return true;
-        }
-        else if (entity instanceof EntityTFSnowQueen || entity instanceof EntityTFIceMob) {
+        } else if (entity instanceof EntityTFSnowQueen || entity instanceof EntityTFIceMob) {
             return this.getTeam() == null && entity.getTeam() == null;
-        }
-        else {
+        } else {
             return false;
         }
     }
 
-	@Override
-	public boolean isNonBoss() {
-		return false;
-	}
+    @Override
+    public boolean isNonBoss() {
+        return false;
+    }
 }

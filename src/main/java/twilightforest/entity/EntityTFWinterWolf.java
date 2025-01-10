@@ -1,8 +1,10 @@
 package twilightforest.entity;
 
 import com.bobmowzie.mowziesmobs.server.potion.PotionHandler;
+import com.bobmowzie.mowziesmobs.server.sound.MMSounds;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -10,7 +12,7 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -110,7 +112,7 @@ public class EntityTFWinterWolf extends EntityTFHostileWolf implements IBreathAt
 	}
 
 	private void playBreathSound() {
-		playSound(SoundEvents.ENTITY_GHAST_SHOOT, rand.nextFloat() * 0.5F, rand.nextFloat() * 0.5F);
+		playSound(MMSounds.ENTITY_FROSTMAW_ICEBREATH_START, rand.nextFloat() * 0.75F, rand.nextFloat() * 1.5F);
 	}
 
 	@Override
@@ -131,6 +133,11 @@ public class EntityTFWinterWolf extends EntityTFHostileWolf implements IBreathAt
 	@Override
 	public void doBreathAttack(Entity target) {
 		target.attackEntityFrom(DamageSource.causeMobDamage(this), BREATH_DAMAGE);
+		
+		if (target instanceof EntityLivingBase) {
+			((EntityLivingBase)target).addPotionEffect(new PotionEffect(TFPotions.frosty, 5 * 20, 2)); // 5 seconds
+			((EntityLivingBase)target).addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 5 * 20, 1)); // 5 seconds
+		}
 	}
 
 	@Override

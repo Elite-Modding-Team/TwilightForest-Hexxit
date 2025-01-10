@@ -80,12 +80,12 @@ public class EntityAITFYetiRampage extends EntityAIBase {
 		this.yeti.destroyBlocksInAABB(this.yeti.getEntityBoundingBox().grow(1, 2, 1).offset(0, 2, 0));
 
 		// regular falling blocks
-		if (this.currentDuration % 20 == 0) {
+		if (this.currentDuration % 10 == 0) {
 			this.yeti.makeRandomBlockFall();
 		}
 
 		// blocks target players
-		if (this.currentDuration % 40 == 0) {
+		if (this.currentDuration % 20 == 0) {
 			this.yeti.makeBlockAboveTargetFall();
 		}
 

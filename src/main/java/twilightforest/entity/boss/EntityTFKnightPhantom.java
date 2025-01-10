@@ -156,6 +156,16 @@ public class EntityTFKnightPhantom extends EntityFlying implements IMob {
     }
 
     @Override
+    public boolean isPushedByWater() {
+        return false;
+    }
+
+    @Override
+    protected boolean canBeRidden(Entity entity) {
+        return false;
+    }
+
+    @Override
     public boolean isEntityInvulnerable(DamageSource src) {
         return src == DamageSource.IN_WALL || super.isEntityInvulnerable(src);
     }

@@ -176,6 +176,11 @@ public class EntityTFLich extends EntityMob {
     }
 
     @Override
+    public boolean isPushedByWater() {
+        return false;
+    }
+
+    @Override
     protected void despawnEntity() {
         if (world.getDifficulty() == EnumDifficulty.PEACEFUL && !isShadowClone()) {
             if (hasHome()) {
