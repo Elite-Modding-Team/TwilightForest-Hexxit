@@ -41,7 +41,7 @@ public class TConstruct {
                 new ArrowShaftMaterialStats(1.4f, 20)
         );
         TinkerRegistry.integrate(TConstruct.nagascale).preInit();
-        
+
         TinkerRegistry.addMaterialStats(TConstruct.ironwood,
                 new HeadMaterialStats(450, 6f, 5f, HarvestLevels.DIAMOND),
                 new HandleMaterialStats(1.1f, 100),
@@ -82,7 +82,7 @@ public class TConstruct {
                 new FletchingMaterialStats(0.95f, 1.15f)
         );
         TinkerRegistry.integrate(TConstruct.ravenFeather).preInit();
-        
+
         TinkerRegistry.addMaterialStats(TConstruct.regal,
                 new HeadMaterialStats(950, 8f, 7f, HarvestLevels.COBALT),
                 new HandleMaterialStats(1.3f, 200),
@@ -100,22 +100,26 @@ public class TConstruct {
     static void init() {
         TConstruct.nagascale.addItem(TFItems.naga_scale, 1, Material.VALUE_Ingot);
         TConstruct.nagascale
+                .addTrait(TConstruct.twilit, MaterialTypes.HEAD)
                 .addTrait(TConstruct.twilit)
                 .addTrait(TConstruct.precipitate, MaterialTypes.HEAD)
                 .addTrait(TConstruct.precipitate)
                 .setCraftable(true).setCastable(false)
                 .setRepresentativeItem(TFItems.naga_scale);
-        
+
         TConstruct.ironwood.addCommonItems("Ironwood");
         TConstruct.ironwood
+                .addTrait(TConstruct.twilit, MaterialTypes.HEAD)
                 .addTrait(TConstruct.twilit)
                 .addTrait(TinkerTraits.stiff, MaterialTypes.HEAD)
+                .addTrait(TinkerTraits.ecological, MaterialTypes.HEAD)
                 .addTrait(TinkerTraits.ecological)
                 .setCraftable(true).setCastable(false)
                 .setRepresentativeItem(TFItems.ironwood_ingot);
 
         TConstruct.steeleaf.addCommonItems("Steeleaf");
         TConstruct.steeleaf
+                .addTrait(TConstruct.twilit, MaterialTypes.HEAD)
                 .addTrait(TConstruct.twilit)
                 .addTrait(TConstruct.synergy, MaterialTypes.HEAD)
                 .addTrait(TConstruct.synergy)
@@ -125,6 +129,7 @@ public class TConstruct {
         TConstruct.fierymetal.addCommonItems("Fiery");
         TConstruct.fierymetal
                 .addTrait(TinkerTraits.superheat)
+                .addTrait(TConstruct.twilit, MaterialTypes.HEAD)
                 .addTrait(TConstruct.twilit)
                 .addTrait(TinkerTraits.autosmelt, MaterialTypes.HEAD)
                 //.addTrait(TinkerTraits.superheat, MaterialTypes.HEAD)
@@ -136,6 +141,7 @@ public class TConstruct {
         TConstruct.knightmetal.addItem(TFItems.armor_shard, 1, Material.VALUE_Nugget);
         TConstruct.knightmetal.addItem(TFItems.block_and_chain, 1, (Material.VALUE_Ingot * 7) + Material.VALUE_Block);
         TConstruct.knightmetal
+                .addTrait(TConstruct.twilit, MaterialTypes.HEAD)
                 .addTrait(TConstruct.twilit)
                 .addTrait(TConstruct.stalwart, MaterialTypes.HEAD)
                 .addTrait(TConstruct.stalwart)
@@ -144,15 +150,17 @@ public class TConstruct {
 
         TConstruct.ravenFeather.addItem(TFItems.raven_feather, 1, Material.VALUE_Ingot);
         TConstruct.ravenFeather
+                .addTrait(TConstruct.twilit, MaterialTypes.HEAD)
                 .addTrait(TConstruct.twilit)
                 .addTrait(TConstruct.veiled, MaterialTypes.HEAD)
                 .addTrait(TConstruct.veiled)
                 .setCraftable(true).setCastable(false)
                 .setRepresentativeItem(TFItems.raven_feather);
-        
+
         TConstruct.regal.addCommonItems("Regal");
         TConstruct.regal.addItem(TFItems.regal_shard, 1, Material.VALUE_Nugget);
         TConstruct.regal
+                .addTrait(TConstruct.twilit, MaterialTypes.HEAD)
                 .addTrait(TConstruct.twilit)
                 .addTrait(TinkerTraits.shocking, MaterialTypes.HEAD)
                 .addTrait(TinkerTraits.shocking)
@@ -162,8 +170,8 @@ public class TConstruct {
 
     static void postInit() {
         TinkerRegistry.registerSmelteryFuel(new FluidStack(RegisterBlockEvent.essenceFiery, 50), 1000);
-        
-    	TinkerRegistry.registerMelting(TFItems.fiery_blood, RegisterBlockEvent.essenceFiery, Material.VALUE_Ingot);
-    	TinkerRegistry.registerMelting(TFItems.fiery_tears, RegisterBlockEvent.essenceFiery, Material.VALUE_Ingot);
+
+        TinkerRegistry.registerMelting(TFItems.fiery_blood, RegisterBlockEvent.essenceFiery, Material.VALUE_Ingot);
+        TinkerRegistry.registerMelting(TFItems.fiery_tears, RegisterBlockEvent.essenceFiery, Material.VALUE_Ingot);
     }
 }

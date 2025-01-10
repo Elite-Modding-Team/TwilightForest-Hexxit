@@ -38,9 +38,9 @@ public class TraitSynergy extends AbstractTrait {
                     if (stack.getItem() == TFItems.steeleaf_ingot) {
                         healPower += 1;
                     } else if (stack.getItem() == TFItems.block_storage && stack.getMetadata() == CompressedVariant.STEELLEAF.ordinal()) {
-                        healPower += 2;
+                        healPower += 9;
                     } else if (TFItemStackUtils.hasToolMaterial(stack, TFItems.TOOL_STEELEAF)) {
-                        healPower += 1;
+                        healPower += 2;
                     }
                 }
             }

@@ -859,13 +859,13 @@ material.raven_feather.name=Raven Feather
 material.regal.name=Regal
 
 modifier.twilit.name=Twilit
-modifier.twilit.desc=§oThe Twilight Forest's illuminating blessing.§r\nStronger inside the Twilight Forest.\Weaker outside the Twilight Forest.
-modifier.twilit.extra.inside=Mining Speed and Damage inside the Twilight Forest: +%s
-modifier.twilit.extra.outside=Mining Speed and Damage outside the Twilight Forest: +%s
+modifier.twilit.desc=§oThe Twilight Forest's illuminating blessing.§r\nMining speed and damage is increased. The boost is stronger inside the Twilight Forest but weaker outside the dimension.
+modifier.twilit.extra.inside=Twilit Damage: +1 (+2 inside the Twilight Forest)
+modifier.twilit.extra.outside=Twilit Mining Speed: +1 (+2 inside the Twilight Forest)
 modifier.precipitate.name=Precipitate
 modifier.precipitate.desc=§oThe last standing escape plan.§r\nThe less health you have, the speedier it is!
 modifier.synergy.name=Synergy
-modifier.synergy.desc=§oLook ma, no moss!§r\nWill repair itself if you have any Steeleaf related item in your hotbar. It is quicker with a Steeleaf block.
+modifier.synergy.desc=§oLook ma, no moss!§r\nWill repair itself if you have any Steeleaf related item in your hotbar. It is much quicker with a Steeleaf block.
 modifier.stalwart.name=Stalwart
 modifier.stalwart.desc=§oThe Brave and Bold.§r\nHitting an entity can make you feel emboldened and grant you Resistance.
 modifier.veiled.name=Veiled

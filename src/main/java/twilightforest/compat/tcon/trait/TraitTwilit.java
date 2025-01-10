@@ -57,8 +57,8 @@ public class TraitTwilit extends AbstractProjectileTrait {
         String outside = String.format(LOC_Extra + ".outside", getModifierIdentifier());
 
         return ImmutableList.of(
-                Util.translateFormatted(inside, Util.df.format(1.0F)),
-                Util.translateFormatted(outside, Util.df.format(2.0F))
+                Util.translateFormatted(inside, Util.df.format(2.0F)),
+                Util.translateFormatted(outside, Util.df.format(1.0F))
         );
     }
 }
