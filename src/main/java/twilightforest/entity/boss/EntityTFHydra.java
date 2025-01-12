@@ -50,7 +50,7 @@ public class EntityTFHydra extends EntityLiving implements IEntityMultiPart, IMo
     private static final int HEAD_RESPAWN_TICKS = 50;
     private static final int HEAD_MAX_DAMAGE = 100;
     private static final float ARMOR_MULTIPLIER = 8.0F;
-    private static final int MAX_HEALTH = 360;
+    private static final int MAX_HEALTH = 450;
 
     private static final int SECONDARY_FLAME_CHANCE = 50;
     private static final int SECONDARY_MORTAR_CHANCE = 50;

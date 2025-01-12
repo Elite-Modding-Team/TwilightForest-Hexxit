@@ -133,7 +133,7 @@ public class EntityTFKnightPhantom extends EntityFlying implements IMob {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(35.0D);
+        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(60.0D);
         getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
         getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D);
     }

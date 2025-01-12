@@ -51,7 +51,7 @@ public class EntityTFUrGhast extends EntityTFTowerGhast {
     private List<BlockPos> trapLocations;
     private int nextTantrumCry;
 
-    private float damageUntilNextPhase = 10; // how much damage can we take before we toggle tantrum mode
+    private float damageUntilNextPhase = 20; // how much damage can we take before we toggle tantrum mode
     private boolean noTrapMode; // are there no traps nearby?  just float around
     private final BossInfoServer bossInfo = new BossInfoServer(getDisplayName(), BossInfo.Color.RED, BossInfo.Overlay.PROGRESS);
 
@@ -74,7 +74,7 @@ public class EntityTFUrGhast extends EntityTFTowerGhast {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(250);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(400.0D);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(128.0D);
     }
 
