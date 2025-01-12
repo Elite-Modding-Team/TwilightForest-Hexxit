@@ -46,15 +46,14 @@ public class EntityTFHydra extends EntityLiving implements IEntityMultiPart, IMo
 
     public static final ResourceLocation LOOT_TABLE = TwilightForestMod.prefix("entities/hydra");
 
-    private static final int TICKS_BEFORE_HEALING = 1000;
-    private static final int HEAD_RESPAWN_TICKS = 100;
-    private static final int HEAD_MAX_DAMAGE = 120;
+    private static final int TICKS_BEFORE_HEALING = 600;
+    private static final int HEAD_RESPAWN_TICKS = 50;
+    private static final int HEAD_MAX_DAMAGE = 100;
     private static final float ARMOR_MULTIPLIER = 8.0F;
     private static final int MAX_HEALTH = 360;
-    private static float HEADS_ACTIVITY_FACTOR = 0.3F;
 
-    private static final int SECONDARY_FLAME_CHANCE = 10;
-    private static final int SECONDARY_MORTAR_CHANCE = 16;
+    private static final int SECONDARY_FLAME_CHANCE = 50;
+    private static final int SECONDARY_MORTAR_CHANCE = 50;
 
     private static final DataParameter<Boolean> DATA_SPAWNHEADS = EntityDataManager.createKey(EntityTFHydra.class, DataSerializers.BOOLEAN);
 
@@ -203,9 +202,6 @@ public class EntityTFHydra extends EntityLiving implements IEntityMultiPart, IMo
         if (!this.world.isRemote && this.ticksSinceDamaged > TICKS_BEFORE_HEALING && this.ticksSinceDamaged % 5 == 0) {
             this.heal(1);
         }
-
-        // update fight variables for difficulty setting
-        setDifficultyVariables();
 
         super.onLivingUpdate();
 
@@ -369,14 +365,6 @@ public class EntityTFHydra extends EntityLiving implements IEntityMultiPart, IMo
         this.secondaryAttacks();
     }
 
-    private void setDifficultyVariables() {
-        if (world.getDifficulty() != EnumDifficulty.HARD) {
-            EntityTFHydra.HEADS_ACTIVITY_FACTOR = 0.3F;
-        } else {
-            EntityTFHydra.HEADS_ACTIVITY_FACTOR = 0.5F;  // higher is harder
-        }
-    }
-
     // TODO: make random
     private int getRandomDeadHead() {
         for (int i = 0; i < numHeads; i++) {
@@ -416,8 +404,8 @@ public class EntityTFHydra extends EntityLiving implements IEntityMultiPart, IMo
 
         // three main heads can do these kinds of attacks
         for (int i = 0; i < 3; i++) {
-            if (hc[i].isIdle() && !areTooManyHeadsAttacking(i)) {
-                if (distance > 4 && distance < 10 && rand.nextInt(BITE_CHANCE) == 0 && this.countActiveHeads() > 2 && !areOtherHeadsBiting(i)) {
+            if (hc[i].isIdle()) {
+                if (distance > 4 && distance < 10 && rand.nextInt(BITE_CHANCE) == 0 && this.countActiveHeads() > 2) {
                     hc[i].setNextState(HydraHeadContainer.State.BITE_BEGINNING);
                 } else if (distance > 0 && distance < 20 && rand.nextInt(FLAME_CHANCE) == 0) {
                     hc[i].setNextState(HydraHeadContainer.State.FLAME_BEGINNING);
@@ -429,7 +417,7 @@ public class EntityTFHydra extends EntityLiving implements IEntityMultiPart, IMo
 
         // heads 4-7 can do everything but bite
         for (int i = 3; i < numHeads; i++) {
-            if (hc[i].isIdle() && !areTooManyHeadsAttacking(i)) {
+            if (hc[i].isIdle()) {
                 if (distance > 0 && distance < 20 && rand.nextInt(FLAME_CHANCE) == 0) {
                     hc[i].setNextState(HydraHeadContainer.State.FLAME_BEGINNING);
                 } else if (distance > 8 && distance < 32 && !targetAbove && rand.nextInt(MORTAR_CHANCE) == 0) {
@@ -437,23 +425,6 @@ public class EntityTFHydra extends EntityLiving implements IEntityMultiPart, IMo
                 }
             }
         }
-    }
-
-    private boolean areTooManyHeadsAttacking(int testHead) {
-        int otherAttacks = 0;
-
-        for (int i = 0; i < numHeads; i++) {
-            if (i != testHead && hc[i].isAttacking()) {
-                otherAttacks++;
-
-                // biting heads count triple
-                if (hc[i].isBiting()) {
-                    otherAttacks += 2;
-                }
-            }
-        }
-
-        return otherAttacks >= 1 + (countActiveHeads() * HEADS_ACTIVITY_FACTOR);
     }
 
     private int countActiveHeads() {
@@ -466,15 +437,6 @@ public class EntityTFHydra extends EntityLiving implements IEntityMultiPart, IMo
         }
 
         return count;
-    }
-
-    private boolean areOtherHeadsBiting(int testHead) {
-        for (int i = 0; i < numHeads; i++) {
-            if (i != testHead && hc[i].isBiting()) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**

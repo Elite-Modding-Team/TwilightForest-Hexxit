@@ -41,10 +41,10 @@ public class HydraHeadContainer {
 	enum State {
 		IDLE(10),
 
-		BITE_BEGINNING(40),
-		BITE_READY(80),
-		BITING(7),
-		BITE_ENDING(40),
+		BITE_BEGINNING(20),
+		BITE_READY(20),
+		BITING(4),
+		BITE_ENDING(20),
 
 		FLAME_BEGINNING(40),
 		FLAMING(100),
