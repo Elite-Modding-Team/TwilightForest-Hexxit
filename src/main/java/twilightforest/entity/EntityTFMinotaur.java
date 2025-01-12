@@ -50,7 +50,7 @@ public class EntityTFMinotaur extends EntityMob implements ITFCharger {
             // Lowering this to make the fight a bit more fair and more doable hitless with melee
             @Override
             protected double getAttackReachSqr(EntityLivingBase entity) {
-                return entity instanceof EntityTFMinoshroom ? 5.0D : super.getAttackReachSqr(entity);
+                return entity instanceof EntityTFMinoshroom ? 3.0D : super.getAttackReachSqr(entity);
             }
         });
         this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
