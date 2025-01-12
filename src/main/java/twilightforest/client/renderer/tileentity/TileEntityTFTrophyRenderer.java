@@ -60,6 +60,9 @@ public class TileEntityTFTrophyRenderer extends TileEntitySpecialRenderer<TileEn
     private static final ResourceLocation textureLocQuestRam = TwilightForestMod.getModelTexture("questram.png");
     private static final ResourceLocation textureLocQuestRamLines = TwilightForestMod.getModelTexture("questram_lines.png");
 
+    private final ModelWroughtnaut wroughtnautModel = new ModelWroughtnaut();
+    private static final ResourceLocation textureLocWroughtnaut = new ResourceLocation("mowziesmobs", "textures/entity/wroughtnaut.png");
+
     //private final ModelTFYetiAlpha eliteYetiModel = new ModelTFYetiAlpha();
     //private static final ResourceLocation textureLocEliteYeti = TwilightForestMod.getModelTexture("yetialpha.png");
 
@@ -449,7 +452,7 @@ public class TileEntityTFTrophyRenderer extends TileEntitySpecialRenderer<TileEn
     private void renderWroughtnautHead(float rotation, boolean onGround) {
         GlStateManager.translate(0, 1, 0);
 
-        this.bindTexture(new ResourceLocation("mowziesmobs", "textures/entity/wroughtnaut.png"));
+        this.bindTexture(textureLocWroughtnaut);
 
         GlStateManager.scale(1f, -1f, -1f);
 
@@ -460,7 +463,7 @@ public class TileEntityTFTrophyRenderer extends TileEntitySpecialRenderer<TileEn
         GlStateManager.translate(0, onGround ? 1.35F : 1.25F, onGround ? 0F : 0.3F);
 
         // render the head
-        new ModelWroughtnaut().head.render(0.0625F);
+        wroughtnautModel.head.render(0.0625F);
     }
 
     /*private void renderEliteYetiHead(float rotation, boolean onGround) {
