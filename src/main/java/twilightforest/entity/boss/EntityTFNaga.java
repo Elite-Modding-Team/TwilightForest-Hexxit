@@ -56,7 +56,7 @@ public class EntityTFNaga extends EntityMob implements IEntityMultiPart {
     public static final ResourceLocation LOOT_TABLE = TwilightForestMod.prefix("entities/naga");
 
     private static final int TICKS_BEFORE_HEALING = 600;
-    private static final int MAX_SEGMENTS = 12;
+    private static final int MAX_SEGMENTS = 15;
     private static final int LEASH_X = 46;
     private static final int LEASH_Y = 7;
     private static final int LEASH_Z = 46;
@@ -102,18 +102,6 @@ public class EntityTFNaga extends EntityMob implements IEntityMultiPart {
 
     protected void setDazed(boolean daze) {
         dataManager.set(DATA_DAZE, daze);
-    }
-
-    private float getMaxHealthPerDifficulty() {
-        switch (world.getDifficulty()) {
-            case EASY:
-                return 120;
-            default:
-            case NORMAL:
-                return 200;
-            case HARD:
-                return 250;
-        }
     }
 
     @Override
@@ -432,7 +420,7 @@ public class EntityTFNaga extends EntityMob implements IEntityMultiPart {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(getMaxHealthPerDifficulty());
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(350.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(DEFAULT_SPEED);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(80.0D);
