@@ -246,9 +246,9 @@ public class EntityTFLich extends EntityMob {
 
         if (this.getPhase() == 3)
             world.spawnParticle(EnumParticleTypes.VILLAGER_ANGRY,
-                    this.posX + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width,
-                    this.posY + 1.0D + (double) (this.rand.nextFloat() * this.height),
-                    this.posZ + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width,
+                    this.posX + (this.rand.nextFloat() * this.width * 2.0F) - this.width,
+                    this.posY + 1.0D + (this.rand.nextFloat() * this.height),
+                    this.posZ + (this.rand.nextFloat() * this.width * 2.0F) - this.width,
                     this.rand.nextGaussian() * 0.02D, this.rand.nextGaussian() * 0.02D, this.rand.nextGaussian() * 0.02D);
 
         if (!world.isRemote) {
@@ -308,7 +308,7 @@ public class EntityTFLich extends EntityMob {
                 setRevengeTarget(null);
             }
 
-            if (this.getPhase() < 3 || rand.nextInt(4) == 0) {
+            if (this.getAttackTarget() != null && (this.getPhase() < 3 || rand.nextInt(4) == 0)) {
                 this.teleportToSightOfEntity(getAttackTarget());
             }
 
@@ -335,15 +335,15 @@ public class EntityTFLich extends EntityMob {
         }
     }
 
-    public void launchBoltAt() {
+    public void launchBoltAt(EntityLivingBase targetedEntity) {
         float bodyFacingAngle = ((renderYawOffset * 3.141593F) / 180F);
         double sx = posX + (MathHelper.cos(bodyFacingAngle) * 0.65);
         double sy = posY + (height * 0.82);
         double sz = posZ + (MathHelper.sin(bodyFacingAngle) * 0.65);
 
-        double tx = getAttackTarget().posX - sx;
-        double ty = (getAttackTarget().getEntityBoundingBox().minY + (double) (getAttackTarget().height / 2.0F)) - (posY + height / 2.0F);
-        double tz = getAttackTarget().posZ - sz;
+        double tx = targetedEntity.posX - sx;
+        double ty = (targetedEntity.getEntityBoundingBox().minY + (targetedEntity.height / 2.0F)) - (posY + height / 2.0F);
+        double tz = targetedEntity.posZ - sz;
 
         playSound(SoundEvents.ENTITY_GHAST_SHOOT, getSoundVolume(), (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
 
@@ -354,15 +354,15 @@ public class EntityTFLich extends EntityMob {
         world.spawnEntity(projectile);
     }
 
-    public void launchBombAt() {
+    public void launchBombAt(EntityLivingBase targetedEntity) {
         float bodyFacingAngle = ((renderYawOffset * 3.141593F) / 180F);
         double sx = posX + (MathHelper.cos(bodyFacingAngle) * 0.65);
         double sy = posY + (height * 0.82);
         double sz = posZ + (MathHelper.sin(bodyFacingAngle) * 0.65);
 
-        double tx = getAttackTarget().posX - sx;
-        double ty = (getAttackTarget().getEntityBoundingBox().minY + (double) (getAttackTarget().height / 2.0F)) - (posY + height / 2.0F);
-        double tz = getAttackTarget().posZ - sz;
+        double tx = targetedEntity.posX - sx;
+        double ty = (targetedEntity.getEntityBoundingBox().minY + (targetedEntity.height / 2.0F)) - (posY + height / 2.0F);
+        double tz = targetedEntity.posZ - sz;
 
         playSound(SoundEvents.ENTITY_GHAST_SHOOT, getSoundVolume(), (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
 
@@ -398,7 +398,7 @@ public class EntityTFLich extends EntityMob {
         return world.getEntitiesWithinAABB(getClass(), new AxisAlignedBB(posX, posY, posZ, posX + 1, posY + 1, posZ + 1).grow(32.0D, 16.0D, 32.0D));
     }
 
-    public boolean wantsNewMinion(EntityTFLichMinion minion) {
+    public boolean wantsNewMinion() {
         return countMyMinions() < EntityTFLich.MAX_ACTIVE_MINIONS;
     }
 
@@ -415,7 +415,7 @@ public class EntityTFLich extends EntityMob {
         double srcY = posY;
         double srcZ = posZ;
 
-        if (dest != null && entity != null) {
+        if (dest != null) {
             teleportToNoChecks(dest.x, dest.y, dest.z);
             this.getLookHelper().setLookPositionWithEntity(entity, 100F, 100F);
             this.renderYawOffset = this.rotationYaw;

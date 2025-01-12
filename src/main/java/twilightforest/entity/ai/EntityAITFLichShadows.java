@@ -51,9 +51,9 @@ public class EntityAITFLichShadows extends EntityAIBase {
 
 		if (lich.getEntitySenses().canSee(targetedEntity) && lich.getAttackCooldown() == 0 && dist < 20F) {
 			if (lich.getNextAttackType() == 0) {
-				lich.launchBoltAt();
+				lich.launchBoltAt(targetedEntity);
 			} else {
-				lich.launchBombAt();
+				lich.launchBombAt(targetedEntity);
 			}
 
 			if (lich.getRNG().nextInt(3) > 0) {

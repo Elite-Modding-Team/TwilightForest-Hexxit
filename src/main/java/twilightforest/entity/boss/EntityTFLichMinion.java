@@ -59,7 +59,7 @@ public class EntityTFLichMinion extends EntityZombie {
 		}
 		// if we still don't have a master, or ours is dead, die.
 		if (master == null || master.isDead) {
-			this.setHealth(0);
+			this.attackEntityFrom(DamageSource.OUT_OF_WORLD, Float.MAX_VALUE);
 		}
 		super.onLivingUpdate();
 	}
@@ -68,7 +68,7 @@ public class EntityTFLichMinion extends EntityZombie {
 		List<EntityTFLich> nearbyLiches = world.getEntitiesWithinAABB(EntityTFLich.class, new AxisAlignedBB(posX, posY, posZ, posX + 1, posY + 1, posZ + 1).grow(32.0D, 16.0D, 32.0D));
 
 		for (EntityTFLich nearbyLich : nearbyLiches) {
-			if (!nearbyLich.isShadowClone() && nearbyLich.wantsNewMinion(this)) {
+			if (!nearbyLich.isShadowClone() && nearbyLich.wantsNewMinion()) {
 				this.master = nearbyLich;
 
 				// animate our new linkage!

@@ -48,9 +48,9 @@ public class EntityAITFLichMinions extends EntityAIBase {
 				lich.setAttackCooldown(20);
 			} else if (dist < 20F && lich.getEntitySenses().canSee(targetedEntity)) {
 				if (lich.getNextAttackType() == 0) {
-					lich.launchBoltAt();
+					lich.launchBoltAt(targetedEntity);
 				} else {
-					lich.launchBombAt();
+					lich.launchBombAt(targetedEntity);
 				}
 
 				if (lich.getRNG().nextInt(2) > 0) {
