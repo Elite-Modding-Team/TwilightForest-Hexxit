@@ -76,6 +76,7 @@ public class EntityTFUrGhast extends EntityTFTowerGhast {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(400.0D);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(128.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(12.0D);
     }
 
     @Override
@@ -395,6 +396,7 @@ public class EntityTFUrGhast extends EntityTFTowerGhast {
             // cry?
             if (--this.nextTantrumCry <= 0) {
                 this.playSound(getHurtSound(null), this.getSoundVolume(), this.getSoundPitch());
+                this.livingSoundTime = -this.getTalkInterval();
                 this.nextTantrumCry = 20 + rand.nextInt(30);
             }
 

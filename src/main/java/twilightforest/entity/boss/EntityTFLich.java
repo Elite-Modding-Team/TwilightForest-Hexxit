@@ -61,7 +61,7 @@ public class EntityTFLich extends EntityMob {
     public static final int INITIAL_SHIELD_STRENGTH = 6;
     public static final int MAX_ACTIVE_MINIONS = 3;
     public static final int INITIAL_MINIONS_TO_SUMMON = 9;
-    public static final int MAX_HEALTH = 100;
+    public static final int MAX_HEALTH = 350;
 
     private EntityTFLich masterLich;
     private int attackCooldown;
@@ -152,6 +152,7 @@ public class EntityTFLich extends EntityMob {
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(MAX_HEALTH);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.45000001788139344D); // Same speed as an angry enderman
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(7.0D);
     }
 
     @Override

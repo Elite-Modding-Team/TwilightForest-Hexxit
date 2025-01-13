@@ -105,6 +105,7 @@ public class EntityTFHydra extends EntityLiving implements IEntityMultiPart, IMo
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(MAX_HEALTH);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.28D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(12.0D);
     }
 
     @Override
