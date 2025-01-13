@@ -1,8 +1,6 @@
 {
   "result": {
-    "nbt": "{ench:[{lvl:2s,id:0s}]}",
-    "item": "twilightforest:yeti_chestplate",
-    "type": "minecraft:item_nbt"
+    "item": "twilightforest:yeti_chestplate"
   },
   "group": "yeti_armor",
   "pattern": [

@@ -1,8 +1,6 @@
 {
   "result": {
-    "nbt": "{ench:[{lvl:1s,id:35s}]}",
-    "item": "twilightforest:ironwood_axe",
-    "type": "minecraft:item_nbt"
+    "item": "twilightforest:ironwood_axe"
   },
   "group": "ironwood_tool",
   "pattern": [

@@ -1,8 +1,6 @@
 {
   "result": {
-    "nbt": "{ench:[{lvl:2s,id:35s}]}",
-    "item": "twilightforest:steeleaf_pickaxe",
-    "type": "minecraft:item_nbt"
+    "item": "twilightforest:steeleaf_pickaxe"
   },
   "group": "steeleaf_tool",
   "pattern": [

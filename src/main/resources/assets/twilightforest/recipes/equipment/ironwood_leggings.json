@@ -1,8 +1,6 @@
 {
   "result": {
-    "nbt": "{ench:[{lvl:1s,id:0s}]}",
-    "item": "twilightforest:ironwood_leggings",
-    "type": "minecraft:item_nbt"
+    "item": "twilightforest:ironwood_leggings"
   },
   "group": "ironwood_armor",
   "pattern": [

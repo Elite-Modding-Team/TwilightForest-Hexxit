@@ -2,15 +2,12 @@ package twilightforest.item;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Enchantments;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -33,27 +30,6 @@ public class ItemTFYetiArmor extends ItemTFArmor implements ModelRegisterCallbac
 			return TwilightForestMod.ARMOR_DIR + "yetiarmor_2.png";
 		} else {
 			return TwilightForestMod.ARMOR_DIR + "yetiarmor_1.png";
-		}
-	}
-
-	@Override
-	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
-		if (isInCreativeTab(tab)) {
-			ItemStack istack = new ItemStack(this);
-			switch (this.armorType) {
-				case HEAD:
-				case CHEST:
-				case LEGS:
-					istack.addEnchantment(Enchantments.PROTECTION, 2);
-					break;
-				case FEET:
-					istack.addEnchantment(Enchantments.PROTECTION, 2);
-					istack.addEnchantment(Enchantments.FEATHER_FALLING, 4);
-					break;
-				default:
-					break;
-			}
-			list.add(istack);
 		}
 	}
 
