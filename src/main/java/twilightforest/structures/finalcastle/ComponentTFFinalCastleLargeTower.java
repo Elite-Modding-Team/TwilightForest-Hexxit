@@ -3,6 +3,7 @@ package twilightforest.structures.finalcastle;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
@@ -10,6 +11,7 @@ import twilightforest.TFFeature;
 import twilightforest.block.BlockTFCastleDoor;
 import twilightforest.block.BlockTFCastleMagic;
 import twilightforest.block.TFBlocks;
+import twilightforest.loot.TFTreasure;
 import twilightforest.structures.StructureTFComponentOld;
 import twilightforest.structures.lichtower.ComponentTFTowerWing;
 
@@ -65,6 +67,9 @@ public class ComponentTFFinalCastleLargeTower extends ComponentTFTowerWing {
 		this.fillWithBlocks(world, sbb, 0, 1, 1, 0, 4, 3, castleDoor, AIR, false);
 
 		//this.placeSignAtCurrentPosition(world, 6, 1, 6, "Parkour area 1", "Unique monster?", sbb);
+
+		// chest - TODO: replace with unique loot
+		TFTreasure.basement.generateChest(world, new BlockPos(6, 1, 6), false);
 
 		return true;
 	}

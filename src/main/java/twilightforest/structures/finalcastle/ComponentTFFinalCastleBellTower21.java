@@ -3,6 +3,7 @@ package twilightforest.structures.finalcastle;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Rotation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
@@ -10,6 +11,7 @@ import twilightforest.TFFeature;
 import twilightforest.block.BlockTFCastleMagic;
 import twilightforest.block.BlockTFForceField;
 import twilightforest.block.TFBlocks;
+import twilightforest.loot.TFTreasure;
 import twilightforest.structures.StructureTFComponentOld;
 import twilightforest.util.RotationUtil;
 
@@ -85,6 +87,9 @@ public class ComponentTFFinalCastleBellTower21 extends ComponentTFFinalCastleMaz
 
 		// sign
 		//this.placeSignAtCurrentPosition(world, 7, 9, 8, "Parkour area 2", "mini-boss 1", sbb);
+
+		// chest - TODO: replace with unique loot
+		TFTreasure.basement.generateChest(world, new BlockPos(7, 9, 8), false);
 
 		return true;
 	}

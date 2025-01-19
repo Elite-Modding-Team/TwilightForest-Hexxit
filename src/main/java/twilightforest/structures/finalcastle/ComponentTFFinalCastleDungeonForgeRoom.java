@@ -1,9 +1,11 @@
 package twilightforest.structures.finalcastle;
 
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import twilightforest.TFFeature;
+import twilightforest.loot.TFTreasure;
 import twilightforest.structures.StructureTFComponentOld;
 
 import java.util.Random;
@@ -26,6 +28,9 @@ public class ComponentTFFinalCastleDungeonForgeRoom extends StructureTFComponent
 
 		// sign
 		//this.placeSignAtCurrentPosition(world, 25, 0, 25, "Mini-boss 2", "Gives talisman", sbb);
+
+		// chest - TODO: replace with unique loot
+		TFTreasure.basement.generateChest(world, new BlockPos(25, 0, 25), false);
 
 		return true;
 	}
