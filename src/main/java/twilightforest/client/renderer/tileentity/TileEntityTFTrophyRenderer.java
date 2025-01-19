@@ -460,7 +460,7 @@ public class TileEntityTFTrophyRenderer extends TileEntitySpecialRenderer<TileEn
         GlStateManager.rotate(rotation, 0F, 1F, 0F);
         GlStateManager.rotate(180F, 0F, 1F, 0F);
 
-        GlStateManager.translate(0, onGround ? 1.35F : 1.25F, onGround ? 0F : 0.3F);
+        GlStateManager.translate(0, onGround ? 1.35F : 1.25F, onGround ? -0.1F : 0.3F);
 
         // render the head
         wroughtnautModel.head.render(0.0625F);
