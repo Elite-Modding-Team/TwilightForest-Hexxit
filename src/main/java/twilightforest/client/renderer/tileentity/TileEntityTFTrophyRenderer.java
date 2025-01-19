@@ -238,21 +238,27 @@ public class TileEntityTFTrophyRenderer extends TileEntitySpecialRenderer<TileEn
 
         GlStateManager.translate(0, onGround ? 1.0F : -0.0F, 1.5F);
 
+        float ageInTicks = 0F;
+
         // open mouth
         if (onGround) {
             hydraHeadModel.openMouthForTrophy(0.0F);
-        } else if (trophy != null) {
-            float ageInTicks = trophy.ticksExisted;
+        } else {
+            if (trophy != null) {
+                ageInTicks = trophy.ticksExisted;
 
-            if (trophy.shouldAnimate()) {
-                ageInTicks += partialTicks;
+                if (trophy.shouldAnimate()) {
+                    ageInTicks += partialTicks;
+                }
+            } else {
+                ageInTicks = this.getWorld().getWorldTime() + partialTicks;
             }
 
-            hydraHeadModel.openMouthForTrophy(MathHelper.sin(ageInTicks) / 4 + 0.25F);
+            hydraHeadModel.openMouthForTrophy(MathHelper.sin(ageInTicks / 2) / 4 + 0.25F);
         }
 
         // render the hydra head
-        hydraHeadModel.render(null, 0.0F, 0.0F, 0.0F, rotation, 0.0F, 0.0625F);
+        hydraHeadModel.render(null, 0.0F, 0.0F, ageInTicks, rotation, 0.0F, 0.0625F);
     }
 
     private void renderNagaHead(float rotation, boolean onGround) {
@@ -320,6 +326,8 @@ public class TileEntityTFTrophyRenderer extends TileEntitySpecialRenderer<TileEn
             if (trophy.shouldAnimate()) {
                 ageInTicks += partialTime;
             }
+        } else {
+            ageInTicks = this.getWorld().getWorldTime() + partialTime;
         }
 
         urGhastModel.render(null, 0.0F, 0, ageInTicks, 0, 0.0F, 0.0625F);
