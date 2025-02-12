@@ -63,7 +63,7 @@ public class TFEntities {
 		}
 
 		final <T extends Entity> void registerEntity(ResourceLocation registryName, Class<T> entity, Function<World, T> factory, int backgroundEggColour, int foregroundEggColour) {
-			registerEntity(registryName, entity, factory, backgroundEggColour, foregroundEggColour, 80, 3, true);
+			registerEntity(registryName, entity, factory, backgroundEggColour, foregroundEggColour, 80, 1, true);
 		}
 
 		final <T extends Entity> void registerEntity(ResourceLocation registryName, Class<T> entity, Function<World, T> factory, int backgroundEggColour, int foregroundEggColour, int trackingRange, int updateInterval, boolean sendVelocityUpdates) {
@@ -71,7 +71,7 @@ public class TFEntities {
 		}
 
 		final <T extends Entity> void registerEntity(ResourceLocation registryName, Class<T> entity, Function<World, T> factory) {
-			registerEntity(registryName, entity, factory, 80, 3, true);
+			registerEntity(registryName, entity, factory, 80, 1, true);
 		}
 
 		final <T extends Entity> void registerEntity(ResourceLocation registryName, Class<T> entity, Function<World, T> factory, int trackingRange, int updateInterval, boolean sendVelocityUpdates) {
@@ -168,5 +168,6 @@ public class TFEntities {
 		helper.registerEntity(TFEntityNames.SLIDER, EntityTFSlideBlock.class, EntityTFSlideBlock::new, 80, 1, true);
 		helper.registerEntity(TFEntityNames.BOGGARD, EntityTFBoggard.class, EntityTFBoggard::new);
 		helper.registerEntity(TFEntityNames.RISING_ZOMBIE, EntityTFRisingZombie.class, EntityTFRisingZombie::new);
+		helper.registerEntity(TFEntityNames.CASTLE_WARRIOR, EntityTFCastleWarrior.class, EntityTFCastleWarrior::new, 0x000000, 0xfc00fc);
 	}
 }

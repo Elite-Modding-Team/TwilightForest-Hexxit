@@ -93,7 +93,11 @@ public class TFEntityNames {
 	// Final Castle
 	public static final ResourceLocation HARBINGER_CUBE = prefix("harbinger_cube");
 	public static final ResourceLocation ADHERENT = prefix("adherent");
-	// More castle mobs here
+	public static final ResourceLocation CASTLE_WARRIOR = prefix("castle_warrior");
+	public static final ResourceLocation CASTLE_KNIGHT = prefix("castle_knight");
+	public static final ResourceLocation CASTLE_MARKSMAN = prefix("castle_marksman");
+	public static final ResourceLocation CASTLE_PHANTOM = prefix("castle_phantom");
+	public static final ResourceLocation CASTLE_GIANT = prefix("castle_giant");
 
 	// Technical
 	public static final ResourceLocation HYDRA_HEAD = prefix("hydra_head");
