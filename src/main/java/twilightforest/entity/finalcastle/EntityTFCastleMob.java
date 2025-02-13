@@ -65,6 +65,7 @@ public class EntityTFCastleMob extends EntityMob {
         return data;
     }
 
+    @Override
     public boolean attackEntityAsMob(Entity entity) {
         boolean flag = super.attackEntityAsMob(entity);
 
@@ -145,6 +146,7 @@ public class EntityTFCastleMob extends EntityMob {
     }
 
     // Immune to ice effects
+    @Override
     public boolean isPotionApplicable(PotionEffect effect) {
         return effect.getPotion() != TFPotions.frosty && effect.getPotion() != PotionHandler.FROZEN && super.isPotionApplicable(effect);
     }
@@ -181,6 +183,7 @@ public class EntityTFCastleMob extends EntityMob {
         return MMSounds.ENTITY_WROUGHT_STEP;
     }
 
+    @Override
     protected void playStepSound(BlockPos pos, Block block) {
         this.playSound(this.getStepSound(), 0.1F, 0.65F);
     }
