@@ -19,10 +19,7 @@ import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.registries.IForgeRegistry;
 import twilightforest.TwilightForestMod;
 import twilightforest.entity.boss.*;
-import twilightforest.entity.finalcastle.EntityTFCastleGuardian;
-import twilightforest.entity.finalcastle.EntityTFCastleMarksman;
-import twilightforest.entity.finalcastle.EntityTFCastlePhantom;
-import twilightforest.entity.finalcastle.EntityTFCastleWarrior;
+import twilightforest.entity.finalcastle.*;
 import twilightforest.entity.passive.*;
 import twilightforest.util.TFEntityNames;
 
@@ -174,5 +171,6 @@ public class TFEntities {
 		helper.registerEntity(TFEntityNames.CASTLE_WARRIOR, EntityTFCastleWarrior.class, EntityTFCastleWarrior::new, 0x000000, 0xfc00fc);
 		helper.registerEntity(TFEntityNames.CASTLE_MARKSMAN, EntityTFCastleMarksman.class, EntityTFCastleMarksman::new, 0x000000, 0xfc00fc);
 		helper.registerEntity(TFEntityNames.CASTLE_PHANTOM, EntityTFCastlePhantom.class, EntityTFCastlePhantom::new, 0x000000, 0xfc00fc);
+		helper.registerEntity(TFEntityNames.CASTLE_GIANT, EntityTFCastleGiant.class, EntityTFCastleGiant::new, 0x000000, 0xfc00fc);
 	}
 }

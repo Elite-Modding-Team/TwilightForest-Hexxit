@@ -141,6 +141,7 @@ public class TFClientProxy extends TFCommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityTFCastleWarrior.class, RenderTFCastleGuard::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityTFCastleMarksman.class, RenderTFCastleMarksman::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityTFCastlePhantom.class, RenderTFCastlePhantom::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityTFCastleGiant.class, RenderTFCastleGiant::new);
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityTFCastleGuardian.class, m -> new RenderTFCastleGuardian(m, new ModelTFCastleGuardian(), 2.0F, "finalcastle/castle_guardian.png"));
 
