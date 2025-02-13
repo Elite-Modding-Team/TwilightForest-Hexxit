@@ -1,7 +1,9 @@
 package twilightforest.entity.finalcastle;
 
-import net.minecraft.block.Block;
-import net.minecraft.entity.*;
+import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.monster.EntityIronGolem;
@@ -53,6 +55,7 @@ public class EntityTFCastleMarksman extends EntityTFCastleWarrior implements IRa
         this.setCombatTask();
     }
 
+    @Override
     protected void initEntityAI() {
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAIRestrictSun(this));
@@ -66,19 +69,13 @@ public class EntityTFCastleMarksman extends EntityTFCastleWarrior implements IRa
         this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityIronGolem.class, true));
     }
 
+    @Override
     protected void entityInit() {
         super.entityInit();
         this.dataManager.register(SWINGING_ARMS, false);
     }
 
-    protected void playStepSound(BlockPos pos, Block blockIn) {
-        this.playSound(this.getStepSound(), 0.15F, 1.0F);
-    }
-
-    public EnumCreatureAttribute getCreatureAttribute() {
-        return EnumCreatureAttribute.UNDEAD;
-    }
-
+    @Override
     public void onLivingUpdate() {
         if (this.world.isDaytime() && !this.world.isRemote) {
             float f = this.getBrightness();
@@ -107,6 +104,7 @@ public class EntityTFCastleMarksman extends EntityTFCastleWarrior implements IRa
         super.onLivingUpdate();
     }
 
+    @Override
     public void updateRidden() {
         super.updateRidden();
         if (this.getRidingEntity() instanceof EntityCreature) {
@@ -116,12 +114,14 @@ public class EntityTFCastleMarksman extends EntityTFCastleWarrior implements IRa
 
     }
 
+    @Override
     protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty) {
         super.setEquipmentBasedOnDifficulty(difficulty);
         this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
     }
 
     @Nullable
+    @Override
     public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
         livingdata = super.onInitialSpawn(difficulty, livingdata);
         this.setEquipmentBasedOnDifficulty(difficulty);
@@ -151,6 +151,7 @@ public class EntityTFCastleMarksman extends EntityTFCastleWarrior implements IRa
 
     }
 
+    @Override
     public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor) {
         EntityArrow entityarrow = this.getArrow(distanceFactor);
         if (this.getHeldItemMainhand().getItem() instanceof ItemBow) {
@@ -172,11 +173,13 @@ public class EntityTFCastleMarksman extends EntityTFCastleWarrior implements IRa
         return entitytippedarrow;
     }
 
+    @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         this.setCombatTask();
     }
 
+    @Override
     public void setItemStackToSlot(EntityEquipmentSlot slot, ItemStack stack) {
         super.setItemStackToSlot(slot, stack);
         if (!this.world.isRemote && slot == EntityEquipmentSlot.MAINHAND) {
@@ -188,6 +191,7 @@ public class EntityTFCastleMarksman extends EntityTFCastleWarrior implements IRa
         return this.dataManager.get(SWINGING_ARMS);
     }
 
+    @Override
     public void setSwingingArms(boolean swingingArms) {
         this.dataManager.set(SWINGING_ARMS, swingingArms);
     }
