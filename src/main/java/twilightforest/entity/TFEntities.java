@@ -20,6 +20,8 @@ import net.minecraftforge.registries.IForgeRegistry;
 import twilightforest.TwilightForestMod;
 import twilightforest.entity.boss.*;
 import twilightforest.entity.finalcastle.EntityTFCastleGuardian;
+import twilightforest.entity.finalcastle.EntityTFCastleMarksman;
+import twilightforest.entity.finalcastle.EntityTFCastleWarrior;
 import twilightforest.entity.passive.*;
 import twilightforest.util.TFEntityNames;
 
@@ -169,5 +171,6 @@ public class TFEntities {
 		helper.registerEntity(TFEntityNames.BOGGARD, EntityTFBoggard.class, EntityTFBoggard::new);
 		helper.registerEntity(TFEntityNames.RISING_ZOMBIE, EntityTFRisingZombie.class, EntityTFRisingZombie::new);
 		helper.registerEntity(TFEntityNames.CASTLE_WARRIOR, EntityTFCastleWarrior.class, EntityTFCastleWarrior::new, 0x000000, 0xfc00fc);
+		helper.registerEntity(TFEntityNames.CASTLE_MARKSMAN, EntityTFCastleMarksman.class, EntityTFCastleMarksman::new, 0x000000, 0xfc00fc);
 	}
 }

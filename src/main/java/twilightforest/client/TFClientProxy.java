@@ -47,6 +47,9 @@ import twilightforest.compat.TFCompat;
 import twilightforest.entity.*;
 import twilightforest.entity.boss.*;
 import twilightforest.entity.finalcastle.EntityTFCastleGuardian;
+import twilightforest.entity.finalcastle.EntityTFCastleMarksman;
+import twilightforest.entity.finalcastle.EntityTFCastleMob;
+import twilightforest.entity.finalcastle.EntityTFCastleWarrior;
 import twilightforest.entity.passive.*;
 import twilightforest.item.TFItems;
 import twilightforest.tileentity.TileEntityTFTrophy;
@@ -138,6 +141,8 @@ public class TFClientProxy extends TFCommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityTFRovingCube.class, RenderTFRovingCube::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityTFRisingZombie.class, m -> new RenderTFBiped<>(m, new ModelTFRisingZombie(), 0.5F, "textures/entity/zombie/zombie.png"));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTFCastleMob.class, RenderTFCastleGuard::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityTFCastleWarrior.class, RenderTFCastleGuard::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityTFCastleMarksman.class, RenderTFCastleMarksman::new);
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityTFCastleGuardian.class, m -> new RenderTFCastleGuardian(m, new ModelTFCastleGuardian(), 2.0F, "finalcastle/castle_guardian.png"));
 
