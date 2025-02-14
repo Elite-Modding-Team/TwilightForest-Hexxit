@@ -53,12 +53,12 @@ public class TraitTwilit extends AbstractProjectileTrait {
 
     @Override
     public List<String> getExtraInfo(ItemStack tool, NBTTagCompound modifierTag) {
-        String inside = String.format(LOC_Extra + ".inside", getModifierIdentifier());
-        String outside = String.format(LOC_Extra + ".outside", getModifierIdentifier());
+        String damage = String.format(LOC_Extra + ".damage", getModifierIdentifier());
+        String mining_speed = String.format(LOC_Extra + ".mining_speed", getModifierIdentifier());
 
         return ImmutableList.of(
-                Util.translateFormatted(inside, Util.df.format(2.0F)),
-                Util.translateFormatted(outside, Util.df.format(1.0F))
+                Util.translateFormatted(damage, Util.df.format(2.0F)),
+                Util.translateFormatted(mining_speed, Util.df.format(1.0F))
         );
     }
 }

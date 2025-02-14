@@ -865,16 +865,27 @@ material.regal.name=Regal
 
 modifier.twilit.name=Twilit
 modifier.twilit.desc=§oThe Twilight Forest's illuminating blessing.§r\nMining speed and damage is increased. The boost is stronger inside the Twilight Forest but weaker outside the dimension.
-modifier.twilit.extra.inside=Twilit Damage: +1 (+2 inside the Twilight Forest)
-modifier.twilit.extra.outside=Twilit Mining Speed: +1 (+2 inside the Twilight Forest)
+modifier.twilit.extra.damage=Twilit Damage: +1 (+2 inside the Twilight Forest)
+modifier.twilit.extra.mining_speed=Twilit Mining Speed: +1 (+2 inside the Twilight Forest)
 modifier.precipitate.name=Precipitate
 modifier.precipitate.desc=§oThe last standing escape plan.§r\nThe less health you have, the speedier it is!
 modifier.synergy.name=Synergy
 modifier.synergy.desc=§oLook ma, no moss!§r\nWill repair itself if you have any Steeleaf related item in your hotbar. It is much quicker with a Steeleaf block.
 modifier.stalwart.name=Stalwart
-modifier.stalwart.desc=§oThe Brave and Bold.§r\nHitting an entity can make you feel emboldened and grant you Resistance.
+modifier.stalwart.desc=§oThe Brave and Bold.§r\nHitting an entity can make you feel emboldened and grant you Resistance II.
 modifier.veiled.name=Veiled
 modifier.veiled.desc=§oLike a Specter!§r\nProjectile will be invisible.
+
+modifier.twilit_armor.name=Twilit
+modifier.twilit_armor.desc=§oThe Twilight Forest's illuminating blessing.§r\nProtection from mobs is increased. The boost is stronger inside the Twilight Forest but weaker outside the dimension.
+modifier.twilit_armor.extra.inside_armor=Twilit Protection (Inside Twilight Forest): +%s
+modifier.twilit_armor.extra.outside_armor=Twilit Protection (Outside Twilight Forest): +%s
+modifier.precipitate_armor.name=Precipitate
+modifier.precipitate_armor.desc=§oThe last standing escape plan.§r\nYour speed is increased at half health. The more pieces with this trait you wear, the more speedier you are!
+modifier.synergy_armor.name=Synergy
+modifier.synergy_armor.desc=§oLook ma, no moss!§r\nWill repair itself while worn if you have any Steeleaf related item in your hotbar. It is much quicker with a Steeleaf block.
+modifier.stalwart_armor.name=Stalwart
+modifier.stalwart_armor.desc=§oThe Brave and Bold.§r\nGetting hit can make you feel emboldened and grant you Resistance II.
 
 # Immersive Engineering
 item.tfEngineeringShader=Twilit Shader: %s

@@ -20,7 +20,7 @@ public class TraitSynergy extends AbstractTrait {
         super("synergy", TextFormatting.GREEN);
     }
 
-    private static final float REPAIR_DAMPENER = 1f / 256f;
+    private static final float REPAIR_DAMPENER = 1.0F / 256.0F;
 
     @Override
     public void onUpdate(ItemStack tool, World world, Entity entity, int itemSlot, boolean isSelected) {
