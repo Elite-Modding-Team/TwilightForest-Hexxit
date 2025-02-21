@@ -37,8 +37,8 @@
             {
               "function": "set_count",
               "count": {
-                "min": 8,
-                "max": 16
+                "min": 12,
+                "max": 24
               }
             },
             {
