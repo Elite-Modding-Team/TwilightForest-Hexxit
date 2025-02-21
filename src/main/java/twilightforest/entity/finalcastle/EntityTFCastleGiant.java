@@ -28,7 +28,7 @@ import twilightforest.potions.TFPotions;
 
 public class EntityTFCastleGiant extends EntityTFGiantMiner {
     public static final ResourceLocation LOOT_TABLE = TwilightForestMod.prefix("entities/castle_giant");
-    
+
     public EntityTFCastleGiant(World world) {
         super(world);
     }
@@ -36,9 +36,7 @@ public class EntityTFCastleGiant extends EntityTFGiantMiner {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(60.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(120.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
     }
 
     @Override
@@ -152,9 +150,9 @@ public class EntityTFCastleGiant extends EntityTFGiantMiner {
     protected void playStepSound(BlockPos pos, Block block) {
         this.playSound(this.getStepSound(), 0.1F, 0.65F);
     }
-    
-	@Override
-	public ResourceLocation getLootTable() {
-		return LOOT_TABLE;
-	}
+
+    @Override
+    public ResourceLocation getLootTable() {
+        return LOOT_TABLE;
+    }
 }

@@ -36,7 +36,7 @@ public class EntityTFCastleMarksman extends EntityTFCastleWarrior implements IRa
     }
 
     private final EntityAIAttackRangedBow<EntityTFCastleMarksman> aiArrowAttack = new EntityAIAttackRangedBow<>(this, 1.0F, 20, 15.0F);
-    private final EntityAIAttackMelee aiAttackOnCollide = new EntityAIAttackMelee(this, 1.2, false) {
+    private final EntityAIAttackMelee aiAttackOnCollide = new EntityAIAttackMelee(this, 1.0, false) {
         @Override
         public void resetTask() {
             super.resetTask();
@@ -163,9 +163,9 @@ public class EntityTFCastleMarksman extends EntityTFCastleWarrior implements IRa
     public void setSwingingArms(boolean swingingArms) {
         this.dataManager.set(SWINGING_ARMS, swingingArms);
     }
-    
-	@Override
-	public ResourceLocation getLootTable() {
-		return LOOT_TABLE;
-	}
+
+    @Override
+    public ResourceLocation getLootTable() {
+        return LOOT_TABLE;
+    }
 }

@@ -38,10 +38,12 @@ public class EntityTFCastleWarrior extends EntityTFCastleMob {
     protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty) {
         super.setEquipmentBasedOnDifficulty(difficulty);
 
-        if (this.rand.nextDouble() <= 0.4D && !(this instanceof EntityTFCastleMarksman)) {
-            this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(TFItems.regal_axe));
-        } else {
-            this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(TFItems.regal_sword));
+        if (!(this instanceof EntityTFCastleMarksman)) {
+            if (this.rand.nextDouble() <= 0.4D) {
+                this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(TFItems.regal_axe));
+            } else {
+                this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(TFItems.regal_sword));
+            }
         }
 
         this.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(TFItems.regal_helmet));

@@ -48,8 +48,8 @@ public class EntityTFCastlePhantom extends EntityTFCastleMob {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(7.5D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(60.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
     }
 
@@ -110,6 +110,34 @@ public class EntityTFCastlePhantom extends EntityTFCastleMob {
     @Override
     public boolean isOnLadder() {
         return false;
+    }
+
+    @Override
+    protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty) {
+        super.setEquipmentBasedOnDifficulty(difficulty);
+        this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(TFItems.regal_axe));
+        this.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(TFItems.regal_helmet));
+        this.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(TFItems.regal_chestplate));
+    }
+
+    @Override
+    public ResourceLocation getLootTable() {
+        return LOOT_TABLE;
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return TFSounds.WRAITH;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return SoundEvents.ENTITY_BLAZE_HURT;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return TFSounds.WRAITH;
     }
 
     static class AIFlyTowardsTarget extends EntityAIBase {
@@ -235,33 +263,5 @@ public class EntityTFCastlePhantom extends EntityTFCastleMob {
                 }
             }
         }
-    }
-
-    @Override
-    protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty) {
-        super.setEquipmentBasedOnDifficulty(difficulty);
-        this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(TFItems.regal_axe));
-        this.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(TFItems.regal_helmet));
-        this.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(TFItems.regal_chestplate));
-    }
-
-    @Override
-    public ResourceLocation getLootTable() {
-        return LOOT_TABLE;
-    }
-
-    @Override
-    protected SoundEvent getAmbientSound() {
-        return TFSounds.WRAITH;
-    }
-
-    @Override
-    protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ENTITY_BLAZE_HURT;
-    }
-
-    @Override
-    protected SoundEvent getDeathSound() {
-        return TFSounds.WRAITH;
     }
 }
