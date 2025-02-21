@@ -668,11 +668,10 @@ entity.twilightforest.castle_guardian.name=Castle Guardian
 entity.twilightforest.harbinger_cube.name=Harbinger Cube
 entity.twilightforest.roving_cube.name=Roving Cube
 entity.twilightforest.final_boss.name=The Twilight Wroughtnaut
-entity.twilightforest.castle_warrior.name=Twilight Warrior
-entity.twilightforest.castle_knight.name=Twilight Knight
-entity.twilightforest.castle_marksman.name=Twilight Marksman
-entity.twilightforest.castle_phantom.name=Twilight Phantom
-entity.twilightforest.castle_giant.name=Twilight Giant
+entity.twilightforest.castle_warrior.name=Wrought Knight
+entity.twilightforest.castle_marksman.name=Wrought Marksman
+entity.twilightforest.castle_phantom.name=Wrought Phantom
+entity.twilightforest.castle_giant.name=Wrought Giant
 
 twilightforest.effect.frosted=Frosted
 

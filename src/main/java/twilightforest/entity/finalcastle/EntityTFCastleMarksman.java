@@ -5,13 +5,10 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.monster.EntityIronGolem;
-import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityTippedArrow;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemBow;
@@ -20,15 +17,18 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import twilightforest.TwilightForestMod;
+import twilightforest.item.TFItems;
 
 import javax.annotation.Nullable;
 
 public class EntityTFCastleMarksman extends EntityTFCastleWarrior implements IRangedAttackMob {
+    public static final ResourceLocation LOOT_TABLE = TwilightForestMod.prefix("entities/castle_marksman");
     private static final DataParameter<Boolean> SWINGING_ARMS;
 
     static {
@@ -58,9 +58,6 @@ public class EntityTFCastleMarksman extends EntityTFCastleWarrior implements IRa
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(1, new EntityAISwimming(this));
-        this.tasks.addTask(2, new EntityAIRestrictSun(this));
-        this.tasks.addTask(3, new EntityAIFleeSun(this, 1.0F));
-        this.tasks.addTask(3, new EntityAIAvoidEntity<>(this, EntityWolf.class, 6.0F, 1.0F, 1.2));
         this.tasks.addTask(5, new EntityAIWanderAvoidWater(this, 1.0F));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(6, new EntityAILookIdle(this));
@@ -76,35 +73,6 @@ public class EntityTFCastleMarksman extends EntityTFCastleWarrior implements IRa
     }
 
     @Override
-    public void onLivingUpdate() {
-        if (this.world.isDaytime() && !this.world.isRemote) {
-            float f = this.getBrightness();
-            BlockPos blockpos = this.getRidingEntity() instanceof EntityBoat ? (new BlockPos(this.posX, (double) Math.round(this.posY), this.posZ)).up() : new BlockPos(this.posX, (double) Math.round(this.posY), this.posZ);
-            if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.world.canSeeSky(blockpos)) {
-                boolean flag = true;
-                ItemStack itemstack = this.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
-                if (!itemstack.isEmpty()) {
-                    if (itemstack.isItemStackDamageable()) {
-                        itemstack.setItemDamage(itemstack.getItemDamage() + this.rand.nextInt(2));
-                        if (itemstack.getItemDamage() >= itemstack.getMaxDamage()) {
-                            this.renderBrokenItemStack(itemstack);
-                            this.setItemStackToSlot(EntityEquipmentSlot.HEAD, ItemStack.EMPTY);
-                        }
-                    }
-
-                    flag = false;
-                }
-
-                if (flag) {
-                    this.setFire(8);
-                }
-            }
-        }
-
-        super.onLivingUpdate();
-    }
-
-    @Override
     public void updateRidden() {
         super.updateRidden();
         if (this.getRidingEntity() instanceof EntityCreature) {
@@ -117,7 +85,7 @@ public class EntityTFCastleMarksman extends EntityTFCastleWarrior implements IRa
     @Override
     protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty) {
         super.setEquipmentBasedOnDifficulty(difficulty);
-        this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
+        this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(TFItems.ice_bow));
     }
 
     @Nullable
@@ -195,4 +163,9 @@ public class EntityTFCastleMarksman extends EntityTFCastleWarrior implements IRa
     public void setSwingingArms(boolean swingingArms) {
         this.dataManager.set(SWINGING_ARMS, swingingArms);
     }
+    
+	@Override
+	public ResourceLocation getLootTable() {
+		return LOOT_TABLE;
+	}
 }

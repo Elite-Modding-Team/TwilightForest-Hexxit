@@ -12,7 +12,7 @@ import twilightforest.entity.finalcastle.EntityTFCastlePhantom;
 import javax.annotation.Nonnull;
 
 public class RenderTFCastlePhantom extends RenderBiped<EntityTFCastlePhantom> {
-    private static final ResourceLocation textureLoc = TwilightForestMod.getModelTexture("castleguard.png");
+    private static final ResourceLocation textureLoc = TwilightForestMod.getModelTexture("castlewraith.png");
 
     public RenderTFCastlePhantom(RenderManager renderManager) {
         super(renderManager, new ModelTFCastlePhantom(), 0.5F);

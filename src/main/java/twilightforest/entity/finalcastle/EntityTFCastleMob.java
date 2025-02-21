@@ -55,6 +55,7 @@ public class EntityTFCastleMob extends EntityMob {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.5D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(70.0D);
     }
 
     @Override
@@ -79,6 +80,13 @@ public class EntityTFCastleMob extends EntityMob {
 
     @Override
     protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty) {
+        this.setDropChance(EntityEquipmentSlot.MAINHAND, -100.0F);
+        this.setDropChance(EntityEquipmentSlot.OFFHAND, -100.0F);
+        this.setDropChance(EntityEquipmentSlot.HEAD, -100.0F);
+        this.setDropChance(EntityEquipmentSlot.CHEST, -100.0F);
+        this.setDropChance(EntityEquipmentSlot.LEGS, -100.0F);
+        this.setDropChance(EntityEquipmentSlot.FEET, -100.0F);
+
         if (this.rand.nextFloat() < 0.4F) {
             int i = this.rand.nextInt(2);
             float f = 0.05F;
