@@ -132,7 +132,7 @@ public class EntityTFCastlePhantom extends EntityTFCastleMob {
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ENTITY_BLAZE_HURT;
+        return TFSounds.WRAITH;
     }
 
     @Override
