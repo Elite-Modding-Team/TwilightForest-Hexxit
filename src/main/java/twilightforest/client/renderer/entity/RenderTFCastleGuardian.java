@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import twilightforest.TwilightForestMod;
-import twilightforest.entity.finalcastle.EntityTFCastleGuardian;
+import twilightforest.entity.unused.EntityTFCastleGuardian;
 
 import javax.annotation.Nonnull;
 

@@ -21,6 +21,9 @@ import twilightforest.TwilightForestMod;
 import twilightforest.entity.boss.*;
 import twilightforest.entity.finalcastle.*;
 import twilightforest.entity.passive.*;
+import twilightforest.entity.unused.EntityTFCastleGuardian;
+import twilightforest.entity.unused.EntityTFRovingCube;
+import twilightforest.entity.unused.EntityTFSlideBlock;
 import twilightforest.util.TFEntityNames;
 
 import java.util.function.Function;

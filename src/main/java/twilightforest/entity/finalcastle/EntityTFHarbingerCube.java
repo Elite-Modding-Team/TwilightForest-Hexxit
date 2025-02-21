@@ -1,4 +1,4 @@
-package twilightforest.entity;
+package twilightforest.entity.finalcastle;
 
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;

@@ -4,7 +4,7 @@ import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import twilightforest.entity.EntityTFRovingCube;
+import twilightforest.entity.unused.EntityTFRovingCube;
 
 public class EntityAICubeMoveToRedstoneSymbols extends EntityAIBase {
 

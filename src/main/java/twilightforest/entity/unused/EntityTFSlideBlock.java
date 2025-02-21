@@ -1,4 +1,4 @@
-package twilightforest.entity;
+package twilightforest.entity.unused;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;

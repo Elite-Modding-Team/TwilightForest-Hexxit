@@ -17,7 +17,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
-import twilightforest.entity.EntityTFSlideBlock;
+import twilightforest.entity.unused.EntityTFSlideBlock;
 
 public class RenderTFSlideBlock extends Render<EntityTFSlideBlock> {
 

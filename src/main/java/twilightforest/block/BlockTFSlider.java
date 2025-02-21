@@ -26,7 +26,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import twilightforest.client.ModelRegisterCallback;
 import twilightforest.client.ModelUtils;
-import twilightforest.entity.EntityTFSlideBlock;
+import twilightforest.entity.unused.EntityTFSlideBlock;
 import twilightforest.item.TFItems;
 
 import java.util.Random;

@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import twilightforest.TwilightForestMod;
 import twilightforest.client.model.entity.ModelTFApocalypseCube;
-import twilightforest.entity.EntityTFHarbingerCube;
+import twilightforest.entity.finalcastle.EntityTFHarbingerCube;
 
 public class RenderTFHarbingerCube extends RenderLiving<EntityTFHarbingerCube> {
 

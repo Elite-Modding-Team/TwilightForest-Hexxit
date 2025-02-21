@@ -1,4 +1,4 @@
-package twilightforest.entity;
+package twilightforest.entity.unused;
 
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;

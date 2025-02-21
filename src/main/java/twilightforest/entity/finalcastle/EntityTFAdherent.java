@@ -1,4 +1,4 @@
-package twilightforest.entity;
+package twilightforest.entity.finalcastle;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -28,6 +28,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import twilightforest.TwilightForestMod;
 import twilightforest.client.particle.TFParticleType;
+import twilightforest.entity.EntityTFAdherentBolt;
+import twilightforest.entity.ITFCharger;
 
 public class EntityTFAdherent extends EntityMob implements IRangedAttackMob, ITFCharger {
 

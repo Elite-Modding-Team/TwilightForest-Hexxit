@@ -10,7 +10,7 @@ import net.minecraft.util.math.MathHelper;
 import org.lwjgl.opengl.GL11;
 import twilightforest.TwilightForestMod;
 import twilightforest.client.model.entity.ModelTFCubeOfAnnihilation;
-import twilightforest.entity.EntityTFRovingCube;
+import twilightforest.entity.unused.EntityTFRovingCube;
 
 public class RenderTFRovingCube extends Render<EntityTFRovingCube> {
 

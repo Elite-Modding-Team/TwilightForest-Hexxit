@@ -1,7 +1,7 @@
 package twilightforest.entity.ai;
 
 import net.minecraft.entity.ai.EntityAIBase;
-import twilightforest.entity.EntityTFRovingCube;
+import twilightforest.entity.unused.EntityTFRovingCube;
 
 /**
  * This is a task that runs when we are near a symbol and have stopped pathfinding, but are not centered on the symbol.

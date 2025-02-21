@@ -1,4 +1,4 @@
-package twilightforest.entity.finalcastle;
+package twilightforest.entity.unused;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
