@@ -2,6 +2,10 @@ package twilightforest.entity.finalcastle;
 
 import java.util.List;
 
+import com.bobmowzie.mowziesmobs.server.entity.wroughtnaut.EntityWroughtnaut;
+import com.bobmowzie.mowziesmobs.server.potion.PotionHandler;
+
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -15,11 +19,14 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 import twilightforest.TFSounds;
 import twilightforest.TwilightForestMod;
+import twilightforest.potions.TFPotions;
 
 public class EntityTFHarbingerCube extends EntityMob {
     public static final ResourceLocation LOOT_TABLE = TwilightForestMod.prefix("entities/harbinger_cube");
@@ -48,10 +55,50 @@ public class EntityTFHarbingerCube extends EntityMob {
     }
 
     @Override
+    public boolean attackEntityFrom(DamageSource source, float damage) {
+        Entity entity = source.getTrueSource();
+
+        if (entity != null && entity instanceof EntityLivingBase && entity.isOnSameTeam(this)) {
+            return false;
+        }
+
+        return super.attackEntityFrom(source, damage);
+    }
+
+    @Override
+    public boolean isOnSameTeam(Entity entity) {
+        if (entity == null) {
+            return false;
+        } else if (entity == this) {
+            return true;
+        } else if (super.isOnSameTeam(entity)) {
+            return true;
+        } else if (entity instanceof EntityWroughtnaut || entity instanceof EntityTFCastleMob || entity instanceof EntityTFCastleGiant || entity instanceof EntityTFAdherent || entity instanceof EntityTFHarbingerCube) {
+            return this.getTeam() == null && entity.getTeam() == null;
+        } else {
+            return false;
+        }
+    }
+
+    // Immune to ice effects and wither
+    @Override
+    public boolean isPotionApplicable(PotionEffect effect) {
+        return effect.getPotion() != TFPotions.frosty && effect.getPotion() != PotionHandler.FROZEN && effect.getPotion() != MobEffects.WITHER && super.isPotionApplicable(effect);
+    }
+
+    @Override
+    public void fall(float distance, float damageMultiplier) {
+    }
+
+    @Override
+    protected void updateFallState(double y, boolean onGround, IBlockState state, BlockPos pos) {
+    }
+
+    @Override
     protected void onDeathUpdate() {
         ++this.deathTime;
 
-        if (this.deathTime == 60) // delay until 3 seconds
+        if (this.deathTime == 40) // delay until 2 seconds
         {
             if (!world.isRemote) {
                 List<Entity> list = EntityTFHarbingerCube.this.world.getEntitiesWithinAABBExcludingEntity((Entity) EntityTFHarbingerCube.this, EntityTFHarbingerCube.this.getEntityBoundingBox().grow(4.0D));
@@ -62,14 +109,14 @@ public class EntityTFHarbingerCube extends EntityMob {
 
                 for (Entity entity : list) {
                     if (entity instanceof EntityLivingBase) {
-                        ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.WITHER, 20 * 15, 0));
+                        ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.WITHER, 20 * 20, 0));
                     }
                 }
             }
             // Fake to trigger super's behaviour
             deathTime = 19;
             super.onDeathUpdate();
-            deathTime = 60;
+            deathTime = 40;
         }
     }
 

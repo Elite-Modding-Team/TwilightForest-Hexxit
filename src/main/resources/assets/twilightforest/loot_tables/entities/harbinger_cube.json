@@ -1,2 +1,30 @@
 {
+  "pools": [
+    {
+      "name": "fiery_blood",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "twilightforest:fiery_blood",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 3
+              }
+            },
+            {
+              "function": "looting_enchant",
+              "count": {
+                "min": 0,
+                "max": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

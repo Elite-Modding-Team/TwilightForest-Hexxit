@@ -55,7 +55,7 @@ public class EntityTFCastleMob extends EntityMob {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.5D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class EntityTFCastleMob extends EntityMob {
 
         if (flag && entity instanceof EntityLivingBase) {
             float f = this.world.getDifficultyForLocation(new BlockPos(this)).getAdditionalDifficulty();
-            ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 80 * (int) f, 1)); // 4 seconds
+            ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 200 * (int) f, 1)); // 10 seconds
         }
 
         return flag;
@@ -146,17 +146,17 @@ public class EntityTFCastleMob extends EntityMob {
             return true;
         } else if (super.isOnSameTeam(entity)) {
             return true;
-        } else if (entity instanceof EntityWroughtnaut || entity instanceof EntityTFCastleMob) {
+        } else if (entity instanceof EntityWroughtnaut || entity instanceof EntityTFCastleMob || entity instanceof EntityTFCastleGiant || entity instanceof EntityTFAdherent || entity instanceof EntityTFHarbingerCube) {
             return this.getTeam() == null && entity.getTeam() == null;
         } else {
             return false;
         }
     }
 
-    // Immune to ice effects
+    // Immune to ice effects and wither
     @Override
     public boolean isPotionApplicable(PotionEffect effect) {
-        return effect.getPotion() != TFPotions.frosty && effect.getPotion() != PotionHandler.FROZEN && super.isPotionApplicable(effect);
+        return effect.getPotion() != TFPotions.frosty && effect.getPotion() != PotionHandler.FROZEN && effect.getPotion() != MobEffects.WITHER && super.isPotionApplicable(effect);
     }
 
     @Override

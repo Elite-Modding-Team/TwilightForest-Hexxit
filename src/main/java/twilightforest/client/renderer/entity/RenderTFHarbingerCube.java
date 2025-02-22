@@ -24,9 +24,6 @@ public class RenderTFHarbingerCube extends RenderLiving<EntityTFHarbingerCube> {
 
     @Override
     protected void preRenderCallback(EntityTFHarbingerCube entity, float partialTicks) {
-        float bounce = entity.ticksExisted + partialTicks;
-        GlStateManager.translate(0F, MathHelper.sin((bounce) * 0.2F) * 0.15F, 0F);
-
         // flash
 
         float f1 = entity.deathTime;

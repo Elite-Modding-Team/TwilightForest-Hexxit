@@ -81,7 +81,7 @@ public class EntityTFCastleGiant extends EntityTFGiantMiner {
 
         if (flag && entity instanceof EntityLivingBase) {
             float f = this.world.getDifficultyForLocation(new BlockPos(this)).getAdditionalDifficulty();
-            ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 80 * (int) f, 1)); // 4 seconds
+            ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 200 * (int) f, 1)); // 10 seconds
         }
 
         return flag;
@@ -106,17 +106,17 @@ public class EntityTFCastleGiant extends EntityTFGiantMiner {
             return true;
         } else if (super.isOnSameTeam(entity)) {
             return true;
-        } else if (entity instanceof EntityWroughtnaut || entity instanceof EntityTFCastleMob) {
+        } else if (entity instanceof EntityWroughtnaut || entity instanceof EntityTFCastleMob || entity instanceof EntityTFCastleGiant || entity instanceof EntityTFAdherent || entity instanceof EntityTFHarbingerCube) {
             return this.getTeam() == null && entity.getTeam() == null;
         } else {
             return false;
         }
     }
 
-    // Immune to ice effects
+    // Immune to ice effects and wither
     @Override
     public boolean isPotionApplicable(PotionEffect effect) {
-        return effect.getPotion() != TFPotions.frosty && effect.getPotion() != PotionHandler.FROZEN && super.isPotionApplicable(effect);
+        return effect.getPotion() != TFPotions.frosty && effect.getPotion() != PotionHandler.FROZEN && effect.getPotion() != MobEffects.WITHER && super.isPotionApplicable(effect);
     }
 
     @Override
