@@ -71,8 +71,7 @@ public class TFBiomeThornlands extends TFBiomeBase {
 			player.attackEntityFrom(DamageSource.MAGIC, 1.0F);
 			world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE, SoundCategory.PLAYERS, 1.0F, 1.0F);
 
-			// hint monster?
-			if (world.rand.nextInt(4) == 0) TFFeature.TROLL_CAVE.trySpawnHintMonster(world, player);
+			if (world.rand.nextInt(4) == 0) TFFeature.FINAL_CASTLE.trySpawnHintMonster(world, player);
 		}
 	}
 }
