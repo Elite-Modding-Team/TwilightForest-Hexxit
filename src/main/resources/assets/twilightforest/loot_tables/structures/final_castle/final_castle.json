@@ -2,7 +2,7 @@
   "pools": [
     {
       "name": "common",
-      "rolls": 4,
+      "rolls": 15,
       "entries": [
         {
           "type": "loot_table",

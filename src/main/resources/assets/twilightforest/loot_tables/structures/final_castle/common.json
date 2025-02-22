@@ -32,6 +32,19 @@
         },
         {
           "type": "item",
+          "name": "twilightforest:hydra_chop",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 8
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
           "name": "twilightforest:ore_magnet"
         },
         {
@@ -122,71 +135,6 @@
         },
         {
           "type": "item",
-          "name": "twilightforest:naga_scale",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 8,
-                "max": 64
-              }
-            }
-          ]
-        },
-        {
-          "type": "item",
-          "name": "twilightforest:maze_wafer",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 32,
-                "max": 64
-              }
-            }
-          ]
-        },
-        {
-          "type": "item",
-          "name": "twilightforest:experiment_115",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 32,
-                "max": 64
-              }
-            }
-          ]
-        },
-        {
-          "type": "item",
-          "name": "twilightforest:transformation_powder",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 32,
-                "max": 64
-              }
-            }
-          ]
-        },
-        {
-          "type": "item",
-          "name": "twilightforest:ice_bomb",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 16,
-                "max": 16
-              }
-            }
-          ]
-        },
-        {
-          "type": "item",
           "name": "twilightforest:knightmetal_block",
           "functions": [
             {
@@ -249,24 +197,6 @@
             {
               "function": "set_data",
               "data": 2
-            }
-          ]
-        },
-        {
-          "type": "item",
-          "name": "twilightforest:block_storage",
-          "entryName": "arctic_fur_block",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 8
-              }
-            },
-            {
-              "function": "set_data",
-              "data": 3
             }
           ]
         },
@@ -357,32 +287,6 @@
             {
               "function": "enchant_randomly",
               "treasure": true
-            }
-          ]
-        },
-        {
-          "type": "item",
-          "name": "twilightforest:alpha_fur",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 8,
-                "max": 64
-              }
-            }
-          ]
-        },
-        {
-          "type": "item",
-          "name": "twilightforest:hydra_chop",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 32,
-                "max": 64
-              }
             }
           ]
         },
