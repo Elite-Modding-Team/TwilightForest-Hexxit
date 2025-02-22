@@ -36,9 +36,9 @@ public class FogHandler {
             targetGreen = 10.0F / 255.0F;
             targetBlue = 0.0F / 255.0F;
         } else if (isFrosty) { // Blue
-            targetRed = 69.0F / 255.0F;
-            targetGreen = 128.0F / 255.0F;
-            targetBlue = 239.0F / 255.0F;
+            targetRed = 60.0F / 255.0F;
+            targetGreen = 78.0F / 255.0F;
+            targetBlue = 196.0F / 255.0F;
         } else if (isSpooky) { // Purple
             targetRed = 106.0F / 255.0F;
             targetGreen = 60.0F / 255.0F;
