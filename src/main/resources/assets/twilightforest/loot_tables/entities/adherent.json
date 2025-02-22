@@ -23,12 +23,12 @@
               }
             }
           ]
+        },
+        {
+          "type": "empty",
+          "weight": 1
         }
       ]
-    },
-    {
-      "type": "empty",
-      "weight": 2
     }
   ]
 }

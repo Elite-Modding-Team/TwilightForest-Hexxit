@@ -60,7 +60,7 @@ public class EntityTFAdherentBolt extends EntityTFThrowable implements ITFProjec
 			if (ray.entityHit instanceof EntityLivingBase && (thrower == null || (ray.entityHit != thrower && ray.entityHit != thrower.getRidingEntity()))) {
 				if (ray.entityHit.attackEntityFrom(DamageSource.causeIndirectMagicDamage(this, this.getThrower()), 2)
 						&& world.getDifficulty() != EnumDifficulty.PEACEFUL) {
-					int effectTime = world.getDifficulty() == EnumDifficulty.HARD ? 9 : 5;
+					int effectTime = world.getDifficulty() == EnumDifficulty.HARD ? 20 : 10;
 					((EntityLivingBase) ray.entityHit).setFire(effectTime);
 					((EntityLivingBase) ray.entityHit).addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, effectTime * 20, 0));
 					((EntityLivingBase) ray.entityHit).addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, effectTime * 20, 0));

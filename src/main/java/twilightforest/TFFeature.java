@@ -397,15 +397,17 @@ public enum TFFeature {
 			this.addMonster(EntityTFCastleWarrior.class, 10, 1, 1)
 				.addMonster(EntityTFAdherent.class, 8, 1, 1)
 				.addMonster(EntityTFHarbingerCube.class, 8, 1, 1)
+				.addMonster(EntityTFCastlePhantom.class, 8, 1, 1)
 				// internal castle
 				.addMonster(1, EntityTFCastleWarrior.class, 10, 1, 1)
 				.addMonster(1, EntityTFCastleMarksman.class, 10, 1, 1)
 				.addMonster(1, EntityTFCastleGiant.class, 8, 1, 1)
 				.addMonster(1, EntityTFAdherent.class, 8, 1, 1)
 				.addMonster(1, EntityTFHarbingerCube.class, 8, 1, 1)
+				.addMonster(1, EntityTFCastlePhantom.class, 8, 1, 1)
 				// dungeons
 				.addMonster(2, EntityTFAdherent.class, 10, 1, 1)
-				.addMonster(2, EntityTFCastlePhantom.class, 8, 1, 1)
+				.addMonster(2, EntityTFHarbingerCube.class, 8, 1, 1)
 				// forge
 				.addMonster(3, EntityBlaze.class, 10, 1, 1)
 				.addMonster(3, EntityTFCastlePhantom.class, 8, 1, 1);
