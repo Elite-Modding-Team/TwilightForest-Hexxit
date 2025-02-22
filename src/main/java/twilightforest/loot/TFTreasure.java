@@ -54,6 +54,7 @@ public class TFTreasure {
 	public static final TFTreasure troll_garden = new TFTreasure("troll_garden");
 	public static final TFTreasure troll_vault = new TFTreasure("troll_vault");
 	public static final TFTreasure graveyard = new TFTreasure("graveyard");
+	public static final TFTreasure final_castle = new TFTreasure("final_castle");
 
 	public static final ResourceLocation FINAL_BOSS_LOOT_TABLE = TwilightForestMod.prefix("entities/final_boss");
 

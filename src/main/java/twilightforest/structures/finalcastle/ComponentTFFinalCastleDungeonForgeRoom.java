@@ -29,8 +29,7 @@ public class ComponentTFFinalCastleDungeonForgeRoom extends StructureTFComponent
 		// sign
 		//this.placeSignAtCurrentPosition(world, 25, 0, 25, "Mini-boss 2", "Gives talisman", sbb);
 
-		// chest - TODO: replace with unique loot
-		TFTreasure.basement.generateChest(world, new BlockPos(25, 0, 25), false);
+		TFTreasure.final_castle.generateChest(world, new BlockPos(25, 0, 25), false);
 
 		return true;
 	}

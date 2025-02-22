@@ -68,8 +68,7 @@ public class ComponentTFFinalCastleLargeTower extends ComponentTFTowerWing {
 
 		//this.placeSignAtCurrentPosition(world, 6, 1, 6, "Parkour area 1", "Unique monster?", sbb);
 
-		// chest - TODO: replace with unique loot
-		TFTreasure.basement.generateChest(world, new BlockPos(6, 1, 6), false);
+		TFTreasure.final_castle.generateChest(world, new BlockPos(6, 1, 6), false);
 
 		return true;
 	}

@@ -1,0 +1,14 @@
+{
+  "pools": [
+    {
+      "name": "common",
+      "rolls": 4,
+      "entries": [
+        {
+          "type": "loot_table",
+          "name": "twilightforest:structures/final_castle/common"
+        }
+      ]
+    }
+  ]
+}
