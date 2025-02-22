@@ -54,7 +54,7 @@ public class FogHandler {
         }
 
         // Smooth transition of fogColor blend ratio
-        fogColor = MathHelper.clamp(fogColor + ((isFiery || isSpooky || isDark) ? COLOR_BLEND_SPEED : -COLOR_BLEND_SPEED), 0.0F, 1.0F);
+        fogColor = MathHelper.clamp(fogColor + ((isFiery || isFrosty || isSpooky || isDark) ? COLOR_BLEND_SPEED : -COLOR_BLEND_SPEED), 0.0F, 1.0F);
 
         // Linear interpolation of fog colors
         fogColors[0] = (float) MathHelper.clampedLerp(event.getRed(), targetRed, fogColor);
