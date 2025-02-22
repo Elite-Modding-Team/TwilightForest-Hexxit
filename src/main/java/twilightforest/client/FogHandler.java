@@ -25,6 +25,7 @@ public class FogHandler {
         boolean isDark = isDark();
         boolean isSpooky = isSpooky();
         boolean isFiery = isFiery();
+        boolean isFrosty = isFrosty();
 
         // Initialize target fog color variables
         float targetRed, targetGreen, targetBlue;
@@ -34,6 +35,10 @@ public class FogHandler {
             targetRed = 56.0F / 255.0F;
             targetGreen = 10.0F / 255.0F;
             targetBlue = 0.0F / 255.0F;
+        } else if (isFrosty) { // Blue
+            targetRed = 69.0F / 255.0F;
+            targetGreen = 128.0F / 255.0F;
+            targetBlue = 239.0F / 255.0F;
         } else if (isSpooky) { // Purple
             targetRed = 106.0F / 255.0F;
             targetGreen = 60.0F / 255.0F;
@@ -101,5 +106,9 @@ public class FogHandler {
 
     private static boolean isFiery() {
         return Minecraft.getMinecraft().world != null && Minecraft.getMinecraft().player != null && Minecraft.getMinecraft().world.getBiome(Minecraft.getMinecraft().player.getPosition()) == TFBiomes.fireSwamp;
+    }
+
+    private static boolean isFrosty() {
+        return Minecraft.getMinecraft().world != null && Minecraft.getMinecraft().player != null && (Minecraft.getMinecraft().world.getBiome(Minecraft.getMinecraft().player.getPosition()) == TFBiomes.snowy_forest || Minecraft.getMinecraft().world.getBiome(Minecraft.getMinecraft().player.getPosition()) == TFBiomes.glacier);
     }
 }
