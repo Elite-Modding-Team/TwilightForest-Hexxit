@@ -31,7 +31,7 @@ public class TFItems {
 	public static Item.ToolMaterial TOOL_KNIGHTLY = EnumHelper.addToolMaterial("KNIGHTMETAL", 4, 512, 8.0F, 3, 8);
 	public static Item.ToolMaterial TOOL_GIANT = EnumHelper.addToolMaterial("GIANTSTONE", 2, 624, 4.0F, 1.0F, 5);
 	public static Item.ToolMaterial TOOL_ICE = EnumHelper.addToolMaterial("TFICE", 0, 420, 1.0F, 3.5F, 5);
-	public static Item.ToolMaterial TOOL_GLASS = EnumHelper.addToolMaterial("TFGLASS", 0, 1, 1.0F, 96.0F, 0);
+	public static Item.ToolMaterial TOOL_GLASS = EnumHelper.addToolMaterial("TFGLASS", 0, 1, 1.0F, 76.0F, 0);
 	public static Item.ToolMaterial TOOL_REGAL = EnumHelper.addToolMaterial("REGAL", 4, 1524, 8.0F, 4, 15);
 
 	static final UUID GIANT_REACH_MODIFIER = UUID.fromString("7f10172d-de69-49d7-81bd-9594286a6827");
