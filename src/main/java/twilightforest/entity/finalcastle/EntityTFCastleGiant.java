@@ -50,7 +50,13 @@ public class EntityTFCastleGiant extends EntityTFGiantMiner {
     @Override
     protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty) {
         super.setEquipmentBasedOnDifficulty(difficulty);
-        this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(TFItems.regal_sword));
+
+        if (this.rand.nextDouble() <= 0.4D) {
+            this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(TFItems.regal_axe));
+        } else {
+            this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(TFItems.regal_sword));
+        }
+
         this.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(TFItems.regal_helmet));
         this.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(TFItems.regal_chestplate));
         this.setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(TFItems.regal_leggings));
