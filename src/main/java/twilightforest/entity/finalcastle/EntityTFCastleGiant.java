@@ -154,7 +154,7 @@ public class EntityTFCastleGiant extends EntityTFGiantMiner {
 
     @Override
     protected void playStepSound(BlockPos pos, Block block) {
-        this.playSound(this.getStepSound(), 0.1F, 0.65F);
+        this.playSound(this.getStepSound(), 0.1F, 0.45F);
     }
 
     @Override
