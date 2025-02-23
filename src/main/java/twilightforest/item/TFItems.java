@@ -29,8 +29,8 @@ public class TFItems {
 	public static Item.ToolMaterial TOOL_FIERY = EnumHelper.addToolMaterial("FIERY", 4, 1024, 9F, 4, 10);
 	public static Item.ToolMaterial TOOL_STEELEAF = EnumHelper.addToolMaterial("STEELEAF", 3, 131, 8.0F, 3, 9);
 	public static Item.ToolMaterial TOOL_KNIGHTLY = EnumHelper.addToolMaterial("KNIGHTMETAL", 4, 512, 8.0F, 3, 8);
-	public static Item.ToolMaterial TOOL_GIANT = EnumHelper.addToolMaterial("GIANTSTONE", 2, 1024, 4.0F, 1.0F, 5);
-	public static Item.ToolMaterial TOOL_ICE = EnumHelper.addToolMaterial("TFICE", 0, 32, 1.0F, 3.5F, 5);
+	public static Item.ToolMaterial TOOL_GIANT = EnumHelper.addToolMaterial("GIANTSTONE", 2, 624, 4.0F, 1.0F, 5);
+	public static Item.ToolMaterial TOOL_ICE = EnumHelper.addToolMaterial("TFICE", 0, 420, 1.0F, 3.5F, 5);
 	public static Item.ToolMaterial TOOL_GLASS = EnumHelper.addToolMaterial("TFGLASS", 0, 1, 1.0F, 96.0F, 0);
 	public static Item.ToolMaterial TOOL_REGAL = EnumHelper.addToolMaterial("REGAL", 4, 1524, 8.0F, 4, 15);
 
