@@ -11,6 +11,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
@@ -255,7 +256,7 @@ public class TFClientEvents {
                         stopSounds();
                     }
                     // play current music slice
-                    playBossMusic(musicIndex);
+                    playBossMusic(musicIndex, boss.getPosition());
                     // set music time
                     musicTime = 113;
                     // skip to first main music slice if end of queue is reached
@@ -269,7 +270,7 @@ public class TFClientEvents {
                 }
                 // fight is interrupted, play end music slice and reset
                 else if (musicIndex != 0) {
-                    playBossMusic(16);
+                    playBossMusic(16, boss.getPosition());
                     musicIndex = 0;
                 }
             }
@@ -289,7 +290,7 @@ public class TFClientEvents {
             // stop fight music
             stopSounds();
             // play end music slice
-            playBossMusic(16);
+            playBossMusic(16, entity.getPosition());
             // play death sound
             TwilightForestMod.proxy.playSoundAtClientPlayer(TFSounds.FINALBOSS_DEATH);
             // reset music index
@@ -300,8 +301,8 @@ public class TFClientEvents {
         }
     }
 
-    public static void playBossMusic(int index) {
-        Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.getMusicRecord(musicSlices[index]));
+    public static void playBossMusic(int index, BlockPos pos) {
+        Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.getRecordSoundRecord(musicSlices[index], pos.getX(), pos.getY(), pos.getZ()));
     }
 
     public static void stopSounds() {
