@@ -1,5 +1,6 @@
 {
   "package": "twilightforest.mixin",
+  "refmap": "twilightforest.mixins.refmap.json",
   "minVersion": "0.8.5",
   "compatibilityLevel": "JAVA_8",
   "mixins": [

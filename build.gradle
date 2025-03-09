@@ -14,15 +14,21 @@ buildscript {
             name = "forge"
             url = "https://maven.minecraftforge.net"
         }
+        maven {
+            name = "sponge"
+            url = "https://repo.spongepowered.org/maven"
+        }
     }
     dependencies {
         classpath 'com.anatawa12.forge:ForgeGradle:2.3-1.0.8'
+        classpath 'org.spongepowered:mixingradle:0.6-SNAPSHOT'
     }
 }
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'maven'
+apply plugin: 'org.spongepowered.mixin'
 
 ///////////////////////////////////////////////////
 // IDE Settings
@@ -124,6 +130,10 @@ repositories {
         name 'CleanroomMC' // Cleanroom MC
         url 'https://maven.cleanroommc.com'
     }
+    maven {
+        name 'Sponge' // MixinGradle
+        url 'https://repo.spongepowered.org/maven'
+    }
 }
 
 dependencies {
@@ -165,6 +175,10 @@ dependencies {
     annotationProcessor('zone.rong:mixinbooter:10.5') {
         transitive = false
     }
+}
+
+mixin {
+    add sourceSets.main, "twilightforest.mixins.refmap.json"
 }
 
 task createPom {
