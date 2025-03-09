@@ -1,0 +1,8 @@
+{
+  "package": "twilightforest.mixin",
+  "minVersion": "0.8.5",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "TFEntityWroughtnautMixin"
+  ]
+}

@@ -120,6 +120,10 @@ repositories {
         name 'Curse Maven' // Mowzie's Mobs
         url 'https://www.cursemaven.com'
     }
+    maven {
+        name 'CleanroomMC' // Cleanroom MC
+        url 'https://maven.cleanroommc.com'
+    }
 }
 
 dependencies {
@@ -149,6 +153,18 @@ dependencies {
     deobfCompile "curse.maven:mowzies-mobs-250498:3048685"
 
     deobfCompile "curse.maven:constructs-armory-287683:3174535"
+
+    // MixinBooter
+    annotationProcessor 'org.ow2.asm:asm-debug-all:5.2'
+    annotationProcessor 'com.google.guava:guava:32.1.2-jre'
+    annotationProcessor 'com.google.code.gson:gson:2.8.9'
+
+    implementation('zone.rong:mixinbooter:10.5') {
+        transitive = false
+    }
+    annotationProcessor('zone.rong:mixinbooter:10.5') {
+        transitive = false
+    }
 }
 
 task createPom {
